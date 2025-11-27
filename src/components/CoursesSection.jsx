@@ -28,7 +28,7 @@ const courses = [
     level: "Intermediate",
     difficulty: 65,
     duration: "6 Weeks",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+    image: "https://static.xx.fbcdn.net/mci_ab/public/cms/?ab_b=e&ab_page=CMS&ab_entry=489057099063563&version=1753437665&transcode_extension=webp",
     color: "from-indigo-600 to-purple-600",
     desc: "Master campaign structures, A/B testing, and scaling logic."
   },
