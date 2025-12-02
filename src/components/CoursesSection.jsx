@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom"; // 1. Import Link
 import { 
   ArrowRight, 
   Clock, 
   BarChart, 
-  CheckCircle2, 
   Zap,
   Layout,
   Target
@@ -21,7 +21,8 @@ const courses = [
     gradient: "from-blue-600 to-indigo-900",
     accent: "bg-blue-500",
     desc: "The complete roadmap to running ₹5L+ budgets. Master the full stack of digital acquisition.",
-    topics: ["Budget Scaling", "Cross-Platform Strategy", "Data Analytics"]
+    topics: ["Budget Scaling", "Cross-Platform Strategy", "Data Analytics"],
+    link: "/courses/performance" // 2. Added Link
   },
   {
     id: 2,
@@ -30,11 +31,12 @@ const courses = [
     icon: <Zap className="w-5 h-5" />,
     level: "Intermediate",
     duration: "6 Weeks",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+    image: "https://www.searchenginejournal.com/wp-content/uploads/2024/09/img_2024-09-09-195224-837.jpeg",
     gradient: "from-purple-600 to-pink-900",
     accent: "bg-purple-500",
     desc: "Stop boosting posts. Master campaign structures, CBO/ABO logic, and creative testing.",
-    topics: ["Campaign Structure", "Creative Strategy", "Pixel Setup"]
+    topics: ["Campaign Structure", "Creative Strategy", "Pixel Setup"],
+    link: "/courses/meta" // 2. Added Link
   },
   {
     id: 3,
@@ -47,7 +49,8 @@ const courses = [
     gradient: "from-orange-500 to-red-900",
     accent: "bg-orange-500",
     desc: "Dominate Search, Display, and YouTube with advanced bidding and keyword psychology.",
-    topics: ["Quality Score", "Keyword Research", "YouTube Ads"]
+    topics: ["Quality Score", "Keyword Research", "YouTube Ads"],
+    link: "/courses/google" // 2. Added Link
   }
 ];
 
@@ -72,12 +75,11 @@ export default function CoursesSection() {
              Expert Curriculum
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#1a1a2e] leading-[1.15] tracking-tight mb-6 font-sans">
-  <span className="font-light text-slate-600">Specialized Tracks for</span> <br/>
-  <span className="font-bold text-[#3F348F]">
-    Serious Marketers
-  </span>
-</h2>
-
+            <span className="font-light text-slate-600">Specialized Tracks for</span> <br/>
+            <span className="font-bold text-[#3F348F]">
+              Serious Marketers
+            </span>
+          </h2>
 
           <p className="text-lg text-slate-500 font-light">
             We don't teach basics. Choose a specialization designed to take you from practitioner to expert.
@@ -89,11 +91,11 @@ export default function CoursesSection() {
           {courses.map((course) => (
             <div 
               key={course.id} 
-              className="group relative h-[580px] rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white"
+              className="group relative h-[580px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white"
             >
               
               {/* --- IMAGE BACKGROUND --- */}
-              <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 z-0 pointer-events-none">
                 <img 
                   src={course.image} 
                   alt={course.title} 
@@ -154,11 +156,14 @@ export default function CoursesSection() {
                       </div>
                     </div>
 
-                    {/* Circular Button */}
-                    <button className="w-12 h-12 rounded-full bg-white text-[#3F348F] flex items-center justify-center hover:bg-[#FFC500] hover:scale-110 transition-all duration-300 shadow-lg group-hover:w-auto group-hover:px-6 group-hover:gap-2">
+                    {/* 3. UPDATED: Circular Button wrapped in LINK */}
+                    <Link 
+                      to={course.link}
+                      className="w-12 h-12 rounded-full bg-white text-[#3F348F] flex items-center justify-center hover:bg-[#FFC500] hover:scale-110 transition-all duration-300 shadow-lg group-hover:w-auto group-hover:px-6 group-hover:gap-2"
+                    >
                        <ArrowRight className="w-5 h-5" />
                        <span className="hidden group-hover:inline-block font-bold text-sm whitespace-nowrap">View Details</span>
-                    </button>
+                    </Link>
 
                   </div>
                 </div>
