@@ -51,7 +51,7 @@ export default function TestimonialSection() {
   const activeTestimonial = testimonials.find(t => t.id === activeId);
 
   return (
-    <section className="relative w-full py-20 bg-[#FDFCFE] overflow-hidden">
+    <section id="testimonials" className="relative w-full py-20 bg-[#FDFCFE] overflow-hidden">
       
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-100 rounded-full blur-[100px] opacity-40 pointer-events-none"></div>

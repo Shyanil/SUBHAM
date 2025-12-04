@@ -66,7 +66,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 bg-white overflow-hidden relative">
+    <section id = "why" className="py-24 bg-white overflow-hidden relative">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none"></div>
 

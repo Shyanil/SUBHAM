@@ -64,7 +64,7 @@ const features = [
 
 export default function LearningExperience() {
   return (
-    <section className="relative w-full py-20 bg-[#FDFCFE] overflow-hidden">
+    <section id = 'learning' className="relative w-full py-20 bg-[#FDFCFE] overflow-hidden">
       
       {/* --- BACKGROUND DECORATIONS --- */}
       {/* 1. The Wavy S-Curve Line */}

@@ -40,7 +40,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="relative w-full py-20 bg-[#faeef4] overflow-hidden">
+    <section id = "faq" className="relative w-full py-20 bg-[#faeef4] overflow-hidden">
       
       {/* --- BACKGROUND DECORATIONS --- */}
       <div className="absolute inset-0 opacity-[0.4]" 

@@ -56,7 +56,7 @@ const courses = [
 
 export default function CoursesSection() {
   return (
-    <section className="relative py-20 md:py-32 bg-[#F8F7FF] overflow-hidden">
+    <section id = "courses" className="relative py-20 md:py-32 bg-[#F8F7FF] overflow-hidden">
       
       {/* --- BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 opacity-[0.4]" 

@@ -30,7 +30,7 @@ export default function ContactEnrollmentForm() {
   };
 
   return (
-    <section className="relative w-full py-20 lg:py-28 bg-[#FDFCFE] overflow-hidden">
+    <section id = "contact" className="relative w-full py-20 lg:py-28 bg-[#FDFCFE] overflow-hidden">
       
       {/* --- BACKGROUND DECORATIONS --- */}
       {/* Clean Grid Background */}
