@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Quote, Zap, MessageCircle } from "lucide-react";
 
 const testimonials = [
@@ -47,6 +47,24 @@ const testimonials = [
 export default function TestimonialSection() {
   const [activeId, setActiveId] = useState(1);
   
+  // --- NEW CODE: Auto Rotation Logic ---
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveId((currentId) => {
+        // Find current index
+        const currentIndex = testimonials.findIndex(t => t.id === currentId);
+        // Calculate next index (loop back to 0 if at end)
+        const nextIndex = (currentIndex + 1) % testimonials.length;
+        // Return new ID
+        return testimonials[nextIndex].id;
+      });
+    }, 5000); // Change every 5000ms (5 seconds)
+
+    // Cleanup interval on unmount or when user clicks (activeId changes)
+    return () => clearInterval(interval);
+  }, [activeId]); 
+  // -------------------------------------
+
   // Find the currently active testimonial data
   const activeTestimonial = testimonials.find(t => t.id === activeId);
 
@@ -99,6 +117,11 @@ export default function TestimonialSection() {
                     alt={testimonial.name} 
                     className="w-full h-full object-cover"
                   />
+                  
+                  {/* Progress Indicator for Active Item (Optional visual cue) */}
+                  {activeId === testimonial.id && (
+                    <div className="absolute inset-0 bg-[#FF0065] opacity-10 animate-pulse"></div>
+                  )}
                 </button>
               ))}
             </div>
@@ -115,11 +138,11 @@ export default function TestimonialSection() {
           <div className="lg:w-1/2 w-full mt-8 lg:mt-0 flex justify-center lg:justify-start">
             <div className="flex flex-col md:flex-row gap-10 items-center">
               
-              {/* Portrait Image Container - NO BACKGROUND COLOR */}
+              {/* Portrait Image Container */}
               <div className="relative w-48 h-72 flex-shrink-0">
                 <div className="w-full h-full rounded-[100px] overflow-hidden shadow-2xl border-[5px] border-white bg-white relative z-10">
                   <img 
-                    key={activeTestimonial.image} // Key change forces animation reset
+                    key={activeTestimonial.image} 
                     src={activeTestimonial.image} 
                     alt={activeTestimonial.name} 
                     className="w-full h-full object-cover animate-fade-in"
