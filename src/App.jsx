@@ -9,6 +9,7 @@ import Learning from "./components/Learning";
 import Faq from "../src/components/Faq";
 import Testimonial from "../src/components/Testimonial";
 import Contact from "../src/components/Contact";
+import MentorSection from "./components/Mentor";  
 
 // InfoCourse Pages
 import Performance from "./InfoCourses/Performance";
@@ -25,7 +26,8 @@ export default function App() {
       <Route
         path="/"
         element={
-          <>
+          // FIXED: Added this wrapper div
+          <div className="w-full overflow-x-hidden relative">
             <Header />
             <Hero />
             <Courses />
@@ -33,30 +35,44 @@ export default function App() {
             <Who />
             <Testimonial />
             <Learning />
+            <MentorSection/>
             <Faq />
             <Contact />
             <Footer />
-          </>
+          </div>
         }
       />
 
       {/* --------------------------------------- */}
       {/* INFO COURSES PAGES */}
       {/* --------------------------------------- */}
+      {/* It is good practice to wrap these too if they have similar issues */}
 
       <Route 
         path="/courses/performance" 
-        element={<Performance />} 
+        element={
+          <div className="w-full overflow-x-hidden relative">
+            <Performance />
+          </div>
+        } 
       />
 
       <Route 
         path="/courses/meta" 
-        element={<Meta />} 
+        element={
+          <div className="w-full overflow-x-hidden relative">
+            <Meta />
+          </div>
+        } 
       />
 
       <Route 
         path="/courses/google" 
-        element={<Google />} 
+        element={
+          <div className="w-full overflow-x-hidden relative">
+            <Google />
+          </div>
+        } 
       />
 
     </Routes>

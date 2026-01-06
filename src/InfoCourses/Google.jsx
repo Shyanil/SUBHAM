@@ -155,7 +155,7 @@ export default function GoogleAdsCoursePage() {
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <BarChart className="w-4 h-4 text-[#FF512F]" />
-                  <span className="font-semibold text-[#FF512F]">Hard Difficulty</span>
+                  <span className="font-semibold text-[#FF512F]">Intermediate Difficulty</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <Globe className="w-4 h-4 text-slate-400" />

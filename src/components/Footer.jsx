@@ -23,10 +23,11 @@ export default function Footer() {
     yellow: "#ffc500",
   };
 
-  // Define Links to match Header
+  // Define Links to match Header (Added Mentor)
   const footerLinks = [
     { name: 'Courses', id: 'courses' },
     { name: 'Why Us', id: 'why' },
+    { name: 'Mentor', id: 'mentor' }, // <-- ADDED HERE
     { name: 'Learning', id: 'learning' },
     { name: 'FAQ', id: 'faq' },
     { name: 'Testimonials', id: 'testimonials' },

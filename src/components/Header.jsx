@@ -20,12 +20,11 @@ export default function Header() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      // Offset calculation to prevent Header from covering the section title
       const yOffset = -100; 
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false); // Close mobile menu if open
+    setIsMobileMenuOpen(false); // Close mobile menu
   };
 
   // Handle Scroll Effect
@@ -35,6 +34,7 @@ export default function Header() {
     };
     window.addEventListener("scroll", handleScroll);
     
+    // Prevent scrolling when menu is open
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -75,14 +75,14 @@ export default function Header() {
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled
-            ? "bg-white/90 backdrop-blur-md shadow-lg py-3"
+            ? "bg-white/95 backdrop-blur-md shadow-lg py-3"
             : "bg-white py-5 shadow-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center relative z-50">
             
-            {/* --- LOGO (Scrolls to Top) --- */}
+            {/* --- LOGO --- */}
             <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <div 
                 className="w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md transform hover:rotate-12 transition-transform"
@@ -104,7 +104,8 @@ export default function Header() {
             <nav className="hidden md:flex items-center space-x-8">
               <NavLink targetId="courses">Courses</NavLink>
               <NavLink targetId="why">Why Us</NavLink>
-              <NavLink targetId="learning">Learning</NavLink> {/* ADDED HERE */}
+              <NavLink targetId="mentor">Mentor</NavLink>
+              <NavLink targetId="learning">Learning</NavLink>
               <NavLink targetId="faq">FAQ</NavLink>
               <NavLink targetId="testimonials">Testimonials</NavLink>
             </nav>
@@ -116,28 +117,22 @@ export default function Header() {
                 className="flex items-center px-6 py-2.5 rounded-full text-white font-semibold text-sm shadow-[0_4px_14px_0_rgba(255,0,101,0.39)] hover:shadow-[0_6px_20px_rgba(255,0,101,0.23)] hover:-translate-y-0.5 transition-all duration-300" 
                 style={{ backgroundColor: colors.pink }}
               >
-                <span targetId="contact">Contact Us</span>
+                <span>Contact Us</span>
               </button>
             </div>
 
             {/* --- MOBILE HAMBURGER --- */}
             <div className="md:hidden flex items-center z-50">
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => setIsMobileMenuOpen(true)}
                 className="relative focus:outline-none transition-transform duration-300 active:scale-95"
               >
-                <div className="w-12 h-12 bg-white rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex items-center justify-center border border-gray-50">
-                    {isMobileMenuOpen ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6" style={{ color: colors.pink }}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    ) : (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M7 8H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
-                          <path d="M4 12H20" stroke={colors.purple} strokeWidth="3" strokeLinecap="round" />
-                          <path d="M7 16H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                    )}
+                <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center border border-gray-100">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 8H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
+                      <path d="M4 12H20" stroke={colors.purple} strokeWidth="3" strokeLinecap="round" />
+                      <path d="M7 16H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
+                    </svg>
                 </div>
               </button>
             </div>
@@ -146,37 +141,53 @@ export default function Header() {
 
         {/* --- MOBILE MENU OVERLAY --- */}
         <div 
-            className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+            className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
             onClick={() => setIsMobileMenuOpen(false)}
         ></div>
 
         {/* --- MOBILE SIDEBAR --- */}
+        {/* Added overflow-hidden to fix the right-side white space issue */}
         <div
-          className={`fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) md:hidden flex flex-col ${
+          className={`fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) md:hidden flex flex-col overflow-hidden ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Decorative Blobs */}
+          {/* Decorative Blobs (Now contained safely) */}
           <div className="absolute top-[-10%] right-[-10%] w-64 h-64 rounded-full opacity-10 pointer-events-none blur-3xl" style={{ backgroundColor: colors.pink }}></div>
           <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 rounded-full opacity-10 pointer-events-none blur-3xl" style={{ backgroundColor: colors.yellow }}></div>
 
-          <div className="flex flex-col h-full p-8 relative">
-            <div className="flex items-center justify-between mb-10 mt-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Navigation</span>
+          <div className="flex flex-col h-full p-6 relative z-10">
+            
+            {/* Header inside Sidebar */}
+            <div className="flex items-center justify-between mb-8">
+                <div>
+                   <span className="text-xl font-bold" style={{color: colors.purple}}>Menu</span>
+                </div>
+                {/* CLOSE BUTTON */}
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                >
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-gray-500">
+                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                   </svg>
+                </button>
             </div>
 
-            <div className="flex flex-col space-y-6">
+            {/* Links */}
+            <div className="flex flex-col space-y-5">
                 {[
                   { name: 'Courses', id: 'courses' },
                   { name: 'Why Us', id: 'why' },
-                  { name: 'Learning', id: 'learning' }, // ADDED HERE
+                  { name: 'Mentor', id: 'mentor' },
+                  { name: 'Learning', id: 'learning' }, 
                   { name: 'FAQ', id: 'faq' },
                   { name: 'Testimonials', id: 'testimonials' },
                 ].map((item) => (
                     <a 
                         key={item.name} 
                         href={`#${item.id}`}
-                        className="text-2xl font-bold transition-colors duration-200 hover:translate-x-2 transform inline-block"
+                        className="text-xl font-bold transition-transform duration-200 hover:translate-x-2 block py-2 border-b border-gray-50"
                         style={{ color: colors.purple }}
                         onClick={(e) => scrollToSection(e, item.id)}
                     >
@@ -185,17 +196,15 @@ export default function Header() {
                 ))}
             </div>
 
-            <div className="mt-auto pt-8 border-t border-gray-100">
-                <div className="mb-6">
-                    <p className="text-sm text-gray-500 mb-2">Ready to start?</p>
-                    <button
-                        onClick={(e) => scrollToSection(e, 'contact')}
-                        className="w-full flex justify-center items-center px-6 py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95"
-                        style={{ backgroundColor: colors.pink }}
-                    >
-                        Contact Us
-                    </button>
-                </div>
+            {/* Bottom Action */}
+            <div className="mt-auto pt-6">
+                <button
+                    onClick={(e) => scrollToSection(e, 'contact')}
+                    className="w-full flex justify-center items-center px-6 py-3.5 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95"
+                    style={{ backgroundColor: colors.pink }}
+                >
+                    Contact Us
+                </button>
             </div>
           </div>
         </div>

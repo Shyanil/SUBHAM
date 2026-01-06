@@ -323,7 +323,7 @@ export default function CourseDetailsPage() {
                      <div className="p-8 border-b border-gray-100 bg-[#faf9fc]">
                         <p className="text-slate-500 font-bold text-[10px] uppercase tracking-wider mb-2">Total Program Fee</p>
                         <div className="flex items-end gap-3">
-                           <span className="text-4xl font-extrabold text-[#1a1a2e]">₹35,000</span>
+                           <span className="text-4xl font-extrabold text-[#1a1a2e]">₹25,000</span>
                            <span className="text-lg text-slate-400 line-through decoration-slate-400 mb-1 font-medium">₹50,000</span>
                         </div>
                         <div className="mt-4 flex items-center gap-2 text-[#FF0065] text-xs font-bold bg-red-50 px-3 py-1.5 rounded-full w-fit">
