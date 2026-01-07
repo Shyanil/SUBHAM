@@ -159,7 +159,7 @@ export default function Footer() {
                    <Phone strokeWidth={1.5} className="w-5 h-5" style={{ color: colors.purple }} />
                 </div>
                 <span className="text-sm font-medium text-slate-500 group-hover:text-[#3F348F] transition-colors">
-                  +91 98765 43210
+                  +91 6292 294 902
                 </span>
               </li>
 
@@ -169,7 +169,7 @@ export default function Footer() {
                    <Mail strokeWidth={1.5} className="w-5 h-5" style={{ color: colors.purple }} />
                 </div>
                 <span className="text-sm font-medium text-slate-500 hover:text-[#3F348F] cursor-pointer transition-colors">
-                  hello@squashcode.com
+                  sagar@squashcode.com
                 </span>
               </li>
 
