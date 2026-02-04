@@ -1,170 +1,117 @@
-import React from "react";
-import { 
-  Briefcase, 
-  Target, 
-  MapPin, 
-  IndianRupee, 
-  FolderOpen, 
-  Zap,
-  TrendingUp,
-  Trophy
-} from "lucide-react";
+import React from 'react';
+import { ArrowUpRight, Building2, Activity, Users, Heart, Sparkles, MapPin } from 'lucide-react';
 
-// Using the working Unsplash URL
-const mentorshipImage = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800";
-
-const features = [
-  {
-    id: 1,
-    icon: <Briefcase strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-purple-500 to-indigo-600 shadow-purple-200",
-    accent: "bg-purple-500",
-    title: "Industry Veterans Only",
-    desc: "No academic trainers. Learn directly from experts with 10+ years in the field."
-  },
-  {
-    id: 2,
-    icon: <Target strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-pink-500 to-rose-600 shadow-pink-200",
-    accent: "bg-pink-500",
-    title: "Active Campaign Specialists",
-    desc: "Our mentors are currently running profitable campaigns, not just teaching theory."
-  },
-  {
-    id: 3,
-    icon: <MapPin strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-purple-500 to-indigo-600 shadow-purple-200",
-    accent: "bg-purple-500",
-    title: "Immersive Offline Hub",
-    desc: "High-energy physical workspace designed for collaboration and deep work."
-  },
-  {
-    id: 4,
-    icon: <IndianRupee strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-pink-500 to-rose-600 shadow-pink-200",
-    accent: "bg-pink-500",
-    title: "Real Budgets & Accounts",
-    desc: "Don't just simulate. Gain access to live ad accounts and manage real spend."
-  },
-  {
-    id: 5,
-    icon: <FolderOpen strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-purple-500 to-indigo-600 shadow-purple-200",
-    accent: "bg-purple-500",
-    title: "Portfolio-Based Learning",
-    desc: "Graduate with a tangible portfolio of live projects to show employers."
-  },
-  {
-    id: 6,
-    icon: <Zap strokeWidth={1.5} />,
-    iconBg: "bg-gradient-to-br from-pink-500 to-rose-600 shadow-pink-200",
-    accent: "bg-pink-500",
-    title: "Action Over Theory",
-    desc: "We prioritize execution. 80% of your time is spent doing, not just listening."
-  },
-];
-
-export default function WhyChooseUs() {
+const ActiveLivingShowcase = () => {
   return (
-    <section id = "why" className="py-24 bg-white overflow-hidden relative">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+    <section className="w-full bg-[#fafaf8] py-24 px-6 md:px-12 lg:px-24 font-sans text-[#062c22]">
+      
+      {/* --- HERO PHILOSOPHY SECTION --- */}
+      <div className="max-w-7xl mx-auto mb-32">
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#062c22]/5 text-[#062c22] text-[10px] font-bold uppercase tracking-[0.3em] mb-10 border border-[#062c22]/10">
+            <MapPin className="w-3 h-3" /> Dibrugarh, Assam
+          </div>
           
-          {/* --- LEFT COLUMN: CONTENT & CARDS --- */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
-            
-            {/* Header Section */}
-            <div className="mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 border border-purple-100 text-[#3F348F] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                  <Trophy className="w-4 h-4" />
-                  The SquashCode Edge
-              </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#1a1a2e] leading-[1.15] tracking-tight mb-6 font-sans">
-                <span className="font-light text-slate-600">Why Choose Us?</span> <br/>
-                <span className="font-bold text-[#3F348F]">
-                Real Skills. Real World.
-                </span>
-                </h2>
+          <h1 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.9] mb-8">
+            Subham <br />
+            <span className="italic font-light text-[#0a4d3c]">Kishori</span> Heights
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-[#062c22]/60 italic font-medium max-w-2xl">
+            "An icon that stands tall in the spirit of active living."
+          </p>
+        </div>
 
-              <p className="text-lg text-slate-500 max-w-xl font-normal leading-relaxed">
-                The gap between online courses and industry demands is huge. We built SquashCode Academy to bridge that gap with an uncompromising practical approach.
+        <div className="flex flex-col lg:flex-row gap-12 items-center justify-between border-t border-[#062c22]/10 pt-16">
+          <div className="lg:w-1/2">
+            <h2 className="font-serif text-4xl md:text-5xl leading-tight mb-6">
+              Step into a world designed to <span className="text-[#0a4d3c] italic">energize</span> every moment.
+            </h2>
+          </div>
+          <div className="lg:w-1/3 flex lg:justify-end">
+            <button className="group flex items-center gap-4 bg-[#062c22] text-[#e3f988] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:scale-105 transition-all duration-300">
+              Free Planning Consult <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* --- MULTI-GENERATIONAL FOCUS --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+        {[
+          { 
+            title: "For Children", 
+            tag: "ENERGY & PLAY",
+            desc: "Designed to spark movement and physical growth through active, purposeful play environments.",
+            icon: <Sparkles className="w-6 h-6" />,
+            bg: "bg-white border border-gray-100" 
+          },
+          { 
+            title: "For Families", 
+            tag: "COMMUNITY BONDING",
+            desc: "Space efficiency and open panoramic views to nurture modern community living and relationships.",
+            icon: <Users className="w-6 h-6" />,
+            bg: "bg-[#062c22] text-white shadow-2xl scale-105 z-10" 
+          },
+          { 
+            title: "For Seniors", 
+            tag: "WELLNESS & CALM",
+            desc: "Emotional grounding and calm aesthetics curated for a healthy, dignified, and energetic lifestyle.",
+            icon: <Heart className="w-6 h-6" />,
+            bg: "bg-[#e3f988]" 
+          }
+        ].map((item, idx) => (
+          <div key={idx} className={`${item.bg} rounded-[4rem] p-12 flex flex-col h-[420px] justify-between group transition-all duration-500`}>
+            <div className="w-16 h-16 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+              {item.icon}
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-widest opacity-50 mb-3 block">{item.tag}</span>
+              <h3 className="font-serif text-4xl mb-6">{item.title}</h3>
+              <p className="text-sm leading-relaxed opacity-70 font-medium">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* --- ARCHITECTURAL VISION --- */}
+      <div className="relative rounded-[5rem] overflow-hidden h-[700px] group shadow-2xl">
+        <img 
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+          alt="Subham Kishori Heights Architecture" 
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#062c22] via-[#062c22]/20 to-transparent opacity-80"></div>
+        
+        <div className="absolute inset-0 p-12 md:p-20 flex flex-col justify-end">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
+            <div className="max-w-2xl">
+              <div className="w-20 h-1 bg-[#e3f988] mb-8"></div>
+              <h3 className="font-serif text-5xl md:text-6xl text-white mb-8 leading-tight">Architecture <br/> <span className="italic font-light text-[#e3f988]">in Harmony</span></h3>
+              <p className="text-white/70 text-lg md:text-xl leading-relaxed font-light">
+                Modern high-rise towers with clean vertical lines and well-lit façades. 
+                Thoughtful space planning ensures natural light and open views for all 
+                exclusive residences.
               </p>
             </div>
-
-            {/* --- PREMIUM CARDS GRID --- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feature) => (
-                <div 
-                  key={feature.id} 
-                  className="group relative bg-[#FAF9FF] p-6 rounded-[20px] border border-white hover:border-purple-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(63,52,143,0.08)] transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-                >
-                  
-                  {/* Left Accent Bar */}
-                  <div className={`absolute left-0 top-6 bottom-6 w-1 rounded-r-full ${feature.accent} opacity-30 group-hover:opacity-100 transition-opacity duration-300`}></div>
-
-                  {/* Header: Icon + Title */}
-                  <div className="flex items-center gap-5 mb-4">
-                    {/* Big Premium Icon Container */}
-                    <div className={`w-14 h-14 rounded-2xl ${feature.iconBg} flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                      {/* Scaled up Icon */}
-                      <div className="w-7 h-7">
-                        {feature.icon}
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-lg font-bold text-[#1a1a2e] leading-tight">
-                      {feature.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-slate-500 text-sm leading-relaxed pl-1">
-                    {feature.desc}
-                  </p>
-                </div>
-              ))}
+            
+            <div className="flex gap-6 w-full lg:w-auto">
+               <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/20 text-white text-center min-w-[160px]">
+                  <Building2 className="w-8 h-8 mx-auto mb-4 text-[#e3f988]" />
+                  <p className="text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Structure</p>
+                  <p className="text-xl font-serif">2 Towers</p>
+               </div>
+               <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/20 text-white text-center min-w-[160px]">
+                  <Activity className="w-8 h-8 mx-auto mb-4 text-[#e3f988]" />
+                  <p className="text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Density</p>
+                  <p className="text-xl font-serif">Exclusive</p>
+               </div>
             </div>
           </div>
-
-          {/* --- RIGHT COLUMN: STICKY IMAGE --- */}
-          {/* UPDATED: Added lg:top-32 (more stick offset) and lg:mt-16 (margin top) to push image down */}
-          <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-32 lg:mt-[200px]">
-            <div className="relative group">
-              {/* Back Glow */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-200 to-pink-200 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-              
-              {/* Main Image Container */}
-              <div className="relative rounded-[2rem] overflow-hidden border-[8px] border-white shadow-2xl z-10">
-                <img 
-                  src={mentorshipImage} 
-                  alt="SquashCode Mentors" 
-                  className="w-full h-[600px] object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Card Floating Below/Overlapping the Image */}
-              <div className="absolute -bottom-10 -left-6 z-20 bg-white p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-50 flex items-center gap-4 animate-bounce-slow max-w-[280px]">
-                 <div className="bg-green-100 p-3 rounded-full text-green-600">
-                    <TrendingUp className="w-6 h-6" />
-                 </div>
-                 <div>
-                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">Career Growth</p>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-slate-800">120%</span>
-                      <span className="text-xs font-bold text-green-600">Avg. Hike</span>
-                    </div>
-                 </div>
-              </div>
-
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default ActiveLivingShowcase;

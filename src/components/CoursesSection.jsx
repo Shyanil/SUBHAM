@@ -1,183 +1,112 @@
 import React from "react";
-import { Link } from "react-router-dom"; // 1. Import Link
-import { 
-  ArrowRight, 
-  Clock, 
-  BarChart, 
-  Zap,
-  Layout,
-  Target
-} from "lucide-react";
+import { ArrowUpRight, Activity, TreePine, MapPin, Building2 } from "lucide-react";
 
-const courses = [
-  {
-    id: 1,
-    category: "Flagship Program",
-    title: "Performance Marketing Mastery",
-    icon: <Target className="w-5 h-5" />,
-    level: "Beginner",
-    duration: "12 Weeks",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    gradient: "from-blue-600 to-indigo-900",
-    accent: "bg-blue-500",
-    desc: "The complete roadmap to running ₹5L+ budgets. Master the full stack of digital acquisition.",
-    topics: ["Budget Scaling", "Cross-Platform Strategy", "Data Analytics"],
-    link: "/courses/performance" // 2. Added Link
-  },
-  {
-    id: 2,
-    category: "Social Specialist",
-    title: "Meta Ads Advanced Operator",
-    icon: <Zap className="w-5 h-5" />,
-    level: "Intermediate",
-    duration: "8 Weeks",
-    image: "https://images.prismic.io/favfly2/Z_zoOOvxEdbNPAIq_Meta_Ads-GigBanner-FavFly.png?auto=format%2Ccompress&rect=0%2C0%2C1620%2C910&w=2048&fit=max",
-    gradient: "from-purple-600 to-pink-900",
-    accent: "bg-purple-500",
-    desc: "Stop boosting posts. Master campaign structures, CBO/ABO logic, and creative testing.",
-    topics: ["Campaign Structure", "Creative Strategy", "Pixel Setup"],
-    link: "/courses/meta" // 2. Added Link
-  },
-  {
-    id: 3,
-    category: "Search & Display",
-    title: "Google Ads Pro Certification",
-    icon: <Layout className="w-5 h-5" />,
-    level: "Intermediate",
-    duration: "8 Weeks",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
-    gradient: "from-orange-500 to-red-900",
-    accent: "bg-orange-500",
-    desc: "Dominate Search, Display, and YouTube with advanced bidding and keyword psychology.",
-    topics: ["Quality Score", "Keyword Research", "YouTube Ads"],
-    link: "/courses/google" // 2. Added Link
-  }
-];
-
-export default function CoursesSection() {
+export default function ActiveLivingHero() {
   return (
-    <section id = "courses" className="relative py-20 md:py-32 bg-[#F8F7FF] overflow-hidden">
+    <div className="min-h-screen bg-[#fafaf8] font-sans text-[#062c22] overflow-x-hidden">
       
-      {/* --- BACKGROUND ELEMENTS --- */}
-      <div className="absolute inset-0 opacity-[0.4]" 
-           style={{ 
-             backgroundImage: 'radial-gradient(#CBD5E1 1px, transparent 1px)', 
-             backgroundSize: '40px 40px' 
-           }}>
-      </div>
-      
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
-        
-        {/* --- SECTION HEADER --- */}
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border border-purple-200 text-[#3F348F] text-xs font-bold uppercase tracking-wider mb-4">
-             <span className="w-2 h-2 rounded-full bg-[#3F348F] animate-pulse"></span>
-             Expert Curriculum
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-[#1a1a2e] leading-[1.15] tracking-tight mb-6 font-sans">
-            <span className="font-light text-slate-600">Specialized Tracks for</span> <br/>
-            <span className="font-bold text-[#3F348F]">
-              Serious Marketers
-            </span>
-          </h2>
-
-          <p className="text-lg text-slate-500 font-light">
-            We don't teach basics. Choose a specialization designed to take you from practitioner to expert.
-          </p>
-        </div>
-
-        {/* --- 3-COLUMN GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <div 
-              key={course.id} 
-              className="group relative h-[580px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white"
-            >
-              
-              {/* --- IMAGE BACKGROUND --- */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* Dark Gradient Overlay for Readability */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${course.gradient} opacity-90 mix-blend-multiply transition-opacity duration-500`}></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80"></div>
-              </div>
-
-              {/* --- CONTENT CONTAINER --- */}
-              <div className="relative z-10 h-full flex flex-col p-8">
-                
-                {/* Top Badge */}
-                <div className="flex justify-between items-start">
-                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wide uppercase">
-                      {course.icon}
-                      {course.category}
-                   </div>
-                </div>
-
-                {/* Middle Content (Pushed down by margin-top auto) */}
-                <div className="mt-auto">
-                  
-                  {/* Title */}
-                  <h3 className="text-3xl font-bold text-white mb-3 leading-tight">
-                    {course.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light border-l-2 border-white/30 pl-3">
-                    {course.desc}
-                  </p>
-
-                  {/* Skills / Topics Pills */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {course.topics.map((topic, i) => (
-                      <span key={i} className="text-[10px] font-medium text-white/90 bg-white/10 px-2 py-1 rounded border border-white/10">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Divider */}
-                  <div className="w-full h-px bg-white/20 mb-6"></div>
-
-                  {/* Footer Info (Stats + Button) */}
-                  <div className="flex items-end justify-between">
-                    
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2 text-white/90">
-                         <Clock className="w-4 h-4 text-white/60" />
-                         <span className="text-sm font-semibold">{course.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-white/90">
-                         <BarChart className="w-4 h-4 text-white/60" />
-                         <span className="text-sm font-semibold">{course.level}</span>
-                      </div>
-                    </div>
-
-                    {/* 3. UPDATED: Circular Button wrapped in LINK */}
-                    <Link 
-                      to={course.link}
-                      className="w-12 h-12 rounded-full bg-white text-[#3F348F] flex items-center justify-center hover:bg-[#FFC500] hover:scale-110 transition-all duration-300 shadow-lg group-hover:w-auto group-hover:px-6 group-hover:gap-2"
-                    >
-                       <ArrowRight className="w-5 h-5" />
-                       <span className="hidden group-hover:inline-block font-bold text-sm whitespace-nowrap">View Details</span>
-                    </Link>
-
-                  </div>
-                </div>
-
-              </div>
-              
-              {/* Decorative Accent Line at Bottom */}
-              <div className={`absolute bottom-0 left-0 h-1.5 w-full ${course.accent} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
-
+      {/* --- ADVANCED DYNAMIC MARQUEE (The "Ticker") --- */}
+      <div className="w-full bg-[#062c22] py-4 overflow-hidden border-b border-[#e3f988]/20">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center text-sm font-bold uppercase tracking-[0.3em] text-[#e3f988] px-4">
+              <span className="mx-8">To be active is to live</span>
+              <Activity className="w-4 h-4 opacity-50" />
+              <span className="mx-8">Activeness flows seven days a week</span>
+              <Activity className="w-4 h-4 opacity-50" />
+              <span className="mx-8">Step into a world designed to energize</span>
+              <Activity className="w-4 h-4 opacity-50" />
             </div>
           ))}
         </div>
-
       </div>
-    </section>
+
+      {/* --- HERO SECTION --- */}
+      {/* Fixed: Added relative positioning and ensured main content is centered without collision */}
+      <main className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 flex flex-col items-center">
+        
+        {/* ADVANCED FLOATING COMPOSITION */}
+        {/* Fixed: Changed left/right percentages and added xl: block to prevent overlap on medium screens */}
+        <div className="absolute left-0 xl:left-[2%] top-[25%] w-40 h-56 rounded-[3rem] overflow-hidden shadow-2xl hidden xl:block hover:scale-105 transition-transform duration-500 z-0 opacity-80">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=600" alt="Modern Architecture" className="w-full h-full object-cover" />
+          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter text-black">B+G+14 Floors</div>
+        </div>
+        
+        <div className="absolute right-0 xl:right-[2%] top-[20%] w-48 h-48 rounded-full overflow-hidden shadow-2xl hidden xl:block border-8 border-white hover:rotate-3 transition-transform duration-500 z-0 opacity-80">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600" alt="Wellness Lifestyle" className="w-full h-full object-cover" />
+        </div>
+
+        {/* MAIN LAYOUT */}
+        {/* Fixed: Higher z-index ensures text always stays above background elements */}
+        <div className="flex flex-col items-center text-center relative z-10 w-full max-w-4xl">
+          
+          <div className="flex items-center gap-3 text-[#062c22]/50 text-xs font-bold uppercase tracking-[0.4em] mb-8">
+            <MapPin className="w-3 h-3 text-[#062c22]" />
+            Dibrugarh, Assam
+          </div>
+
+          <h1 className="font-serif text-5xl md:text-8xl text-[#062c22] leading-[0.95] mb-10">
+            Subham <br />
+            <span className="italic font-light text-[#0a4d3c]">Kishori</span> Heights
+          </h1>
+
+          {/* GRID OF HIGHLIGHTS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 w-full">
+            <div className="bg-[#e3f988]/30 p-6 rounded-[2rem] border border-[#062c22]/5 flex flex-col items-center justify-center">
+               <span className="block text-3xl font-serif font-bold italic">78%</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60">Open Space</span>
+            </div>
+            <div className="bg-white p-6 rounded-[2rem] border border-[#062c22]/5 shadow-sm flex flex-col items-center justify-center">
+               <span className="block text-3xl font-serif font-bold italic">65</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60">Exclusive Units</span>
+            </div>
+            <div className="bg-[#062c22] text-[#e3f988] p-6 rounded-[2rem] flex flex-col items-center justify-center">
+               <span className="block text-3xl font-serif font-bold italic">3 & 4</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">BHK / Duplex</span>
+            </div>
+            <div className="bg-white p-6 rounded-[2rem] border border-[#062c22]/5 shadow-sm flex flex-col items-center justify-center">
+               <Building2 className="w-6 h-6 mb-1 opacity-40" />
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60">Vaastu Compliant</span>
+            </div>
+          </div>
+
+          {/* DESCRIPTION */}
+          {/* Grammar Fix: "Designed for families... so that every age group stays active." */}
+          <p className="text-[#062c22]/80 text-lg md:text-2xl font-medium leading-relaxed mb-12">
+            An icon that stands tall in the spirit of active living. 
+            Designed for families, children, and seniors to ensure 
+            everyone stays physically and emotionally active, every day.
+          </p>
+
+          {/* ACTION AREA */}
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <button className="inline-flex items-center gap-3 bg-[#062c22] text-[#e3f988] px-12 py-5 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 group shadow-2xl">
+              Free Planning Consult 
+              <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </button>
+            <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest opacity-60">
+               <TreePine className="w-5 h-5" />
+               A Unit of Lohia Group
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM DECORATIVE ASSET */}
+        <div className="w-full h-1 bg-[#062c22]/5 rounded-full mt-20"></div>
+      </main>
+
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .font-serif {
+          font-family: 'Playfair Display', serif;
+        }
+      `}</style>
+    </div>
   );
 }

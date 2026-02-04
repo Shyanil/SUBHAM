@@ -33,11 +33,6 @@ export default function App() {
             <Courses />
             <Why />
             <Who />
-            <Testimonial />
-            <Learning />
-            <MentorSection/>
-            <Faq />
-            <Contact />
             <Footer />
           </div>
         }

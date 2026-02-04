@@ -1,18 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Define Brand Colors
+  // Brand Colors matching the "Active Lifestyle" aesthetic
   const colors = {
-    purple: "#3f348f",
-    pink: "#ff0065",
-    yellow: "#ffc500",
-    lightPink: "#faeef4",
-    lightPurple: "#a5a1c7",
+    darkGreen: "#062c22",
+    lime: "#e3f988",
   };
 
   // --- SCROLL TO SECTION LOGIC ---
@@ -20,175 +18,147 @@ export default function Header() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -100; 
+      const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false); // Close mobile menu
+    setIsMobileMenuOpen(false);
   };
 
-  // Handle Scroll Effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    
-    // Prevent scrolling when menu is open
+
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isMobileMenuOpen]);
 
-  // Simplified NavLink Component
-  const NavLink = ({ children, targetId }) => (
-    <a
-      href={`#${targetId}`}
-      onClick={(e) => scrollToSection(e, targetId)}
-      className="group relative flex items-center text-[15px] font-medium transition-colors duration-300 cursor-pointer"
-      style={{ color: colors.purple }}
-    >
-      <span className="relative z-10 group-hover:text-[#ff0065] transition-colors">
-        {children}
-      </span>
-      <span 
-        className="absolute bottom-[-4px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
-        style={{ backgroundColor: colors.yellow }}
-      ></span>
-    </a>
-  );
+  // Updated Navigation Items for Real Estate
+  const navItems = [
+    { name: "Amenities", id: "amenities" },
+    { name: "Location", id: "location" },
+    { name: "Floor Plans", id: "plans" },
+    { name: "Gallery", id: "gallery" }
+  ];
 
   return (
     <>
-      {/* --- TOP ANNOUNCEMENT BAR --- */}
-      <div className="relative z-[60] w-full py-1 text-center text-xs font-medium text-white" style={{ backgroundColor: colors.purple }}>
-        New Performance Marketing Masterclass! <span onClick={(e) => scrollToSection(e, 'courses')} className="underline cursor-pointer ml-1 text-yellow-300">Check it out</span>
-      </div>
-
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg py-3"
-            : "bg-white py-5 shadow-sm"
+        className={`sticky top-0 z-50 w-full transition-all duration-300 px-4 md:px-8 lg:px-12 ${
+          isScrolled ? "py-2" : "py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center relative z-50">
-            
-            {/* --- LOGO --- */}
-            <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <div 
-                className="w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-md transform hover:rotate-12 transition-transform"
-                style={{ backgroundColor: colors.pink }}
-              >
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <div>
-                <h1 className="heading-font text-2xl font-bold leading-none" style={{ color: colors.purple }}>
-                  SquashCode
-                </h1>
-                <p className="text-xs font-semibold tracking-wider uppercase" style={{ color: colors.yellow }}>
-                  Academy
-                </p>
-              </div>
-            </div>
+        {/* --- PILL NAVIGATION --- */}
+        <div 
+          className="max-w-7xl mx-auto rounded-full px-8 py-4 flex justify-between items-center shadow-lg transition-all duration-300 border border-white/10"
+          style={{ 
+            backgroundColor: colors.darkGreen,
+            color: colors.lime,
+            transform: isScrolled ? "scale(0.98)" : "scale(1)"
+          }}
+        >
+          {/* LOGO AREA: SUBHAM KISHORI HEIGHTS */}
+          <div 
+            className="font-serif text-xl md:text-2xl tracking-tight cursor-pointer flex flex-col leading-none"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <span className="font-bold">SUBHAM</span>
+            <span className="text-[10px] md:text-[12px] uppercase tracking-[0.2em] font-light mt-1 opacity-80">
+              Kishori Heights
+            </span>
+          </div>
 
-            {/* --- DESKTOP NAV --- */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <NavLink targetId="courses">Courses</NavLink>
-              <NavLink targetId="why">Why Us</NavLink>
-              <NavLink targetId="mentor">Mentor</NavLink>
-              <NavLink targetId="learning">Learning</NavLink>
-              <NavLink targetId="faq">FAQ</NavLink>
-              <NavLink targetId="testimonials">Testimonials</NavLink>
-            </nav>
-
-            {/* --- DESKTOP ACTIONS --- */}
-            <div className="hidden md:flex items-center space-x-4">
-              <button 
-                onClick={(e) => scrollToSection(e, 'contact')}
-                className="flex items-center px-6 py-2.5 rounded-full text-white font-semibold text-sm shadow-[0_4px_14px_0_rgba(255,0,101,0.39)] hover:shadow-[0_6px_20px_rgba(255,0,101,0.23)] hover:-translate-y-0.5 transition-all duration-300" 
-                style={{ backgroundColor: colors.pink }}
+          {/* DESKTOP NAV */}
+          <nav className="hidden lg:flex items-center space-x-10 text-[13px] font-semibold uppercase tracking-widest">
+            {navItems.map((item) => (
+              <a 
+                key={item.id} 
+                href={`#${item.id}`} 
+                onClick={(e) => scrollToSection(e, item.id)}
+                className="hover:opacity-60 transition-opacity"
               >
-                <span>Contact Us</span>
-              </button>
-            </div>
+                {item.name}
+              </a>
+            ))}
+          </nav>
 
-            {/* --- MOBILE HAMBURGER --- */}
-            <div className="md:hidden flex items-center z-50">
-              <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="relative focus:outline-none transition-transform duration-300 active:scale-95"
-              >
-                <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center border border-gray-100">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7 8H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
-                      <path d="M4 12H20" stroke={colors.purple} strokeWidth="3" strokeLinecap="round" />
-                      <path d="M7 16H17" stroke={colors.lightPurple} strokeWidth="2" strokeLinecap="round" />
-                    </svg>
-                </div>
-              </button>
-            </div>
+          {/* ACTIONS */}
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className="hidden sm:flex items-center gap-2 border px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300"
+              style={{ 
+                borderColor: colors.lime,
+                color: colors.lime
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = colors.lime;
+                e.currentTarget.style.color = colors.darkGreen;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = colors.lime;
+              }}
+            >
+              Enquire Now <ArrowUpRight className="w-4 h-4" />
+            </button>
+
+            {/* MOBILE HAMBURGER */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden flex items-center justify-center p-2"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 8H20M4 16H20" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
           </div>
         </div>
 
-        {/* --- MOBILE MENU OVERLAY --- */}
+        {/* --- MOBILE SIDEBAR & OVERLAY --- */}
         <div 
-            className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+            className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
             onClick={() => setIsMobileMenuOpen(false)}
         ></div>
 
-        {/* --- MOBILE SIDEBAR --- */}
-        {/* Added overflow-hidden to fix the right-side white space issue */}
         <div
-          className={`fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) md:hidden flex flex-col overflow-hidden ${
+          className={`fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) flex flex-col ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Decorative Blobs (Now contained safely) */}
-          <div className="absolute top-[-10%] right-[-10%] w-64 h-64 rounded-full opacity-10 pointer-events-none blur-3xl" style={{ backgroundColor: colors.pink }}></div>
-          <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 rounded-full opacity-10 pointer-events-none blur-3xl" style={{ backgroundColor: colors.yellow }}></div>
-
-          <div className="flex flex-col h-full p-6 relative z-10">
-            
-            {/* Header inside Sidebar */}
-            <div className="flex items-center justify-between mb-8">
-                <div>
-                   <span className="text-xl font-bold" style={{color: colors.purple}}>Menu</span>
+          <div className="flex flex-col h-full p-8 relative">
+            <div className="flex items-center justify-between mb-12">
+                <div className="flex flex-col leading-none">
+                  <span className="font-serif font-bold text-xl" style={{color: colors.darkGreen}}>SUBHAM</span>
+                  <span className="text-[10px] uppercase tracking-widest mt-1 opacity-60">Kishori Heights</span>
                 </div>
-                {/* CLOSE BUTTON */}
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                  className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center active:scale-90 transition-transform"
                 >
-                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-gray-500">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                    </svg>
                 </button>
             </div>
 
-            {/* Links */}
-            <div className="flex flex-col space-y-5">
-                {[
-                  { name: 'Courses', id: 'courses' },
-                  { name: 'Why Us', id: 'why' },
-                  { name: 'Mentor', id: 'mentor' },
-                  { name: 'Learning', id: 'learning' }, 
-                  { name: 'FAQ', id: 'faq' },
-                  { name: 'Testimonials', id: 'testimonials' },
-                ].map((item) => (
+            <div className="flex flex-col space-y-6">
+                {navItems.map((item) => (
                     <a 
-                        key={item.name} 
+                        key={item.id} 
                         href={`#${item.id}`}
-                        className="text-xl font-bold transition-transform duration-200 hover:translate-x-2 block py-2 border-b border-gray-50"
-                        style={{ color: colors.purple }}
+                        className="text-2xl font-bold transition-all hover:translate-x-2 block py-2 border-b border-gray-50"
+                        style={{ color: colors.darkGreen }}
                         onClick={(e) => scrollToSection(e, item.id)}
                     >
                         {item.name}
@@ -196,14 +166,13 @@ export default function Header() {
                 ))}
             </div>
 
-            {/* Bottom Action */}
-            <div className="mt-auto pt-6">
+            <div className="mt-auto">
                 <button
                     onClick={(e) => scrollToSection(e, 'contact')}
-                    className="w-full flex justify-center items-center px-6 py-3.5 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all active:scale-95"
-                    style={{ backgroundColor: colors.pink }}
+                    className="w-full flex justify-center items-center px-6 py-5 rounded-2xl text-white font-bold text-lg shadow-xl"
+                    style={{ backgroundColor: colors.darkGreen }}
                 >
-                    Contact Us
+                    Book a Visit
                 </button>
             </div>
           </div>
