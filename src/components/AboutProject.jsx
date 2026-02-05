@@ -3,7 +3,7 @@ import { ArrowUpRight, Activity, TreePine, MapPin, Building2 } from "lucide-reac
 
 export default function ActiveLivingHero() {
   return (
-    <div className="min-h-screen bg-[#fafaf8] font-sans text-[#062c22] overflow-x-hidden">
+    <div id = 'about' className="min-h-screen bg-[#fafaf8] font-sans text-[#062c22] overflow-x-hidden">
       
       {/* --- ADVANCED DYNAMIC MARQUEE (The "Ticker") --- */}
       <div className="w-full bg-[#062c22] py-4 overflow-hidden border-b border-[#e3f988]/20">

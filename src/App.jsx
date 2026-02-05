@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Courses from "./components/CoursesSection";
+import AboutProject from "./components/AboutProject";
+import Amenities from "./components/Amenities";
 import Why from "./components/Why";
 import Who from "./components/Who";
 import Footer from "./components/Footer";
@@ -30,9 +31,11 @@ export default function App() {
           <div className="w-full overflow-x-hidden relative">
             <Header />
             <Hero />
-            <Courses />
+            <AboutProject />
             <Why />
+            <Amenities/>
             <Who />
+            <Contact/>
             <Footer />
           </div>
         }

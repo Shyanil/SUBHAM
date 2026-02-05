@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="w-full min-h-screen bg-white px-4 py-6 md:px-8 lg:px-12 flex flex-col">
+    <section id = 'hero' className="w-full min-h-screen bg-white px-4 py-6 md:px-8 lg:px-12 flex flex-col">
       
       {/* --- MAIN GRID LAYOUT --- */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
