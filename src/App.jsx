@@ -6,6 +6,9 @@ import Amenities from "./components/Amenities";
 import Why from "./components/Why";
 import Who from "./components/Who";
 import Footer from "./components/Footer";
+import Gallery from "./components/Gallery";
+import Highlights from "./components/Highlights";
+import ThankYou from "./components/ThankYou";
 import Learning from "./components/Learning";
 import Faq from "../src/components/Faq";
 import Testimonial from "../src/components/Testimonial";
@@ -35,8 +38,10 @@ export default function App() {
             <Why />
             <Amenities/>
             <Who />
+            <Highlights />
+            <Gallery/>
             <Contact/>
-            <Footer />
+            <ThankYou />
           </div>
         }
       />
