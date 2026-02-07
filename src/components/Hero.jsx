@@ -39,7 +39,7 @@ export default function HeroSection() {
         {/* --- RIGHT CARD: IMAGE --- */}
         <div className="relative h-full min-h-[500px] rounded-[3rem] overflow-hidden group">
           <img 
-            src="/hero.png" 
+            src="https://subhamgroup.com/img/subham-kishori-glry1.jpg" 
             alt="Subham Kishori Heights Lifestyle" 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />

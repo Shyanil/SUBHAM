@@ -66,7 +66,7 @@ export default function Walkthrough() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="public/SubhamKishoriHeights.mp4" type="video/mp4" />
+            <source src="https://subhamgroup.com/video/SubhamKishoriHeights.mp4" type="video/mp4" />
           </video>
 
           {/* Video Controls Overlay */}

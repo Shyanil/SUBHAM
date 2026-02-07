@@ -7,13 +7,16 @@ export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
 
+  // Updated with official project imagery
   const galleryImages = [
-    { title: "Community Hub", tag: "Indoor Spaces", src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" },
-    { title: "Modern Architecture", tag: "Exterior Vision", src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" },
-    { title: "Master Plan", tag: "Aerial View", src: "https://images.unsplash.com/photo-1506765515384-028b60a970df?w=800" },
-    { title: "Lush Landscapes", tag: "78% Open Space", src: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800" },
-    { title: "Grand Lobby", tag: "Premium Entrance", src: "https://media.istockphoto.com/id/1369030854/photo/3d-render-of-luxury-hotel-lobby-and-reception.jpg?s=612x612&w=0&k=20&c=obw_JfMCUfb26jO0JkYSiXOkc8Tli9vPsGmw3fLgjIc=" },
-    { title: "Active Living", tag: "Lifestyle Promise", src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" }
+    { title: "Architectural Vision", tag: "Exterior", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
+    { title: "Modern Facade", tag: "Design", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
+    { title: "Aerial Perspective", tag: "Master Plan", src: "https://subhamgroup.com/img/subham-kishori-glry4.jpg" },
+    { title: "Lifestyle Amenities", tag: "Active Living", src: "https://subhamgroup.com/img/subham-kishori-glry5.jpg" },
+    { title: "Community Spaces", tag: "Social Hub", src: "https://subhamgroup.com/img/subham-kishori-glry6.jpg" },
+    { title: "Evening Glow", tag: "Ambiance", src: "https://subhamgroup.com/img/subham-kishori-glry7.jpg" },
+    { title: "Interior Elegance", tag: "Indoor", src: "https://subhamgroup.com/img/subham-kishori-glry8.jpg" },
+    { title: "Premium Living", tag: "Perspective", src: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" }
   ];
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export default function Gallery() {
       {/* --- GRID --- */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryImages.map((image, idx) => (
+          {galleryImages.slice(0, 6).map((image, idx) => (
             <div 
               key={idx} 
               className="group relative rounded-[2.5rem] overflow-hidden bg-white aspect-[4/3] cursor-pointer shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
@@ -74,18 +77,16 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* --- BUG FIXED SIDEBAR OVERLAY --- */}
+      {/* --- SIDEBAR OVERLAY --- */}
       <div 
         className={`fixed inset-0 z-[100] ${isOpen ? "visible" : "invisible"}`}
-        style={{ transition: 'visibility 0s linear 0s' }} // Instant visibility toggle
+        style={{ transition: 'visibility 0s linear 0s' }}
       >
-        {/* Backdrop - Faster Fade */}
         <div 
           className={`absolute inset-0 bg-[#062c22]/90 backdrop-blur-md transition-opacity duration-300 ease-out ${isOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsOpen(false)}
         ></div>
 
-        {/* Sidebar Container - Snappier Motion */}
         <div className={`absolute right-0 top-0 h-full w-full lg:w-[450px] bg-white shadow-2xl transform transition-transform duration-400 cubic-bezier(0.2, 0, 0, 1) flex flex-col z-[110] ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
           
           <div className="p-8 flex justify-between items-center border-b border-gray-100 shrink-0">
@@ -125,7 +126,7 @@ export default function Gallery() {
           </div>
         </div>
 
-        {/* Center Preview - Only shows on desktop */}
+        {/* Center Preview - Desktop */}
         <div className={`hidden lg:flex absolute left-0 top-0 h-full w-[calc(100%-450px)] items-center justify-center p-20 pointer-events-none transition-all duration-300 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
            <div className="relative w-full max-w-5xl shadow-2xl rounded-[4rem] overflow-hidden">
               <img 
