@@ -26,9 +26,7 @@ export default function SubhamHeader() {
 
   const dropdownNav = [
     { name: "Highlights", id: "highlights" },
-    { name: "Pricing", id: "pricing" },
     { name: "Gallery", id: "gallery" },
-    { name: "FAQ", id: "faq" },
   ];
 
   // --- SMART SCROLL LOGIC ---

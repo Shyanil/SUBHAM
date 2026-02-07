@@ -39,7 +39,7 @@ export default function HeroSection() {
         {/* --- RIGHT CARD: IMAGE --- */}
         <div className="relative h-full min-h-[500px] rounded-[3rem] overflow-hidden group">
           <img 
-            src="https://images.unsplash.com/photo-1632400990400-416d5460f337?q=80&w=918&auto=format&fit=crop" 
+            src="/hero.png" 
             alt="Subham Kishori Heights Lifestyle" 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
