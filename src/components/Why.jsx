@@ -1,9 +1,21 @@
+"use client";
+
 import React from 'react';
 import { ArrowUpRight, Building2, Activity, Users, Heart, Sparkles, MapPin } from 'lucide-react';
 
 const ActiveLivingShowcase = () => {
+  // SMOOTH SCROLL HANDLER
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) {
+      const yOffset = -100; // Account for fixed header
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="w-full bg-[#fafaf8] py-24 px-6 md:px-12 lg:px-24 font-sans text-[#062c22]">
+    <section id="highlights" className="w-full bg-[#fafaf8] py-24 px-6 md:px-12 lg:px-24 font-sans text-[#062c22]">
       
       {/* --- HERO PHILOSOPHY SECTION --- */}
       <div className="max-w-7xl mx-auto mb-32">
@@ -17,7 +29,7 @@ const ActiveLivingShowcase = () => {
             <span className="italic font-light text-[#0a4d3c]">Kishori</span> Heights
           </h1>
           
-          <p className="text-xl md:text-2xl text-[#062c22]/60 italic font-medium max-w-2xl">
+          <p className="text-xl md:text-2xl text-[#062c22]/60 italic font-medium max-w-2xl leading-relaxed">
             "An icon that stands tall in the spirit of active living."
           </p>
         </div>
@@ -29,7 +41,10 @@ const ActiveLivingShowcase = () => {
             </h2>
           </div>
           <div className="lg:w-1/3 flex lg:justify-end">
-            <button className="group flex items-center gap-4 bg-[#062c22] text-[#e3f988] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:scale-105 transition-all duration-300">
+            <button 
+              onClick={scrollToContact}
+              className="group flex items-center gap-4 bg-[#062c22] text-[#e3f988] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:scale-105 transition-all duration-300"
+            >
               Free Planning Consult <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
@@ -43,26 +58,26 @@ const ActiveLivingShowcase = () => {
             title: "For Children", 
             tag: "ENERGY & PLAY",
             desc: "Designed to spark movement and physical growth through active, purposeful play environments.",
-            icon: <Sparkles className="w-6 h-6" />,
+            icon: <Sparkles className="w-6 h-6 text-[#062c22]" />,
             bg: "bg-white border border-gray-100" 
           },
           { 
             title: "For Families", 
             tag: "COMMUNITY BONDING",
             desc: "Space efficiency and open panoramic views to nurture modern community living and relationships.",
-            icon: <Users className="w-6 h-6" />,
+            icon: <Users className="w-6 h-6 text-white" />,
             bg: "bg-[#062c22] text-white shadow-2xl scale-105 z-10" 
           },
           { 
             title: "For Seniors", 
             tag: "WELLNESS & CALM",
             desc: "Emotional grounding and calm aesthetics curated for a healthy, dignified, and energetic lifestyle.",
-            icon: <Heart className="w-6 h-6" />,
+            icon: <Heart className="w-6 h-6 text-[#062c22]" />,
             bg: "bg-[#e3f988]" 
           }
         ].map((item, idx) => (
           <div key={idx} className={`${item.bg} rounded-[4rem] p-12 flex flex-col h-[420px] justify-between group transition-all duration-500`}>
-            <div className="w-16 h-16 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+            <div className={`w-16 h-16 rounded-3xl flex items-center justify-center border border-black/5 shadow-inner ${idx === 1 ? 'bg-white/10 backdrop-blur-md' : 'bg-[#062c22]/5'}`}>
               {item.icon}
             </div>
             <div>
@@ -75,13 +90,13 @@ const ActiveLivingShowcase = () => {
       </div>
 
       {/* --- ARCHITECTURAL VISION --- */}
-      <div className="relative rounded-[5rem] overflow-hidden h-[700px] group shadow-2xl">
+      <div className="relative rounded-[5rem] overflow-hidden h-[700px] group shadow-2xl bg-[#062c22]">
         <img 
           src="/outside_view_2.png" 
           alt="Subham Kishori Heights Architecture" 
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#062c22] via-[#062c22]/20 to-transparent opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#062c22] via-[#062c22]/40 to-transparent"></div>
         
         <div className="absolute inset-0 p-12 md:p-20 flex flex-col justify-end">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
@@ -91,7 +106,7 @@ const ActiveLivingShowcase = () => {
               <p className="text-white/70 text-lg md:text-xl leading-relaxed font-light">
                 Modern high-rise towers with clean vertical lines and well-lit façades. 
                 Thoughtful space planning ensures natural light and open views for all 
-                exclusive residences.
+                65 exclusive residences.
               </p>
             </div>
             
@@ -103,8 +118,8 @@ const ActiveLivingShowcase = () => {
                </div>
                <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-8 rounded-[3rem] border border-white/20 text-white text-center min-w-[160px]">
                   <Activity className="w-8 h-8 mx-auto mb-4 text-[#e3f988]" />
-                  <p className="text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Density</p>
-                  <p className="text-xl font-serif">Exclusive</p>
+                  <p className="text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Elevation</p>
+                  <p className="text-xl font-serif">B+G+14</p>
                </div>
             </div>
           </div>

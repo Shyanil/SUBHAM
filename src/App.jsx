@@ -7,7 +7,7 @@ import Hero from "./components/Hero";
 import AboutProject from "./components/AboutProject";
 import Amenities from "./components/Amenities";
 import Why from "./components/Why";
-import Who from "./components/Who";
+import Location from "./components/Location";
 import Footer from "./components/Footer";
 import Walkthrough from "./components/Walkthrough";
 import Gallery from "./components/Gallery";
@@ -36,7 +36,7 @@ export default function App() {
                   <AboutProject />
                   <Why />
                   <Amenities />
-                  <Who />
+                  <Location />
                   <Highlights />
                   <Gallery />
                   <Walkthrough/>

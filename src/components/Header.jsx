@@ -1,49 +1,41 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, ChevronDown, Download, Layout } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowUpRight, Download, Layout } from "lucide-react";
 
 export default function SubhamHeader() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const colors = {
     darkGreen: "#062c22",
     lime: "#e3f988",
   };
 
+  // Updated navigation to match your latest structure
   const mainNav = [
     { name: "Home", id: "hero" },
     { name: "About Project", id: "about" },
     { name: "Amenities", id: "amenities" },
-    { name: "Floor Plans", id: "plans" },
     { name: "Location", id: "location" },
+    { name: "Gallery", id: "gallery" }
   ];
 
-  const dropdownNav = [
-    { name: "Highlights", id: "highlights" },
-    { name: "Gallery", id: "gallery" },
-  ];
+  const brochureLink = "https://subhamgroup.com/pdf/subham-kishori-heights-brohcure.pdf";
 
   // --- SMART SCROLL LOGIC ---
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // 1. Determine if header should be slim (scrolled state)
       setIsScrolled(currentScrollY > 50);
 
-      // 2. Logic: Show if scrolling UP, Hide if scrolling DOWN
       if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setIsVisible(false); // Scrolling down - Hide
+        setIsVisible(false); // Hide on scroll down
       } else {
-        setIsVisible(true); // Scrolling up - Show
+        setIsVisible(true); // Show on scroll up
       }
-
       setLastScrollY(currentScrollY);
     };
 
@@ -60,14 +52,10 @@ export default function SubhamHeader() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
     setIsMobileMenuOpen(false);
-    setIsDropdownOpen(false);
   };
 
   return (
     <>
-      {/* --- CONTENT SPACER --- 
-          Ensures the first section of Subham Kishori Heights is visible on load.
-      */}
       <div className="h-[100px] lg:h-[140px] w-full bg-white" />
 
       <header 
@@ -88,37 +76,32 @@ export default function SubhamHeader() {
             className="font-serif text-xl md:text-2xl tracking-tighter cursor-pointer flex flex-col leading-none" 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <span className="font-bold">SUBHAM</span>
+            <span className="font-bold uppercase tracking-tighter">SUBHAM</span>
             <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-light mt-1 opacity-70">Kishori Heights</span>
           </div>
 
           {/* --- DESKTOP NAVIGATION --- */}
-          <nav className="hidden lg:flex items-center space-x-8 text-[11px] font-bold uppercase tracking-widest">
+          <nav className="hidden lg:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest">
             {mainNav.map((item) => (
-              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="hover:text-white transition-colors">
+              <a 
+                key={item.id} 
+                href={`#${item.id}`} 
+                onClick={(e) => scrollToSection(e, item.id)} 
+                className="hover:text-white transition-colors"
+              >
                 {item.name}
               </a>
             ))}
 
-            <div className="relative" ref={dropdownRef}>
-              <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="flex items-center gap-1.5 hover:text-white">
-                More <ChevronDown className={`w-3 h-3 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              <div className={`absolute top-full right-0 mt-6 w-56 bg-white rounded-[2rem] shadow-2xl overflow-hidden transition-all duration-300 origin-top-right ${isDropdownOpen ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"}`}>
-                <div className="p-2">
-                  {dropdownNav.map((item) => (
-                    <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="flex items-center px-6 py-4 text-[10px] font-bold text-[#062c22] uppercase tracking-widest hover:bg-[#e3f988]/20 rounded-2xl transition-colors">
-                      {item.name}
-                    </a>
-                  ))}
-                  <div className="h-px bg-gray-100 my-2 mx-4"></div>
-                  <a href="/brochure.pdf" className="flex items-center gap-3 px-6 py-4 text-[10px] font-bold text-[#062c22] uppercase tracking-widest hover:bg-[#e3f988]/20 rounded-2xl transition-colors">
-                    <Download className="w-4 h-4" /> Download Brochure
-                  </a>
-                </div>
-              </div>
-            </div>
+            {/* DIRECT BROCHURE DOWNLOAD */}
+            <a 
+              href={brochureLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2 rounded-full border border-[#e3f988]/30 hover:bg-[#e3f988] hover:text-[#062c22] transition-all duration-300"
+            >
+              <Download className="w-3 h-3" /> Brochure
+            </a>
           </nav>
 
           {/* --- ACTION BUTTON --- */}
@@ -127,7 +110,7 @@ export default function SubhamHeader() {
               onClick={(e) => scrollToSection(e, 'contact')}
               className="hidden sm:flex items-center gap-2 bg-[#e3f988] text-[#062c22] px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 hover:bg-white hover:scale-105"
             >
-              Contact / Enquire Now <ArrowUpRight className="w-4 h-4" />
+              Contact Now <ArrowUpRight className="w-4 h-4" />
             </button>
 
             <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 text-[#e3f988]">
@@ -137,7 +120,7 @@ export default function SubhamHeader() {
         </div>
       </header>
 
-      {/* --- MOBILE FULLSCREEN MENU --- */}
+      {/* --- MOBILE MENU --- */}
       <div className={`fixed inset-0 bg-[#062c22] z-[100] transition-transform duration-700 ease-in-out ${isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="flex flex-col h-full p-8 overflow-y-auto">
           <div className="flex justify-between items-center mb-12 shrink-0 text-[#e3f988] font-serif">
@@ -151,18 +134,22 @@ export default function SubhamHeader() {
           </div>
 
           <nav className="flex flex-col space-y-6">
-            {[...mainNav, ...dropdownNav].map((item) => (
-              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="text-4xl font-serif text-[#e3f988] opacity-80 hover:opacity-100">
+            {mainNav.map((item) => (
+              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="text-4xl font-serif text-[#e3f988] opacity-80">
                 {item.name}
               </a>
             ))}
-            <a href="/brochure.pdf" className="flex items-center gap-3 text-xl font-bold text-[#e3f988] pt-6 border-t border-[#e3f988]/10">
+            <a 
+              href={brochureLink} 
+              target="_blank" 
+              className="flex items-center gap-3 text-xl font-bold text-[#e3f988] pt-6 border-t border-[#e3f988]/10"
+            >
               <Download className="w-5 h-5" /> Download Brochure
             </a>
           </nav>
 
           <div className="mt-12 mb-8">
-            <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full bg-[#e3f988] text-[#062c22] py-6 rounded-3xl font-bold text-lg shadow-xl">
+            <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full bg-[#e3f988] text-[#062c22] py-6 rounded-3xl font-bold text-lg">
               Contact / Enquire Now
             </button>
           </div>
