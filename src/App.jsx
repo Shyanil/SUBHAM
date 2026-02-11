@@ -16,26 +16,40 @@ import Gallery from "./components/Gallery";
 import Highlights from "./components/Highlights";
 import ThankYou from "./components/ThankYou";
 import Contact from "./components/Contact";
-// NEW: Import the StickyContact component
 import StickyContact from "./components/StickyContact";
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const [hideStickyOnDesktop, setHideStickyOnDesktop] = useState(false);
+  // Controls visibility based on specific section scroll boundaries
+  const [isStickyVisible, setIsStickyVisible] = useState(false);
+  
+  const heroRef = useRef(null);
   const walkthroughRef = useRef(null);
 
-  // LOGIC: Handle visibility based on scroll for larger screens
   useEffect(() => {
     const handleScroll = () => {
-      if (walkthroughRef.current && window.innerWidth >= 1024) {
-        const rect = walkthroughRef.current.getBoundingClientRect();
-        // If the top of Walkthrough is visible or above the viewport, hide the sticky footer
-        const isIntersecting = rect.top <= window.innerHeight;
-        setHideStickyOnDesktop(isIntersecting);
+      if (window.innerWidth >= 1024) {
+        const heroRect = heroRef.current?.getBoundingClientRect();
+        const walkthroughRect = walkthroughRef.current?.getBoundingClientRect();
+
+        // 1. Show only AFTER the Hero section has started leaving the view
+        const hasPassedHero = heroRect ? heroRect.bottom < 100 : false;
+        
+        // 2. Hide when the Walkthrough section enters the view
+        const hasReachedWalkthrough = walkthroughRect ? walkthroughRect.top <= window.innerHeight : false;
+
+        // Sticky is visible ONLY between Hero and Walkthrough
+        setIsStickyVisible(hasPassedHero && !hasReachedWalkthrough);
+      } else {
+        // Always allow the mobile FAB to manage its own 5s timer logic
+        setIsStickyVisible(true);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Initial check in case page is refreshed mid-scroll
+    handleScroll(); 
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -51,7 +65,12 @@ export default function App() {
               element={
                 <div className="w-full overflow-x-hidden relative">
                   <Header />
-                  <Hero />
+                  
+                  {/* Boundary 1: Show Sticky only after this */}
+                  <div ref={heroRef}>
+                    <Hero />
+                  </div>
+
                   <AboutProject />
                   <Why />
                   <Amenities />
@@ -59,19 +78,20 @@ export default function App() {
                   <Highlights />
                   <Gallery />
                   
-                  {/* Anchor for scroll detection */}
+                  {/* Boundary 2: Hide Sticky once this is reached */}
                   <div ref={walkthroughRef}>
                     <Walkthrough />
                   </div>
                   
                   <Contact />
                   <ThankYou />
+                  <Footer />
 
                   {/* STICKY CONTACT: 
-                    - Opens after 5s (handled inside StickyContact.jsx)
-                    - Hidden on desktop when reaching Walkthrough section
+                    - Desktop: Visible only between Hero bottom and Walkthrough top
+                    - Mobile: Managed by internal 5s popup logic
                   */}
-                  {!hideStickyOnDesktop && <StickyContact />}
+                  {isStickyVisible && <StickyContact />}
                 </div>
               }
             />
