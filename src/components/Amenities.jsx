@@ -4,7 +4,7 @@ import React from "react";
 import { 
   Train, Hospital, School, 
   ShoppingBag, GraduationCap, Compass, 
-  Sparkles, Target, Zap
+  Sparkles, Target, Zap, Waves
 } from "lucide-react";
 
 const Amenities = () => {
@@ -77,9 +77,16 @@ const Amenities = () => {
   return (
     <section id="amenities" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
       
-      {/* --- DECORATIVE ASSETS --- */}
-      <div className="absolute -right-10 -top-10 w-[280px] md:w-[380px] pointer-events-none z-20 select-none">
-        <img src="/profile_2.png" alt="Architecture" className="w-full h-auto object-contain drop-shadow-2xl" />
+      {/* --- NEW CUSTOM VECTOR ART: TOP RIGHT --- */}
+      {/* Created with CSS shapes and icons to replace profile_2 image */}
+      <div className="absolute -right-20 top-20 w-[300px] h-[300px] pointer-events-none z-0 select-none opacity-20">
+        <div className="relative w-full h-full">
+            <div className="absolute inset-0 border-[40px] rounded-full animate-spin-slow" style={{ borderColor: `${colors.brightOrange}10` }} />
+            <div className="absolute inset-10 border-[2px] border-dashed rounded-full animate-reverse-spin" style={{ borderColor: colors.brightOrange }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <Waves className="w-20 h-20" style={{ color: colors.darkOrange }} />
+            </div>
+        </div>
       </div>
 
       <div className="absolute right-[15%] top-[20%] opacity-20 animate-pulse">
@@ -89,6 +96,7 @@ const Amenities = () => {
         <Zap className="w-6 h-6" style={{ color: colors.brightOrange }} />
       </div>
 
+      {/* --- KEPT ASSET: profile_1.png BOTTOM LEFT --- */}
       <div className="absolute -left-12 -bottom-12 w-[250px] md:w-[350px] pointer-events-none z-0 select-none rotate-6">
         <img src="/profile_1.png" alt="Design Element" className="w-full h-auto drop-shadow-xl" />
       </div>
@@ -136,7 +144,6 @@ const Amenities = () => {
                         <span className="text-sm font-bold tracking-tight text-[#041a14]/80 group-hover/item:text-[#041a14] transition-colors">
                             {item.name}
                         </span>
-                        {/* UPDATED: Lighter shade for distance background for readability */}
                         <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-sm border border-[#F2A71D30]" style={{ backgroundColor: colors.lightOrangeBG, color: colors.darkOrange }}>
                           {item.dist}
                         </span>
@@ -155,11 +162,18 @@ const Amenities = () => {
 
       <style jsx>{`
         .animate-spin-slow {
-          animation: spin 8s linear infinite;
+          animation: spin 12s linear infinite;
+        }
+        .animate-reverse-spin {
+          animation: spin-reverse 8s linear infinite;
         }
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
         }
       `}</style>
     </section>

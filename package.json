@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.87.1",
     "@tailwindcss/vite": "^4.1.17",
+    "firebase": "^12.9.0",
     "framer-motion": "^12.31.0",
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
