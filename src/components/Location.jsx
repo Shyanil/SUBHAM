@@ -8,18 +8,26 @@ export default function Location() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Official Brand Palette
+  const colors = {
+    blackish: "#041a14",      // Deeper, darker Forest Green for a blackish feel
+    brightOrange: "#F2A71D", // Accent Highlight
+    mediumOrange: "#E97323", // Primary Action
+    darkOrange: "#D64B27",   // Red-Orange Accent
+  };
+
   return (
-    <footer id="location" className="w-full bg-[#062c22] py-24 px-6 md:px-12 lg:px-24 text-[#e3f988] font-sans">
+    <footer id="location" className="w-full py-24 px-6 md:px-12 lg:px-24 font-sans" style={{ backgroundColor: colors.blackish }}>
       <div className="max-w-7xl mx-auto">
         
         {/* --- PART 1: PROJECT IDENTITY --- */}
         <div className="border-b border-white/10 pb-12 mb-12">
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.brightOrange }}>
             Strategically Positioned
           </p>
           <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-none text-white">
             Project <br />
-            <span className="italic font-light text-[#e3f988]">Location.</span>
+            <span className="italic font-light" style={{ color: colors.darkOrange }}>Location.</span>
           </h2>
         </div>
 
@@ -30,8 +38,8 @@ export default function Location() {
           <div className="flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-6">
-                <MapPin className="w-4 h-4 text-[#e3f988]" />
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-40">The Address</p>
+                <MapPin className="w-4 h-4" style={{ color: colors.brightOrange }} />
+                <p className="text-[10px] font-black uppercase tracking-widest opacity-40 text-white">The Address</p>
               </div>
               <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8 text-white">
                 Subham Kishori Heights, <br />
@@ -41,19 +49,19 @@ export default function Location() {
             </div>
             
             <div className="pt-8 border-t border-white/5">
-              <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-4">Home Types</p>
-              <div className="flex gap-6 text-xl font-serif italic text-[#e3f988]">
+              <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-4 text-white">Home Types</p>
+              <div className="flex gap-6 text-xl font-serif italic" style={{ color: colors.brightOrange }}>
                 <span>3 BHK</span>
                 <span>4 BHK</span>
                 <span>Duplex</span>
               </div>
-              <p className="mt-4 text-[10px] font-black uppercase tracking-[0.3em] opacity-30">
+              <p className="mt-4 text-[10px] font-black uppercase tracking-[0.3em] opacity-30 text-white">
                 B+G+14 · 65 Exclusive Homes
               </p>
             </div>
           </div>
 
-          {/* GOOGLE MAPS COLUMN (YOUR SPECIFIC IFRAME) */}
+          {/* GOOGLE MAPS COLUMN */}
           <div className="lg:col-span-2">
             <div className="relative w-full h-[350px] md:h-[450px] rounded-[3rem] overflow-hidden border border-white/10 group grayscale transition-all duration-700 hover:grayscale-0 shadow-2xl">
               <iframe 
@@ -72,7 +80,8 @@ export default function Location() {
                 href="https://maps.google.com/?q=Subham+Kishori+Heights+Dibrugarh" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="absolute bottom-8 right-8 bg-[#e3f988] text-[#062c22] px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-bold text-[10px] uppercase tracking-widest hover:scale-105 transition-transform"
+                className="absolute bottom-8 right-8 px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-bold text-[10px] uppercase tracking-widest hover:scale-105 transition-transform"
+                style={{ backgroundColor: colors.mediumOrange, color: "white" }}
               >
                 <Navigation className="w-4 h-4" />
                 Open in Maps
@@ -84,20 +93,28 @@ export default function Location() {
         {/* --- FOOTER ACTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/10 gap-8">
           <div className="flex flex-col gap-1">
-            <p className="text-[9px] font-black uppercase tracking-widest opacity-30">
+            <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
               A Unit of Subham Group · Legacy Since 2007
             </p>
-            <p className="text-[9px] font-black uppercase tracking-widest opacity-30">
+            <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
               78% Open Space · Vastu Compliant
             </p>
           </div>
 
           <button 
             onClick={scrollToTop}
-            className="group flex items-center gap-4 bg-white/5 hover:bg-[#e3f988] hover:text-[#062c22] px-8 py-4 rounded-full transition-all duration-500 border border-white/10"
+            className="group flex items-center gap-4 bg-white/5 px-8 py-4 rounded-full transition-all duration-500 border border-white/10"
+            onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = colors.brightOrange;
+                e.currentTarget.style.borderColor = colors.brightOrange;
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
+                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
+            }}
           >
-            <span className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-[#062c22]">Back to Top</span>
-            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-black">Back to Top</span>
+            <ArrowUp className="w-4 h-4 text-white group-hover:text-black group-hover:-translate-y-1 transition-transform" />
           </button>
         </div>
         

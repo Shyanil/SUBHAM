@@ -3,18 +3,25 @@
 import React, { useState, useEffect } from "react";
 import { 
   ArrowRight, 
-  Send, 
   CheckCircle2, 
   MapPin, 
   Phone, 
   ShieldCheck, 
-  Target // FIXED: Added missing import
+  Target 
 } from "lucide-react";
 
 export default function Contact() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   
+  // NEW PALETTE: Orange and Blackish Combo
+  const colors = {
+    blackish: "#041a14",
+    brightOrange: "#F2A71D",
+    mediumOrange: "#E97323",
+    darkOrange: "#D64B27",
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,42 +51,41 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Lead Captured with Marketing Data:", formData);
     setSubmitted(true);
   };
 
   return (
-    <section id="contact" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#062c22]">
+    <section id="contact" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
       
       {/* BRAND DECOR: profile_2.png */}
-      <div className="absolute right-0 top-0 w-[400px] opacity-20 pointer-events-none select-none z-0">
+      <div className="absolute right-0 top-0 w-[400px] opacity-10 pointer-events-none select-none z-0">
         <img src="/profile_2.png" alt="Branding" className="w-full h-auto" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-stretch bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-[#062c22]/5 min-h-[650px]">
+        <div className="flex flex-col lg:flex-row items-stretch bg-white rounded-[4rem] shadow-2xl overflow-hidden border border-[#041a14]/5 min-h-[650px]">
           
-          {/* LEFT PANEL: PROJECT INFO */}
-          <div className="lg:w-2/5 bg-[#062c22] p-12 lg:p-20 text-[#e3f988] flex flex-col justify-between">
+          {/* LEFT PANEL: BLACKISH THEME */}
+          <div className="lg:w-2/5 p-12 lg:p-20 text-white flex flex-col justify-between" style={{ backgroundColor: colors.blackish }}>
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-60 mb-6 block">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] mb-6 block" style={{ color: colors.brightOrange }}>
                 Exclusive Inquiry
               </span>
               <h2 className="font-serif text-5xl md:text-6xl leading-[0.95] mb-8">
                 Request a <br />
-                <span className="italic font-light">Consultation.</span>
+                <span className="italic font-light" style={{ color: colors.brightOrange }}>Consultation.</span>
               </h2>
-              <p className="text-[#e3f988]/70 text-lg font-medium leading-relaxed max-w-xs">
-                Subham Kishori Heights is a lifestyle-focused residential project designed to redefine modern living in Dibrugarh.
+              <p className="text-white/70 text-lg font-medium leading-relaxed max-w-xs">
+                Subham Kishori Heights is a lifestyle-focused residential project designed for Dibrugarh.
               </p>
             </div>
 
             <div className="space-y-4 pt-10">
               <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest">
-                <MapPin className="w-4 h-4 text-[#e3f988]" /> Near Brahmaputra, Dibrugarh
+                <MapPin className="w-4 h-4" style={{ color: colors.brightOrange }} /> Near Brahmaputra, Dibrugarh
               </div>
               <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest">
-                <Phone className="w-4 h-4 text-[#e3f988]" /> +91 6292 294 902
+                <Phone className="w-4 h-4" style={{ color: colors.brightOrange }} /> +91 6292 294 902
               </div>
             </div>
           </div>
@@ -91,27 +97,34 @@ export default function Contact() {
                 
                 {step === 1 && (
                   <div className="space-y-8">
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[#062c22]/40">01. Identity</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[#041a14]/40">01. Identity</h4>
                     <div className="space-y-6">
                       <input 
                         type="text" required placeholder="Full Name"
-                        className="w-full bg-transparent border-b-2 border-[#062c22]/10 py-4 focus:border-[#062c22] outline-none transition-all font-medium text-lg"
+                        className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium text-lg"
+                        style={{ borderBottomColor: `${colors.blackish}15` }}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                       />
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <input 
                           type="email" required placeholder="Email Address"
-                          className="w-full bg-transparent border-b-2 border-[#062c22]/10 py-4 focus:border-[#062c22] outline-none transition-all font-medium"
+                          className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium"
+                          style={{ borderBottomColor: `${colors.blackish}15` }}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
                         />
                         <input 
                           type="tel" required placeholder="Phone Number"
-                          className="w-full bg-transparent border-b-2 border-[#062c22]/10 py-4 focus:border-[#062c22] outline-none transition-all font-medium"
+                          className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium"
+                          style={{ borderBottomColor: `${colors.blackish}15` }}
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         />
                       </div>
                     </div>
-                    <button type="button" onClick={() => setStep(2)} className="inline-flex items-center gap-3 bg-[#062c22] text-[#e3f988] px-10 py-5 rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-lg">
+                    <button 
+                      type="button" onClick={() => setStep(2)} 
+                      className="inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-lg"
+                      style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}
+                    >
                       Select Interest <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
@@ -119,7 +132,7 @@ export default function Contact() {
 
                 {step === 2 && (
                   <div className="space-y-8">
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[#062c22]/40">02. Project Interest</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-[#041a14]/40">02. Project Interest</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="flex flex-col gap-3">
                         <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">Configuration</label>
@@ -128,7 +141,11 @@ export default function Contact() {
                             <button 
                               key={type} type="button"
                               onClick={() => setFormData({...formData, interest: type})}
-                              className={`px-6 py-3 rounded-xl text-xs font-bold transition-all ${formData.interest === type ? 'bg-[#062c22] text-[#e3f988]' : 'bg-[#f0f2e8] text-[#062c22]/60 hover:bg-[#e3f988]'}`}
+                              className={`px-6 py-3 rounded-xl text-xs font-bold transition-all ${formData.interest === type ? 'text-white' : 'bg-gray-100'}`}
+                              style={{ 
+                                backgroundColor: formData.interest === type ? colors.darkOrange : "",
+                                color: formData.interest === type ? "white" : ""
+                              }}
                             >
                               {type}
                             </button>
@@ -138,7 +155,8 @@ export default function Contact() {
                       <div className="flex flex-col gap-3">
                         <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">Timeline</label>
                         <select 
-                          className="w-full bg-transparent border-b-2 border-[#062c22]/10 py-4 focus:border-[#062c22] outline-none transition-all font-medium"
+                          className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium"
+                          style={{ borderBottomColor: `${colors.blackish}15` }}
                           onChange={(e) => setFormData({...formData, timeline: e.target.value})}
                         >
                           <option>Immediate</option>
@@ -150,7 +168,11 @@ export default function Contact() {
 
                     <div className="flex items-center gap-8 pt-8">
                       <button type="button" onClick={() => setStep(1)} className="text-[10px] font-black uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity underline underline-offset-4">Back</button>
-                      <button type="submit" className="flex-1 bg-[#e3f988] text-[#062c22] py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:scale-[1.02] transition-all shadow-xl">
+                      <button 
+                        type="submit" 
+                        className="flex-1 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:scale-[1.02] transition-all shadow-xl"
+                        style={{ backgroundColor: colors.mediumOrange, color: "white" }}
+                      >
                         Enquire Now
                       </button>
                     </div>
@@ -159,26 +181,25 @@ export default function Contact() {
               </form>
             ) : (
               <div className="text-center">
-                <CheckCircle2 className="w-20 h-20 text-[#062c22] mx-auto mb-6" />
+                <CheckCircle2 className="w-20 h-20 mx-auto mb-6" style={{ color: colors.darkOrange }} />
                 <h3 className="font-serif text-4xl mb-4">Request Received.</h3>
-                <p className="text-[#062c22]/60 font-medium leading-relaxed">An advisor from Subham Kishori Heights will contact you shortly to schedule your site visit.</p>
+                <p className="text-[#041a14]/60 font-medium leading-relaxed">An advisor from Subham Kishori Heights will contact you shortly.</p>
               </div>
             )}
           </div>
         </div>
         
-        {/* TRUST INDICATOR */}
+        {/* TRUST INDICATORS */}
         <div className="mt-12 flex justify-center items-center gap-12 opacity-30 grayscale">
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
             <ShieldCheck className="w-4 h-4" /> RERA Registered
           </div>
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
-            <Target className="w-4 h-4" /> 78% Open Space
+            <Target className="w-4 h-4" /> 78% Open Space Living
           </div>
         </div>
       </div>
 
-      {/* FIXED: Removed boolean jsx attribute for standard React usage */}
       <style>{`
         .font-serif { font-family: 'Playfair Display', serif; }
       `}</style>

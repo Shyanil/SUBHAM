@@ -1,49 +1,83 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+// Added ArrowUpRight to the imports below
 import { 
-  Play, X, Volume2, VolumeX, 
-  ArrowRight, Sparkles, Building2, 
+  Play, Pause, X, Volume2, VolumeX, 
+  ArrowUpRight, ArrowRight, Sparkles, Building2, 
   Trees, ShieldCheck 
 } from "lucide-react";
 
 export default function Walkthrough() {
   const [isActive, setIsActive] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
+
+  const colors = {
+    blackish: "#041a14",
+    brightOrange: "#F2A71D",
+    mediumOrange: "#E97323",
+    darkOrange: "#D64B27",
+  };
+
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) {
+      const yOffset = -100;
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   const handleStart = () => {
     setIsActive(true);
     setIsMuted(false);
+    setIsPlaying(true);
+    videoRef.current?.play();
+  };
+
+  const handleExit = () => {
+    setIsActive(false);
+    setIsPlaying(false);
+    videoRef.current?.pause();
+    if (videoRef.current) videoRef.current.currentTime = 0; 
+  };
+
+  const togglePlay = () => {
+    if (videoRef.current?.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current?.pause();
+      setIsPlaying(false);
+    }
   };
 
   return (
-    <section id="walkthrough" className="relative w-full h-screen min-h-[750px] bg-[#062c22] overflow-hidden font-sans">
-      
-      {/* --- STAGE 1: CINEMATIC MASK (Before Click) --- */}
+    <section id="walkthrough" className="relative w-full h-screen min-h-[750px] overflow-hidden font-sans" style={{ backgroundColor: colors.blackish }}>
+      {/* STAGE 1: CINEMATIC MASK */}
       <div 
         className={`absolute inset-0 z-20 flex items-center justify-center transition-all duration-1000 ease-in-out
           ${isActive ? "opacity-0 pointer-events-none scale-110" : "opacity-100"}`}
       >
-        {/* The "Curtain" Overlay */}
-        <div className="absolute inset-0 bg-[#062c22]/40 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         
         <div className="relative z-30 text-center flex flex-col items-center">
           <button 
             onClick={handleStart}
             className="group relative w-32 h-32 md:w-44 md:h-44 flex items-center justify-center mb-10"
           >
-            {/* Pulsing Rings */}
-            <div className="absolute inset-0 rounded-full border border-[#e3f988]/30 animate-ping" />
-            <div className="absolute inset-2 rounded-full border border-[#e3f988]/50 animate-pulse" />
+            <div className="absolute inset-0 rounded-full border animate-ping" style={{ borderColor: `${colors.brightOrange}30` }} />
+            <div className="absolute inset-2 rounded-full border animate-pulse" style={{ borderColor: `${colors.brightOrange}50` }} />
             
-            <div className="w-full h-full rounded-full bg-[#e3f988] flex items-center justify-center text-[#062c22] transition-transform duration-500 group-hover:scale-110 shadow-[0_0_50px_rgba(227,249,136,0.3)]">
+            <div className="w-full h-full rounded-full flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-2xl" style={{ backgroundColor: colors.brightOrange, color: colors.blackish }}>
               <Play className="w-12 h-12 fill-current ml-2" />
             </div>
           </button>
           
           <h2 className="font-serif text-5xl md:text-8xl text-white italic leading-none mb-6">
-            Witness the <br /> <span className="text-[#e3f988] not-italic font-bold uppercase tracking-tighter">Ascent.</span>
+            Witness the <br /> <span className="not-italic font-bold uppercase tracking-tighter" style={{ color: colors.brightOrange }}>Ascent.</span>
           </h2>
           <p className="text-[10px] font-black uppercase tracking-[0.6em] text-white/50">
             Click to start the immersive walkthrough
@@ -51,16 +85,13 @@ export default function Walkthrough() {
         </div>
       </div>
 
-      {/* --- STAGE 2: THE SPLIT THEATER (After Click) --- */}
+      {/* STAGE 2: THE SPLIT THEATER */}
       <div className="flex h-full w-full">
-        
-        {/* Left: Dynamic Video Window */}
         <div className={`relative h-full transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
           ${isActive ? "w-full lg:w-[70%]" : "w-full"}`}>
           
           <video
             ref={videoRef}
-            autoPlay
             loop
             muted={isMuted}
             playsInline
@@ -69,31 +100,37 @@ export default function Walkthrough() {
             <source src="https://subhamgroup.com/video/SubhamKishoriHeights.mp4" type="video/mp4" />
           </video>
 
-          {/* Video Controls Overlay */}
           <div className={`absolute bottom-10 left-10 flex gap-4 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}>
             <button 
+              onClick={togglePlay}
+              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
+            >
+              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
+            </button>
+
+            <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-[#e3f988] hover:text-[#062c22] transition-all"
+              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
             >
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
+
             <button 
-              onClick={() => setIsActive(false)}
-              className="px-8 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#062c22] transition-all"
+              onClick={handleExit}
+              className="px-8 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-3"
             >
-              Exit Theater
+              <X className="w-4 h-4" /> Exit Theater
             </button>
           </div>
         </div>
 
-        {/* Right: Project Highlights Sidebar */}
         <div className={`relative h-full bg-[#fafaf8] transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] flex flex-col
           ${isActive ? "w-0 lg:w-[30%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
           
-          <div className="p-12 lg:p-16 flex flex-col h-full justify-between text-[#062c22]">
+          <div className="p-12 lg:p-16 flex flex-col h-full justify-between text-[#041a14]">
             <div>
-              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-[#0a4d3c] mb-12">
-                <Sparkles className="w-4 h-4 text-[#e3f988]" />
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] mb-12" style={{ color: colors.darkOrange }}>
+                <Sparkles className="w-4 h-4" style={{ color: colors.brightOrange }} />
                 Visual Tour
               </div>
               
@@ -103,21 +140,21 @@ export default function Walkthrough() {
 
               <div className="space-y-10">
                 <div className="flex gap-6 items-start">
-                  <Building2 className="w-6 h-6 text-[#e3f988] mt-1 shrink-0" />
+                  <Building2 className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Scale</p>
                     <p className="text-sm font-bold">B+G+14 Modern Towers</p>
                   </div>
                 </div>
                 <div className="flex gap-6 items-start">
-                  <Trees className="w-6 h-6 text-[#e3f988] mt-1 shrink-0" />
+                  <Trees className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Landscape</p>
-                    <p className="text-sm font-bold">78% Open Green Space</p>
+                    <p className="text-sm font-bold">78% Open Space Living</p>
                   </div>
                 </div>
                 <div className="flex gap-6 items-start">
-                  <ShieldCheck className="w-6 h-6 text-[#e3f988] mt-1 shrink-0" />
+                  <ShieldCheck className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Safety</p>
                     <p className="text-sm font-bold">Earthquake Resistant Structure</p>
@@ -126,8 +163,12 @@ export default function Walkthrough() {
               </div>
             </div>
 
-            <button className="group w-full bg-[#062c22] text-[#e3f988] py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-4 hover:scale-[1.02] transition-transform">
-              Book Site Visit <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            <button 
+              onClick={scrollToContact}
+              className="group w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-4 hover:scale-[1.02] transition-transform shadow-lg"
+              style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}
+            >
+              Book Site Visit <ArrowUpRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </button>
           </div>
         </div>

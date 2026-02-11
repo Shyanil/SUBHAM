@@ -9,12 +9,14 @@ export default function SubhamHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // UPDATED PALETTE: Blackish background with Orange highlights
   const colors = {
-    darkGreen: "#062c22",
-    lime: "#e3f988",
+    blackish: "#041a14",      // Deeper, darker Forest Green for a blackish feel
+    brightOrange: "#F2A71D", // Accent Highlight
+    mediumOrange: "#E97323", // Primary Button
+    darkOrange: "#D64B27",   // Red-Orange Accent
   };
 
-  // Updated navigation to match your latest structure
   const mainNav = [
     { name: "Home", id: "hero" },
     { name: "About Project", id: "about" },
@@ -25,16 +27,15 @@ export default function SubhamHeader() {
 
   const brochureLink = "https://subhamgroup.com/pdf/subham-kishori-heights-brohcure.pdf";
 
-  // --- SMART SCROLL LOGIC ---
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
 
       if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setIsVisible(false); // Hide on scroll down
+        setIsVisible(false); 
       } else {
-        setIsVisible(true); // Show on scroll up
+        setIsVisible(true); 
       }
       setLastScrollY(currentScrollY);
     };
@@ -64,92 +65,110 @@ export default function SubhamHeader() {
           ${isScrolled ? "py-3" : "py-8"}`}
       >
         <div 
-          className="max-w-7xl mx-auto rounded-full px-6 md:px-10 py-4 flex justify-between items-center shadow-2xl transition-all duration-300 border border-white/10 backdrop-blur-md"
+          className="max-w-7xl mx-auto rounded-full px-6 md:px-10 py-4 flex justify-between items-center shadow-2xl transition-all duration-300 border border-white/5 backdrop-blur-xl"
           style={{ 
-            backgroundColor: isScrolled ? "rgba(6, 44, 34, 0.98)" : colors.darkGreen, 
-            color: colors.lime,
+            backgroundColor: isScrolled ? "rgba(4, 26, 20, 0.98)" : colors.blackish, 
+            color: "white",
             transform: isScrolled ? "scale(0.98)" : "scale(1)" 
           }}
         >
-          {/* --- LOGO --- */}
+          {/* --- LOGO: SUBHAM in White, Heights in Bright Orange --- */}
           <div 
             className="font-serif text-xl md:text-2xl tracking-tighter cursor-pointer flex flex-col leading-none" 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <span className="font-bold uppercase tracking-tighter">SUBHAM</span>
-            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-light mt-1 opacity-70">Kishori Heights</span>
+            <span className="font-bold uppercase tracking-tighter text-white">SUBHAM</span>
+            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-light mt-1" style={{ color: colors.brightOrange }}>
+              Kishori Heights
+            </span>
           </div>
 
-          {/* --- DESKTOP NAVIGATION --- */}
+          {/* --- DESKTOP NAVIGATION: Orange Hover Effects --- */}
           <nav className="hidden lg:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest">
             {mainNav.map((item) => (
               <a 
                 key={item.id} 
                 href={`#${item.id}`} 
                 onClick={(e) => scrollToSection(e, item.id)} 
-                className="hover:text-white transition-colors"
+                className="transition-colors opacity-70 hover:opacity-100"
+                style={{ color: "white" }}
+                onMouseEnter={(e) => (e.target.style.color = colors.brightOrange)}
+                onMouseLeave={(e) => (e.target.style.color = "white")}
               >
                 {item.name}
               </a>
             ))}
 
-            {/* DIRECT BROCHURE DOWNLOAD */}
             <a 
               href={brochureLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2 rounded-full border border-[#e3f988]/30 hover:bg-[#e3f988] hover:text-[#062c22] transition-all duration-300"
+              className="flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300"
+              style={{ borderColor: `${colors.brightOrange}44`, color: colors.brightOrange }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = colors.brightOrange;
+                e.target.style.color = colors.blackish;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = colors.brightOrange;
+              }}
             >
               <Download className="w-3 h-3" /> Brochure
             </a>
           </nav>
 
-          {/* --- ACTION BUTTON --- */}
+          {/* --- ACTION BUTTON: Medium Orange --- */}
           <div className="flex items-center gap-4">
             <button 
               onClick={(e) => scrollToSection(e, 'contact')}
-              className="hidden sm:flex items-center gap-2 bg-[#e3f988] text-[#062c22] px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 hover:bg-white hover:scale-105"
+              className="hidden sm:flex items-center gap-2 px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-[0_10px_20px_rgba(233,115,35,0.2)]"
+              style={{ 
+                backgroundColor: colors.mediumOrange,
+                color: "white"
+              }}
             >
               Contact Now <ArrowUpRight className="w-4 h-4" />
             </button>
 
-            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 text-[#e3f988]">
+            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2" style={{ color: colors.brightOrange }}>
               <Layout className="w-6 h-6" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* --- MOBILE MENU --- */}
-      <div className={`fixed inset-0 bg-[#062c22] z-[100] transition-transform duration-700 ease-in-out ${isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"}`}>
+      {/* --- MOBILE MENU: Blackish Background with Orange Accents --- */}
+      <div className={`fixed inset-0 z-[100] transition-transform duration-700 ease-in-out ${isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"}`} style={{ backgroundColor: colors.blackish }}>
         <div className="flex flex-col h-full p-8 overflow-y-auto">
-          <div className="flex justify-between items-center mb-12 shrink-0 text-[#e3f988] font-serif">
+          <div className="flex justify-between items-center mb-12 shrink-0 font-serif">
             <div>
-              <p className="text-2xl font-bold leading-none">SUBHAM</p>
-              <p className="text-[10px] uppercase tracking-widest opacity-60">Kishori Heights</p>
+              <p className="text-2xl font-bold leading-none text-white">SUBHAM</p>
+              <p className="text-[10px] uppercase tracking-widest" style={{ color: colors.brightOrange }}>Kishori Heights</p>
             </div>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="w-12 h-12 rounded-full border border-[#e3f988]/20 flex items-center justify-center">
-              <span className="text-3xl">×</span>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
+              <span className="text-3xl text-white">×</span>
             </button>
           </div>
 
           <nav className="flex flex-col space-y-6">
             {mainNav.map((item) => (
-              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="text-4xl font-serif text-[#e3f988] opacity-80">
+              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="text-4xl font-serif text-white opacity-80 hover:opacity-100 transition-opacity">
                 {item.name}
               </a>
             ))}
             <a 
               href={brochureLink} 
               target="_blank" 
-              className="flex items-center gap-3 text-xl font-bold text-[#e3f988] pt-6 border-t border-[#e3f988]/10"
+              className="flex items-center gap-3 text-xl font-bold pt-6 border-t border-white/10"
+              style={{ color: colors.brightOrange }}
             >
               <Download className="w-5 h-5" /> Download Brochure
             </a>
           </nav>
 
           <div className="mt-12 mb-8">
-            <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full bg-[#e3f988] text-[#062c22] py-6 rounded-3xl font-bold text-lg">
+            <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full py-6 rounded-3xl font-bold text-lg text-white" style={{ backgroundColor: colors.mediumOrange }}>
               Contact / Enquire Now
             </button>
           </div>

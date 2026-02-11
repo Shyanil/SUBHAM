@@ -7,7 +7,14 @@ export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
 
-  // Updated with official project imagery
+  // Official Brand Palette
+  const colors = {
+    blackish: "#041a14",      // Deep architectural dark base
+    brightOrange: "#F2A71D", // Accent Highlight
+    mediumOrange: "#E97323", // Primary action color
+    darkOrange: "#D64B27",   // Red-Orange branding accent
+  };
+
   const galleryImages = [
     { title: "Architectural Vision", tag: "Exterior", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
     { title: "Modern Facade", tag: "Design", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
@@ -24,21 +31,21 @@ export default function Gallery() {
   }, [isOpen]);
 
   return (
-    <section id="gallery" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 font-sans text-[#062c22]">
+    <section id="gallery" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 font-sans text-[#041a14]">
       
       {/* --- HEADER --- */}
       <div className="max-w-7xl mx-auto px-6 mb-20">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] text-[#0a4d3c] mb-8">
-              <Sparkles className="w-4 h-4 text-[#e3f988]" />
+            <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] mb-8" style={{ color: colors.darkOrange }}>
+              <Sparkles className="w-4 h-4" style={{ color: colors.brightOrange }} />
               The Visual Journey
             </div>
-            <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.85] text-[#062c22] mb-2">
-              The <span className="italic font-light text-[#0a4d3c]">Library.</span>
+            <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.85] text-[#041a14] mb-2">
+              The <span className="italic font-light" style={{ color: colors.darkOrange }}>Library.</span>
             </h2>
           </div>
-          <p className="text-[#062c22]/60 max-w-sm text-lg font-medium border-l-4 border-[#e3f988] pl-8 py-2">
+          <p className="text-[#041a14]/60 max-w-sm text-lg font-medium border-l-4 pl-8 py-2" style={{ borderLeftColor: colors.brightOrange }}>
             A curated look at the architectural vertical lines and well-lit façades of Kishori Heights.
           </p>
         </div>
@@ -58,9 +65,9 @@ export default function Gallery() {
                 alt={image.title} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#062c22] via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" style={{ backgroundColor: colors.blackish }}></div>
               <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#e3f988] mb-2">{image.tag}</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2" style={{ color: colors.brightOrange }}>{image.tag}</span>
                 <h3 className="text-white font-serif text-3xl italic">{image.title}</h3>
               </div>
             </div>
@@ -70,7 +77,16 @@ export default function Gallery() {
         <div className="mt-20 flex justify-center">
           <button 
             onClick={() => setIsOpen(true)}
-            className="group flex items-center gap-4 border-2 border-[#062c22] px-12 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#062c22] hover:text-[#e3f988] transition-all duration-300"
+            className="group flex items-center gap-4 border-2 px-12 py-5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300"
+            style={{ borderColor: colors.blackish, color: colors.blackish }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = colors.blackish;
+              e.currentTarget.style.color = colors.brightOrange;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.color = colors.blackish;
+            }}
           >
             Open Full Gallery <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
           </button>
@@ -83,20 +99,23 @@ export default function Gallery() {
         style={{ transition: 'visibility 0s linear 0s' }}
       >
         <div 
-          className={`absolute inset-0 bg-[#062c22]/90 backdrop-blur-md transition-opacity duration-300 ease-out ${isOpen ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 backdrop-blur-md transition-opacity duration-300 ease-out ${isOpen ? "opacity-100" : "opacity-0"}`}
+          style={{ backgroundColor: `${colors.blackish}E6` }} // 90% opacity
           onClick={() => setIsOpen(false)}
         ></div>
 
         <div className={`absolute right-0 top-0 h-full w-full lg:w-[450px] bg-white shadow-2xl transform transition-transform duration-400 cubic-bezier(0.2, 0, 0, 1) flex flex-col z-[110] ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
           
           <div className="p-8 flex justify-between items-center border-b border-gray-100 shrink-0">
-            <div className="font-serif text-[#062c22]">
+            <div className="font-serif" style={{ color: colors.blackish }}>
               <p className="font-bold text-xl uppercase tracking-tighter">Library View</p>
               <p className="text-[10px] tracking-widest opacity-60">Kishori Heights</p>
             </div>
             <button 
               onClick={() => setIsOpen(false)} 
-              className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#e3f988] transition-colors active:scale-90"
+              className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center transition-colors active:scale-90 hover:text-white"
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.mediumOrange}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#f3f4f6"}
             >
               <X className="w-6 h-6" />
             </button>
@@ -106,21 +125,24 @@ export default function Gallery() {
             {galleryImages.map((image, idx) => (
               <div 
                 key={idx}
-                className={`group relative rounded-2xl overflow-hidden cursor-pointer border-4 transition-all duration-200 ${activeImage === idx ? "border-[#e3f988]" : "border-transparent opacity-60 hover:opacity-100"}`}
+                className={`group relative rounded-2xl overflow-hidden cursor-pointer border-4 transition-all duration-200 ${activeImage === idx ? "border-[#F2A71D]" : "border-transparent opacity-60 hover:opacity-100"}`}
                 onClick={() => setActiveImage(idx)}
               >
                 <img src={image.src} alt="" className="w-full aspect-video object-cover" />
-                <div className="absolute inset-0 bg-[#062c22]/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: `${colors.blackish}66` }}>
                    <p className="text-white font-bold text-[10px] uppercase tracking-widest">View Details</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="p-8 bg-[#062c22] text-[#e3f988] shrink-0">
+          <div className="p-8 shrink-0" style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}>
             <p className="text-[10px] font-black uppercase tracking-widest mb-4 opacity-50">Currently Exploring</p>
-            <h4 className="font-serif text-3xl italic mb-6 leading-none">{galleryImages[activeImage].title}</h4>
-            <button className="w-full bg-[#e3f988] text-[#062c22] py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:scale-[1.02] transition-transform">
+            <h4 className="font-serif text-3xl italic mb-6 leading-none text-white">{galleryImages[activeImage].title}</h4>
+            <button 
+              className="w-full py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:scale-[1.02] transition-transform"
+              style={{ backgroundColor: colors.mediumOrange, color: "white" }}
+            >
               Download Brochure
             </button>
           </div>
@@ -135,7 +157,7 @@ export default function Gallery() {
                 className="w-full h-auto object-cover"
               />
               <div className="absolute bottom-12 left-12 text-white drop-shadow-lg">
-                <p className="text-[10px] uppercase tracking-[0.4em] text-[#e3f988] mb-2">{galleryImages[activeImage].tag}</p>
+                <p className="text-[10px] uppercase tracking-[0.4em] mb-2" style={{ color: colors.brightOrange }}>{galleryImages[activeImage].tag}</p>
                 <h3 className="text-5xl font-serif italic leading-none">{galleryImages[activeImage].title}</h3>
               </div>
            </div>

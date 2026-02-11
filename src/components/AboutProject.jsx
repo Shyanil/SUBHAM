@@ -8,20 +8,28 @@ export default function ActiveLivingHero() {
   const scrollToContact = () => {
     const element = document.getElementById("contact");
     if (element) {
-      const yOffset = -100; // Offset to account for fixed header
+      const yOffset = -100; // Offset for fixed header
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
+  // Color Palette
+  const colors = {
+    blackish: "#041a14",
+    brightOrange: "#F2A71D",
+    mediumOrange: "#E97323",
+    darkOrange: "#D64B27",
+  };
+
   return (
-    <div id="about" className="min-h-screen bg-[#fafaf8] font-sans text-[#062c22] overflow-x-hidden">
+    <div id="about" className="min-h-screen bg-[#fafaf8] font-sans text-[#041a14] overflow-x-hidden">
       
-      {/* --- ADVANCED DYNAMIC MARQUEE (The "Ticker") --- */}
-      <div className="w-full bg-[#062c22] py-4 overflow-hidden border-b border-[#e3f988]/20">
+      {/* --- TICKER: Blackish background with Bright Orange text --- */}
+      <div className="w-full py-4 overflow-hidden border-b" style={{ backgroundColor: colors.blackish, borderBottomColor: `${colors.brightOrange}20` }}>
         <div className="flex whitespace-nowrap animate-marquee">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center text-sm font-bold uppercase tracking-[0.3em] text-[#e3f988] px-4">
+            <div key={i} className="flex items-center text-sm font-bold uppercase tracking-[0.3em] px-4" style={{ color: colors.brightOrange }}>
               <span className="mx-8">To be active is to live</span>
               <Activity className="w-4 h-4 opacity-50" />
               <span className="mx-8">Activeness flows seven days a week</span>
@@ -48,59 +56,60 @@ export default function ActiveLivingHero() {
         {/* MAIN LAYOUT */}
         <div className="flex flex-col items-center text-center relative z-10 w-full max-w-4xl">
           
-          <div className="flex items-center gap-3 text-[#062c22]/50 text-xs font-bold uppercase tracking-[0.4em] mb-8">
-            <MapPin className="w-3 h-3 text-[#062c22]" />
+          <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.4em] mb-8" style={{ color: `${colors.darkOrange}80` }}>
+            <MapPin className="w-3 h-3" style={{ color: colors.darkOrange }} />
             Dibrugarh, Assam
           </div>
 
-          <h1 className="font-serif text-5xl md:text-8xl text-[#062c22] leading-[0.95] mb-10">
+          <h1 className="font-serif text-5xl md:text-8xl leading-[0.95] mb-10" style={{ color: colors.blackish }}>
             Subham <br />
-            <span className="italic font-light text-[#0a4d3c]">Kishori</span> Heights
+            <span className="italic font-light" style={{ color: colors.darkOrange }}>Kishori</span> Heights
           </h1>
 
-          {/* GRID OF HIGHLIGHTS */}
+          {/* GRID OF HIGHLIGHTS: Using Orange gradients and Blackish backgrounds --- */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 w-full">
-            <div className="bg-[#e3f988]/30 p-6 rounded-[2rem] border border-[#062c22]/5 flex flex-col items-center justify-center">
-               <span className="block text-3xl font-serif font-bold italic">78%</span>
+            <div className="p-6 rounded-[2rem] border border-gray-100 flex flex-col items-center justify-center shadow-sm" style={{ backgroundColor: `${colors.brightOrange}15` }}>
+               <span className="block text-3xl font-serif font-bold italic" style={{ color: colors.darkOrange }}>78%</span>
                <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">Open Space</span>
             </div>
-            <div className="bg-white p-6 rounded-[2rem] border border-[#062c22]/5 shadow-sm flex flex-col items-center justify-center">
-               <span className="block text-3xl font-serif font-bold italic">65</span>
+            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center">
+               <span className="block text-3xl font-serif font-bold italic" style={{ color: colors.blackish }}>65</span>
                <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">Exclusive Units</span>
             </div>
-            <div className="bg-[#062c22] text-[#e3f988] p-6 rounded-[2rem] flex flex-col items-center justify-center">
-               <span className="block text-xl font-serif font-bold italic leading-tight">3 & 4 BHK</span>
-               <span className="text-[9px] uppercase font-bold tracking-widest opacity-60 text-center mt-1">Duplex</span>
+            <div className="p-6 rounded-[2rem] flex flex-col items-center justify-center shadow-xl" style={{ backgroundColor: colors.blackish }}>
+               <span className="block text-xl font-serif font-bold italic leading-tight" style={{ color: colors.brightOrange }}>3 & 4 BHK</span>
+               <span className="text-[9px] uppercase font-bold tracking-widest opacity-60 text-center mt-1 text-white/70">Duplex</span>
             </div>
-            <div className="bg-white p-6 rounded-[2rem] border border-[#062c22]/5 shadow-sm flex flex-col items-center justify-center">
-               <Building2 className="w-6 h-6 mb-1 opacity-40 text-[#0a4d3c]" />
+            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center">
+               <Building2 className="w-6 h-6 mb-1 opacity-40" style={{ color: colors.darkOrange }} />
                <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center leading-tight">Vaastu <br/> Compliant</span>
             </div>
           </div>
 
-          <p className="text-[#062c22]/80 text-lg md:text-2xl font-medium leading-relaxed mb-12">
+          <p className="text-lg md:text-2xl font-medium leading-relaxed mb-12" style={{ color: `${colors.blackish}CC` }}>
             An icon that stands tall in the spirit of active living. 
             Designed for families, children, and seniors to ensure 
             everyone stays physically and emotionally active, every day.
           </p>
 
-          {/* ACTION AREA */}
+          {/* ACTION AREA: Orange button with Blackish accents --- */}
           <div className="flex flex-col md:flex-row items-center gap-6">
             <button 
               onClick={scrollToContact}
-              className="inline-flex items-center gap-3 bg-[#062c22] text-[#e3f988] px-12 py-5 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 group shadow-2xl"
+              className="inline-flex items-center gap-3 px-12 py-5 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 group shadow-2xl"
+              style={{ backgroundColor: colors.mediumOrange, color: "white" }}
             >
               Free Planning Consult 
               <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
             <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest opacity-60">
-               <TreePine className="w-5 h-5" />
+               <TreePine className="w-5 h-5" style={{ color: colors.darkOrange }} />
                A Unit of Lohia Group
             </div>
           </div>
         </div>
 
-        <div className="w-full h-1 bg-[#062c22]/5 rounded-full mt-20"></div>
+        <div className="w-full h-1 bg-gray-100 rounded-full mt-20"></div>
       </main>
 
       <style jsx>{`
