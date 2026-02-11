@@ -85,7 +85,7 @@ export default function App() {
                   
                   <Contact />
                   <ThankYou />
-                  <Footer />
+                  
 
                   {/* STICKY CONTACT: 
                     - Desktop: Visible only between Hero bottom and Walkthrough top
