@@ -1,12 +1,11 @@
 "use client";
-
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { 
   Send, MapPin, Phone, ShieldCheck, 
   Target, CheckCircle2, Sparkles, Lock 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-// Import Firebase logic
 import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../lib/firebase";
 
 export default function Contact() {
@@ -31,28 +30,64 @@ export default function Contact() {
     timeline: "Immediate"
   });
 
+  // ✅ FIXED recaptcha setup (Firebase v9 correct order)
   const setupRecaptcha = () => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'invisible'
-      });
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: () => {
+            console.log("reCAPTCHA verified");
+          }
+        }
+      );
     }
   };
 
+  // ✅ FIXED phone number format for Firebase
   const handleSendOtp = async () => {
-    if (formData.phone.length < 10) return alert("Enter a valid phone number");
+    if (!formData.phone) return alert("Enter phone number");
+
     setLoading(true);
+
     try {
       setupRecaptcha();
-      const phoneNumber = formData.phone.startsWith("+") ? formData.phone : "+91" + formData.phone;
+
+      // remove all non-numbers
+      let cleaned = formData.phone.replace(/\D/g, "");
+
+      // remove leading zero
+      if (cleaned.startsWith("0")) {
+        cleaned = cleaned.substring(1);
+      }
+
+      // must be 10 digits
+      if (cleaned.length !== 10) {
+        alert("Enter valid 10 digit phone number");
+        setLoading(false);
+        return;
+      }
+
+      const phoneNumber = `+91${cleaned}`;
+
       const appVerifier = window.recaptchaVerifier;
-      const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+
+      const result = await signInWithPhoneNumber(
+        auth,
+        phoneNumber,
+        appVerifier
+      );
+
       setConfirmationResult(result);
       setIsOtpSent(true);
+
       alert("OTP sent to " + phoneNumber);
+
     } catch (error) {
       console.error(error);
-      alert("Error sending OTP. Try again.");
+      alert(error.message || "Error sending OTP");
     } finally {
       setLoading(false);
     }
@@ -60,13 +95,18 @@ export default function Contact() {
 
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
-    if (!isOtpSent) return alert("Please verify your phone number first.");
+
+    if (!isOtpSent) return alert("Please verify phone first");
+    if (!confirmationResult) return alert("OTP expired. Try again.");
+
     setLoading(true);
+
     try {
       await confirmationResult.confirm(otp);
       setSubmitted(true);
     } catch (error) {
-      alert("Invalid OTP. Please check and try again.");
+      console.error(error);
+      alert("Invalid OTP. Try again.");
     } finally {
       setLoading(false);
     }
@@ -92,6 +132,7 @@ export default function Contact() {
                 Subham Kishori Heights is a lifestyle-focused residential project designed for Dibrugarh.
               </p>
             </div>
+
             <div className="space-y-6 pt-10">
               <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest">
                 <MapPin className="w-4 h-4" style={{ color: colors.brightOrange }} /> Near Brahmaputra, Dibrugarh
@@ -105,102 +146,75 @@ export default function Contact() {
           <div className="lg:w-3/5 p-12 lg:p-20 flex flex-col justify-center bg-white">
             {!submitted ? (
               <form onSubmit={handleFinalSubmit} className="space-y-8">
-                <div className="space-y-6">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">01. Personal Information</h4>
-                  <input 
-                    type="text" required placeholder="Full Name"
-                    className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium text-lg"
-                    style={{ borderBottomColor: `${colors.blackish}15` }}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  />
-                  
-                  <div className="relative group">
-                    <input 
-                      type="tel" required placeholder="Phone Number"
-                      disabled={isOtpSent}
-                      className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium disabled:opacity-50"
-                      style={{ borderBottomColor: isOtpSent ? colors.mediumOrange : `${colors.blackish}15` }}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    />
-                    {formData.phone.length >= 10 && !isOtpSent && (
-                      <button 
-                        type="button"
-                        onClick={handleSendOtp}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#041a14] text-[#F2A71D] text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-lg hover:scale-105 transition-all"
-                      >
-                        {loading ? "Sending..." : "Get OTP"}
-                      </button>
-                    )}
-                  </div>
 
-                  <AnimatePresence>
-                    {isOtpSent && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="space-y-4">
-                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest" style={{ color: colors.mediumOrange }}>
-                          <Lock className="w-3 h-3" /> Security Verification
-                        </div>
-                        <input 
-                          type="text" required placeholder="Enter 6-Digit OTP"
-                          className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-bold text-2xl tracking-[0.5em]"
-                          style={{ borderBottomColor: colors.mediumOrange }}
-                          onChange={(e) => setOtp(e.target.value)}
-                        />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                <input 
+                  type="text"
+                  required
+                  placeholder="Full Name"
+                  className="w-full bg-transparent border-b-2 py-4 outline-none font-medium"
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
 
+                <div className="relative">
                   <input 
-                    type="email" required placeholder="Email Address"
-                    className="w-full bg-transparent border-b-2 py-4 outline-none transition-all font-medium"
-                    style={{ borderBottomColor: `${colors.blackish}15` }}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    type="tel"
+                    required
+                    placeholder="Phone Number"
+                    disabled={isOtpSent}
+                    className="w-full bg-transparent border-b-2 py-4 outline-none"
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   />
+
+                  {formData.phone.length >= 10 && !isOtpSent && (
+                    <button 
+                      type="button"
+                      onClick={handleSendOtp}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#041a14] text-[#F2A71D] px-4 py-2 rounded-lg"
+                    >
+                      {loading ? "Sending..." : "Get OTP"}
+                    </button>
+                  )}
                 </div>
 
-                <div className="space-y-6">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">02. Requirements</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="flex flex-col gap-3">
-                      <label className="text-[10px] font-bold uppercase tracking-widest opacity-60">Interest</label>
-                      <div className="flex gap-2">
-                        {['3 BHK', '4 BHK', 'Duplex'].map(type => (
-                          <button 
-                            key={type} type="button"
-                            onClick={() => setFormData({...formData, interest: type})}
-                            className="px-4 py-2 rounded-lg text-[10px] font-bold uppercase transition-all border"
-                            style={{ 
-                              backgroundColor: formData.interest === type ? colors.blackish : "white",
-                              color: formData.interest === type ? colors.brightOrange : colors.blackish,
-                              borderColor: formData.interest === type ? colors.blackish : "#eee"
-                            }}
-                          >
-                            {type}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <AnimatePresence>
+                  {isOtpSent && (
+                    <motion.div initial={{ height: 0 }} animate={{ height: "auto" }}>
+                      <input 
+                        type="text"
+                        required
+                        placeholder="Enter OTP"
+                        className="w-full border-b-2 py-4"
+                        onChange={(e) => setOtp(e.target.value)}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <input 
+                  type="email"
+                  required
+                  placeholder="Email"
+                  className="w-full border-b-2 py-4"
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
 
                 <button 
-                  type="submit" 
+                  type="submit"
                   disabled={!isOtpSent || loading}
-                  className="w-full py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] flex items-center justify-center gap-4 hover:scale-[1.01] transition-all shadow-2xl disabled:grayscale disabled:opacity-50"
-                  style={{ backgroundColor: colors.mediumOrange, color: "white" }}
+                  className="w-full py-6 bg-[#E97323] text-white rounded-xl"
                 >
-                  {loading ? "Processing..." : "Confirm Registration"} <Send className="w-4 h-4" />
+                  {loading ? "Processing..." : "Confirm Registration"}
                 </button>
+
               </form>
             ) : (
-              <div className="text-center py-20">
-                <CheckCircle2 className="w-24 h-24 mx-auto mb-8" style={{ color: colors.brightOrange }} />
-                <h3 className="font-serif text-5xl mb-6">Verification Success.</h3>
-                <p className="text-[#041a14]/60 font-medium leading-relaxed max-w-sm mx-auto">
-                  Thank you, {formData.name}. Your identity has been verified. Our advisor will reach out to you shortly.
-                </p>
+              <div className="text-center">
+                <CheckCircle2 className="w-24 h-24 mx-auto" />
+                <h3>Verification Success</h3>
               </div>
             )}
           </div>
+
         </div>
       </div>
     </section>
