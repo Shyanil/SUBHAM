@@ -101,10 +101,9 @@ export default function SubhamHeader() {
             ))}
 
             <a 
-              href={brochureLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300"
+              href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className="flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300 cursor-pointer"
               style={{ borderColor: `${colors.vibrantOrange}30`, color: colors.vibrantOrange }}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = colors.vibrantOrange;
@@ -159,9 +158,9 @@ export default function SubhamHeader() {
               </a>
             ))}
             <a 
-              href={brochureLink} 
-              target="_blank" 
-              className="flex items-center gap-3 text-xl font-bold pt-6 border-t border-orange-100"
+              href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className="flex items-center gap-3 text-xl font-bold pt-6 border-t border-orange-100 cursor-pointer"
               style={{ color: colors.vibrantOrange }}
             >
               <Download className="w-5 h-5" /> Download Brochure
