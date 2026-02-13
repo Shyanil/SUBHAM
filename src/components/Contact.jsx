@@ -131,10 +131,13 @@ export default function Contact() {
       await confirmationResult.confirm(otp);
       
       // 2. Send all data to Webhook
-      await fetch("https://connect.pabbly.com/webhook-listener/webhook/IjU3NjYwNTZlMDYzNzA0Mzc1MjY0Ig_3D_3D_pc/IjU3NjcwNTZjMDYzMTA0Mzc1MjY1NTUzNDUxMzAi_pc", {
+      await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
         method: "POST",
         // Using 'no-cors' if your environment has CORS restrictions, 
         // otherwise regular POST works for Pabbly.
+          headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 

@@ -67,7 +67,7 @@ const StickyContact = () => {
 
   // --- WEBHOOK LOGIC ---
   const sendToWebhook = async (data) => {
-    const webhookURL = "https://connect.pabbly.com/webhook-listener/webhook/IjU3NjYwNTZlMDYzNzA0Mzc1MjY0Ig_3D_3D_pc/IjU3NjcwNTZjMDYzMTA0Mzc1MjY1NTUzNDUxMzAi_pc";
+    const webhookURL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc";
     try {
       await fetch(webhookURL, {
         method: "POST",
