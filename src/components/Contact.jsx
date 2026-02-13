@@ -34,9 +34,28 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
-    interest: "3 BHK", // Default selection
-    callTime: "Morning (9 AM - 12 PM)", // Default selection
+    interest: "3 BHK", 
+    callTime: "Morning (9 AM - 12 PM)",
+    // UTM parameters added to state
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: ""
   });
+
+  // Capture UTM parameters from URL on load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setFormData(prev => ({
+      ...prev,
+      utm_source: params.get("utm_source") || "direct",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_term: params.get("utm_term") || "",
+      utm_content: params.get("utm_content") || ""
+    }));
+  }, []);
 
   // ==========================================
   // FIREBASE LOGIC
@@ -65,15 +84,12 @@ export default function Contact() {
     try {
       setupRecaptcha();
 
-      // remove all non-numbers
       let cleaned = formData.phone.replace(/\D/g, "");
 
-      // remove leading zero
       if (cleaned.startsWith("0")) {
         cleaned = cleaned.substring(1);
       }
 
-      // must be 10 digits
       if (cleaned.length !== 10) {
         alert("Enter valid 10 digit phone number");
         setLoading(false);
@@ -111,18 +127,26 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      // Verify OTP
+      // 1. Verify OTP
       await confirmationResult.confirm(otp);
       
-      setSubmitted(true);
-      console.log("Form Data Submitted:", formData); 
+      // 2. Send all data to Webhook
+      await fetch("https://connect.pabbly.com/webhook-listener/webhook/IjU3NjYwNTZlMDYzNzA0Mzc1MjY0Ig_3D_3D_pc/IjU3NjcwNTZjMDYzMTA0Mzc1MjY1NTUzNDUxMzAi_pc", {
+        method: "POST",
+        // Using 'no-cors' if your environment has CORS restrictions, 
+        // otherwise regular POST works for Pabbly.
+        body: JSON.stringify(formData),
+      });
 
-      // ✅ FIXED: Redirect to Thank You Page using React Router
+      setSubmitted(true);
+      console.log("Form Data Submitted to Webhook:", formData); 
+
+      // 3. Redirect to Thank You Page
       navigate("/Info/Thankyou"); 
 
     } catch (error) {
       console.error(error);
-      alert("Invalid OTP. Try again.");
+      alert("Invalid OTP or submission error. Try again.");
     } finally {
       setLoading(false);
     }
