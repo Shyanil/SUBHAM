@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
 
-// ✅ FIXED: Use 'react-router-dom' for Vite, not 'next/navigation'
+// ✅ FIXED: Use 'react-router-dom' for Vite
 import { useNavigate } from "react-router-dom"; 
 
 import { 
@@ -20,7 +20,6 @@ export default function Contact() {
   const [confirmationResult, setConfirmationResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // ✅ FIXED: Initialize navigate hook
   const navigate = useNavigate();
 
   const colors = {
@@ -36,7 +35,6 @@ export default function Contact() {
     phone: "",
     interest: "3 BHK", 
     callTime: "Morning (9 AM - 12 PM)",
-    // UTM parameters added to state
     utm_source: "",
     utm_medium: "",
     utm_campaign: "",
@@ -78,17 +76,12 @@ export default function Contact() {
 
   const handleSendOtp = async () => {
     if (!formData.phone) return alert("Enter phone number");
-
     setLoading(true);
 
     try {
       setupRecaptcha();
-
       let cleaned = formData.phone.replace(/\D/g, "");
-
-      if (cleaned.startsWith("0")) {
-        cleaned = cleaned.substring(1);
-      }
+      if (cleaned.startsWith("0")) cleaned = cleaned.substring(1);
 
       if (cleaned.length !== 10) {
         alert("Enter valid 10 digit phone number");
@@ -99,20 +92,19 @@ export default function Contact() {
       const phoneNumber = `+91${cleaned}`;
       const appVerifier = window.recaptchaVerifier;
 
-      const result = await signInWithPhoneNumber(
-        auth,
-        phoneNumber,
-        appVerifier
-      );
-
+      const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       setConfirmationResult(result);
       setIsOtpSent(true);
-
       alert("OTP sent to " + phoneNumber);
 
     } catch (error) {
       console.error(error);
       alert(error.message || "Error sending OTP");
+      // Reset reCAPTCHA on error to allow retry
+      if (window.recaptchaVerifier) {
+        window.recaptchaVerifier.clear();
+        window.recaptchaVerifier = null;
+      }
     } finally {
       setLoading(false);
     }
@@ -122,54 +114,55 @@ export default function Contact() {
     e.preventDefault();
 
     if (!isOtpSent) return alert("Please verify phone first");
-    if (!confirmationResult) return alert("OTP expired. Try again.");
+    if (!otp || otp.length < 6) return alert("Please enter the 6-digit OTP");
 
     setLoading(true);
 
     try {
-      // 1. Verify OTP
+      // 1. Verify OTP with Firebase
       await confirmationResult.confirm(otp);
       
-      // 2. Send all data to Webhook
-      await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
-        method: "POST",
-        // Using 'no-cors' if your environment has CORS restrictions, 
-        // otherwise regular POST works for Pabbly.
-          headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      // 2. Prepare data for Pabbly (using URLSearchParams to avoid CORS/404 issues)
+      const payload = new URLSearchParams();
+      Object.entries(formData).forEach(([key, value]) => {
+        payload.append(key, value);
       });
 
-      setSubmitted(true);
-      console.log("Form Data Submitted to Webhook:", formData); 
+      // 3. Send to Webhook
+      // Ensure the Workflow in Pabbly is "ON" and "Waiting for Response"
+      await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
+        method: "POST",
+        mode: "no-cors", // Bypasses preflight checks that cause 404s
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: payload.toString(),
+      });
 
-      // 3. Redirect to Thank You Page
-      navigate("/Info/Thankyou"); 
+      // 4. Update UI and Redirect
+      setSubmitted(true);
+      setTimeout(() => {
+        navigate("/Info/Thankyou");
+      }, 1500);
 
     } catch (error) {
-      console.error(error);
-      alert("Invalid OTP or submission error. Try again.");
+      console.error("Submission Error:", error);
+      alert("Invalid OTP or session expired. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // ==========================================
-  // UI COMPONENTS & STYLES
-  // ==========================================
-
   const inputStyle = "w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 outline-none focus:border-[#E97323] focus:ring-4 focus:ring-[#E97323]/10 transition-all duration-300 placeholder:text-gray-400 text-[#041a14] font-medium";
 
   return (
     <section id="contact" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
-      {/* Hidden Recaptcha Container */}
       <div id="recaptcha-container"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-stretch bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-[#041a14]/5">
           
-          {/* LEFT SIDE (Visuals) */}
+          {/* LEFT SIDE */}
           <div className="lg:w-2/5 p-12 lg:p-16 text-white flex flex-col justify-between relative overflow-hidden" style={{ backgroundColor: colors.blackish }}>
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E97323] opacity-10 blur-[80px] rounded-full pointer-events-none"></div>
 
@@ -198,7 +191,6 @@ export default function Contact() {
             {!submitted ? (
               <form onSubmit={handleFinalSubmit} className="space-y-6">
 
-                {/* 1. Full Name */}
                 <div>
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block ml-1">Full Name</label>
                   <input 
@@ -210,7 +202,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* 2. Phone Number & OTP Button */}
                 <div>
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block ml-1">Phone Number</label>
                   <div className="relative">
@@ -242,7 +233,6 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* 3. OTP Input (Animated) */}
                 <AnimatePresence>
                   {isOtpSent && (
                     <motion.div 
@@ -266,7 +256,6 @@ export default function Contact() {
                   )}
                 </AnimatePresence>
 
-                {/* 4. Home Type Selection */}
                 <div>
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block ml-1">Interested In</label>
                   <div className="grid grid-cols-3 gap-3">
@@ -288,7 +277,6 @@ export default function Contact() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   {/* 5. Email */}
                   <div>
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block ml-1">Email Address</label>
                     <input 
@@ -300,7 +288,6 @@ export default function Contact() {
                     />
                   </div>
 
-                  {/* 6. Best Time to Call */}
                   <div className="relative">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block ml-1">Best Time to Call</label>
                     <div className="relative">
@@ -319,7 +306,6 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Submit Button */}
                 <button 
                   type="submit"
                   disabled={!isOtpSent || loading}

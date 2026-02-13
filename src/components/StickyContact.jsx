@@ -43,7 +43,6 @@ const StickyContact = () => {
 
   // --- CAPTURE UTM & AUTO-OPEN LOGIC ---
   useEffect(() => {
-    // 1. Capture UTMs
     const params = new URLSearchParams(window.location.search);
     setFormData(prev => ({
       ...prev,
@@ -54,7 +53,6 @@ const StickyContact = () => {
       utm_content: params.get("utm_content") || ""
     }));
 
-    // 2. Visibility Timer
     const timer = setTimeout(() => {
       setIsVisible(true); 
       if (window.innerWidth < 1024 && !submitted) {
@@ -65,16 +63,29 @@ const StickyContact = () => {
     return () => clearTimeout(timer);
   }, [submitted]);
 
-  // --- WEBHOOK LOGIC ---
+  // --- UPDATED WEBHOOK LOGIC ---
   const sendToWebhook = async (data) => {
     const webhookURL = "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc";
+    
+    // Using URLSearchParams for maximum compatibility with Pabbly
+    const payload = new URLSearchParams();
+    Object.entries(data).forEach(([key, value]) => {
+      payload.append(key, value);
+    });
+
     try {
       await fetch(webhookURL, {
         method: "POST",
-        body: JSON.stringify(data),
+        mode: "no-cors", // Bypasses CORS Preflight which often causes 404s
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: payload.toString(),
       });
+      return true;
     } catch (err) {
       console.error("Webhook Error:", err);
+      return false;
     }
   };
 
@@ -104,6 +115,10 @@ const StickyContact = () => {
     } catch (error) {
       console.error(error);
       alert("Verification failed. Please try again.");
+      if (window.recaptchaVerifier) {
+        window.recaptchaVerifier.clear();
+        window.recaptchaVerifier = null;
+      }
     } finally {
       setLoading(false);
     }
@@ -112,20 +127,25 @@ const StickyContact = () => {
   const handleVerify = async (e) => {
     e.preventDefault();
     if (!isOtpSent) return alert("Please verify phone first");
+    if (!otp) return alert("Please enter the OTP");
     
     setLoading(true);
     try {
+      // 1. Verify OTP with Firebase
       await confirmationResult.confirm(otp);
       
-      // Send data to webhook
+      // 2. Send data to webhook
       await sendToWebhook(formData);
       
+      // 3. Success state and Redirect
       setSubmitted(true);
-      navigate("/Info/Thankyou"); 
+      setTimeout(() => {
+        navigate("/Info/Thankyou"); 
+      }, 1500);
       
     } catch (error) {
       console.error(error);
-      alert("Invalid OTP");
+      alert("Invalid OTP. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -137,9 +157,7 @@ const StickyContact = () => {
     <>
       <div id="recaptcha-sticky-container"></div>
 
-      {/* =======================================================
-          DESKTOP STICKY BAR (Horizontal)
-          ======================================================= */}
+      {/* DESKTOP STICKY BAR */}
       <AnimatePresence>
         {isVisible && !submitted && !isOpen && (
           <motion.div 
@@ -159,14 +177,12 @@ const StickyContact = () => {
               </div>
 
               <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 justify-end">
-                {/* Desktop Name */}
                 <input 
                   type="text" required placeholder="Name" disabled={isOtpSent}
                   className="w-32 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 text-xs outline-none"
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
 
-                {/* Desktop Phone */}
                 <div className="relative w-48">
                   <input 
                     type="tel" required placeholder="Phone" disabled={isOtpSent}
@@ -177,12 +193,11 @@ const StickyContact = () => {
                     <button type="button" onClick={handleSendOtp} disabled={loading}
                       className="absolute right-1 top-1/2 -translate-y-1/2 bg-[#041a14] text-white text-[9px] font-bold px-2 py-1.5 rounded hover:bg-[#F36F21]"
                     >
-                      OTP
+                      {loading ? "..." : "OTP"}
                     </button>
                   )}
                 </div>
 
-                {/* Desktop Interest */}
                 <select 
                   className="bg-gray-50 border border-gray-200 rounded-lg px-2 py-2.5 text-xs outline-none"
                   value={formData.interest}
@@ -193,7 +208,6 @@ const StickyContact = () => {
                   <option>Duplex</option>
                 </select>
 
-                {/* Desktop OTP */}
                 <AnimatePresence>
                   {isOtpSent && (
                     <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "80px", opacity: 1 }}>
@@ -223,9 +237,7 @@ const StickyContact = () => {
       </AnimatePresence>
 
 
-      {/* =======================================================
-          MOBILE FAB & MODAL (Full Fields)
-          ======================================================= */}
+      {/* MOBILE FAB & MODAL */}
       <div className="lg:hidden">
         <AnimatePresence>
           {isVisible && !isOpen && !submitted && (
@@ -262,14 +274,12 @@ const StickyContact = () => {
                 <div className="p-6 max-h-[70vh] overflow-y-auto">
                   {!submitted ? (
                     <form onSubmit={handleVerify} className="space-y-4">
-                      {/* Name */}
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input type="text" required placeholder="Full Name" className={`${inputStyle} pl-11`}
                           onChange={(e) => setFormData({...formData, name: e.target.value})} />
                       </div>
 
-                      {/* Phone */}
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input type="tel" required placeholder="Phone Number" disabled={isOtpSent} className={`${inputStyle} pl-11 pr-24`}
@@ -281,7 +291,6 @@ const StickyContact = () => {
                         )}
                       </div>
 
-                      {/* OTP Field */}
                       <AnimatePresence>
                         {isOtpSent && (
                           <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} className="overflow-hidden">
@@ -291,7 +300,6 @@ const StickyContact = () => {
                         )}
                       </AnimatePresence>
 
-                      {/* Interest & Call Time Row */}
                       <div className="grid grid-cols-2 gap-3">
                         <div className="relative">
                           <select className={`${inputStyle} appearance-none px-4`}
@@ -315,7 +323,6 @@ const StickyContact = () => {
                         </div>
                       </div>
 
-                      {/* Email */}
                       <div className="relative">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input type="email" required placeholder="Email Address" className={`${inputStyle} pl-11`}
