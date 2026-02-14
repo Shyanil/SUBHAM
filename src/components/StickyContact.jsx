@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { 
-  Send, X, Phone, User, Sparkles, Lock, CheckCircle2, ChevronDown, Clock 
+  Send, X, Phone, User, Sparkles, Lock, 
+  CheckCircle2, ChevronDown, Clock, Mail 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../lib/firebase";
 
-const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSticky prop
+const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { 
   const [isVisible, setIsVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   
@@ -23,19 +24,23 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "",
+    email: "", // Added Email to state
     interest: "3 BHK",
-    callTime: "Morning", // Default value
+    callTime: "Morning", 
     utm_source: "direct",
     utm_medium: "",
     utm_campaign: "",
+    utm_term: "",
+    utm_content: ""
   });
 
   useEffect(() => {
+    // Timer to auto-show after 2 seconds
     const timer = setTimeout(() => {
       if (!submitted) setIsVisible(true);
     }, 2000);
 
+    // Scroll Logic
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY < lastScrollY.current && currentScrollY > 100) {
@@ -46,12 +51,15 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
+    // Capture UTMs
     const params = new URLSearchParams(window.location.search);
     setFormData(prev => ({
       ...prev,
       utm_source: params.get("utm_source") || "direct",
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || "",
+      utm_term: params.get("utm_term") || "",
+      utm_content: params.get("utm_content") || ""
     }));
 
     return () => {
@@ -60,16 +68,29 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
     };
   }, [submitted]);
 
+  // ✅ UPDATED: Exact Webhook Pattern from Contact.jsx
   const sendToWebhook = async (data) => {
     try {
+      // 1. Prepare data (using URLSearchParams to avoid CORS/404 issues)
       const payload = new URLSearchParams();
-      Object.entries(data).forEach(([key, value]) => payload.append(key, value));
+      Object.entries(data).forEach(([key, value]) => {
+        payload.append(key, value);
+      });
+
+      // 2. Send to Webhook
       await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
         method: "POST",
-        mode: "no-cors",
+        mode: "no-cors", // Bypasses preflight checks
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
         body: payload.toString(),
       });
-    } catch (err) { console.error(err); }
+      return true;
+    } catch (err) {
+      console.error("Webhook Error:", err);
+      return false;
+    }
   };
 
   const setupRecaptcha = () => {
@@ -103,8 +124,13 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
     if (!otp) return alert("Enter OTP");
     setLoading(true);
     try {
+      // 1. Verify OTP
       await confirmationResult.confirm(otp);
+      
+      // 2. Send to Webhook (Exact Pattern)
       await sendToWebhook(formData);
+      
+      // 3. Success & Redirect
       setSubmitted(true);
       setTimeout(() => navigate("/Info/Thankyou"), 1500);
     } catch (error) {
@@ -122,7 +148,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
 
       {/* --- DESKTOP: MODERN FLOATING ISLAND --- */}
       <AnimatePresence>
-        {/* Only show if visible, not submitted, and NOT HIDDEN via prop */}
         {isVisible && !submitted && !hideSticky && (
           <motion.div 
             initial={{ y: 100, opacity: 0 }} 
@@ -130,9 +155,10 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-6 left-0 w-full z-[80] hidden lg:flex justify-center pointer-events-none"
           >
-            <div className="pointer-events-auto bg-[#041a14]/95 backdrop-blur-md text-white p-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-2 max-w-5xl w-full mx-6 transition-all duration-500 hover:scale-[1.01]">
+            {/* Increased max-width to fit Email field */}
+            <div className="pointer-events-auto bg-[#041a14]/95 backdrop-blur-md text-white p-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-2 max-w-6xl w-full mx-6 transition-all duration-500 hover:scale-[1.01]">
               
-              <div className="flex items-center gap-3 pl-4 pr-6 border-r border-white/10">
+              <div className="flex items-center gap-3 pl-4 pr-6 border-r border-white/10 shrink-0">
                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-[#F2A71D]" />
                  </div>
@@ -144,7 +170,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
 
               <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2">
                 
-                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-36 focus-within:bg-white/10 transition-colors">
+                {/* Name */}
+                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-32 focus-within:bg-white/10 transition-colors shrink-0">
                    <User className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
                      type="text" placeholder="Name" required disabled={isOtpSent}
@@ -153,7 +180,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
                    />
                 </div>
 
-                <div className="h-10 pl-4 pr-1 rounded-full bg-white/5 border border-white/10 flex items-center w-48 focus-within:bg-white/10 transition-colors relative">
+                {/* Phone & OTP Trigger */}
+                <div className="h-10 pl-4 pr-1 rounded-full bg-white/5 border border-white/10 flex items-center w-40 focus-within:bg-white/10 transition-colors relative shrink-0">
                    <Phone className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
                      type="tel" placeholder="Phone" required disabled={isOtpSent}
@@ -166,12 +194,23 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
                        type="button" onClick={handleSendOtp}
                        className="ml-2 bg-[#F36F21] text-white text-[9px] font-bold px-3 py-1.5 rounded-full hover:bg-[#D84315]"
                      >
-                       {loading ? "..." : "OTP"}
+                       OTP
                      </motion.button>
                    )}
                 </div>
 
-                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-28 cursor-pointer hover:bg-white/10">
+                {/* ✅ NEW: Email Field (Desktop) */}
+                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-40 focus-within:bg-white/10 transition-colors shrink-0">
+                   <Mail className="w-3 h-3 text-gray-400 mr-2" />
+                   <input 
+                     type="email" placeholder="Email" required disabled={isOtpSent}
+                     className={inputClass}
+                     onChange={(e) => setFormData({...formData, email: e.target.value})}
+                   />
+                </div>
+
+                {/* Interest */}
+                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-24 cursor-pointer hover:bg-white/10 shrink-0">
                    <select 
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
                      onChange={(e) => setFormData({...formData, interest: e.target.value})}
@@ -183,8 +222,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
                    <ChevronDown className="w-3 h-3 text-gray-400 ml-1" />
                 </div>
 
-                {/* --- NEW: BEST TIME TO CALL (DESKTOP) --- */}
-                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-32 cursor-pointer hover:bg-white/10">
+                {/* Call Time */}
+                <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-28 cursor-pointer hover:bg-white/10 shrink-0">
                    <select 
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
                      onChange={(e) => setFormData({...formData, callTime: e.target.value})}
@@ -200,8 +239,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
                   {isOtpSent && (
                     <motion.div 
                       initial={{ width: 0, opacity: 0 }} 
-                      animate={{ width: "100px", opacity: 1 }} 
-                      className="overflow-hidden"
+                      animate={{ width: "90px", opacity: 1 }} 
+                      className="overflow-hidden shrink-0"
                     >
                       <div className="h-10 px-4 rounded-full bg-[#F36F21]/20 border border-[#F36F21] flex items-center">
                          <Lock className="w-3 h-3 text-[#F36F21] mr-2" />
@@ -217,12 +256,12 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
 
                 <button 
                   type="submit" disabled={!isOtpSent || loading}
-                  className="h-10 px-6 ml-auto rounded-full bg-[#F36F21] hover:bg-[#D84315] text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_14px_rgba(243,111,33,0.4)]"
+                  className="h-10 px-6 ml-auto rounded-full bg-[#F36F21] hover:bg-[#D84315] text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_14px_rgba(243,111,33,0.4)] shrink-0"
                 >
                   {loading ? "..." : <>Confirm <Send className="w-3 h-3" /></>}
                 </button>
 
-                <button type="button" onClick={() => setIsVisible(false)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors ml-1">
+                <button type="button" onClick={() => setIsVisible(false)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors ml-1 shrink-0">
                    <X className="w-4 h-4 text-white/50" />
                 </button>
               </form>
@@ -278,6 +317,15 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => { // Accept hideSti
                            OTP
                         </button>
                       )}
+                   </div>
+
+                   {/* ✅ NEW: Email Field (Mobile) */}
+                   <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input type="email" placeholder="Email Address" required 
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]"
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      />
                    </div>
 
                    <AnimatePresence>

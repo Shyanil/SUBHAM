@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../lib/firebase";
 import { useNavigate } from "react-router-dom";
 
-// ✅ Removed the floating trigger button logic
 export default function PopupSticky({ isOpen, setIsOpen }) {
   const [loading, setLoading] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -29,7 +28,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
     email: "",
     phone: "",
     interest: "3 BHK",
-    callTime: "Morning (9 AM - 12 PM)",
+    callTime: "Morning",
     utm_source: "direct",
     utm_medium: "",
     utm_campaign: "",
@@ -37,6 +36,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
     utm_content: ""
   });
 
+  // --- Capture UTM Parameters ---
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setFormData(prev => ({
@@ -48,6 +48,27 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
       utm_content: params.get("utm_content") || ""
     }));
   }, []);
+
+  // --- 1. Consistent Webhook Logic ---
+  const sendToWebhook = async (data) => {
+    try {
+      const payload = new URLSearchParams();
+      Object.entries(data).forEach(([key, value]) => payload.append(key, value));
+
+      await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: payload.toString(),
+      });
+      return true;
+    } catch (err) {
+      console.error("Webhook Error:", err);
+      return false;
+    }
+  };
 
   const setupRecaptcha = () => {
     if (!window.recaptchaVerifierPopup) {
@@ -83,17 +104,13 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
     setLoading(true);
 
     try {
+      // 1. Verify OTP
       await confirmationResult.confirm(otp);
       
-      const payload = new URLSearchParams();
-      Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+      // 2. Send Data to Webhook
+      await sendToWebhook(formData);
 
-      await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
-        method: "POST",
-        mode: "no-cors",
-        body: payload.toString(),
-      });
-
+      // 3. Close & Redirect
       setIsOpen(false);
       navigate("/Info/Thankyou");
     } catch (error) {
@@ -214,6 +231,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
                     <div className="relative">
                       <select 
                         className={`${inputClass} appearance-none cursor-pointer`}
+                        value={formData.interest}
                         onChange={(e) => setFormData({...formData, interest: e.target.value})}
                       >
                         <option>3 BHK</option>
@@ -225,6 +243,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
                     <div className="relative">
                       <select 
                         className={`${inputClass} appearance-none cursor-pointer`}
+                        value={formData.callTime}
                         onChange={(e) => setFormData({...formData, callTime: e.target.value})}
                       >
                         <option>Morning</option>
