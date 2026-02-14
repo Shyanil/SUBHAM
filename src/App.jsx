@@ -11,53 +11,52 @@ import AboutProject from "./components/AboutProject";
 import Amenities from "./components/Amenities";
 import Why from "./components/Why";
 import Location from "./components/Location";
-// Ensure you have this if needed
 import Walkthrough from "./components/Walkthrough";
 import Gallery from "./components/Gallery";
 import Highlights from "./components/Highlights";
 import Contact from "./components/Contact";
+import PopupSticky from "./components/PopupSticky";
 import StickyContact from "./components/StickyContact";
-
-// This is likely your old ThankYou section (keep or remove if not needed)
 import ThankYouSection from "./components/ThankYou"; 
-
-// ✅ This is your NEW separate Thank You Page
 import ThankyouPage from './Info/Thankyou';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const [isStickyVisible, setIsStickyVisible] = useState(false);
   
-  const heroRef = useRef(null);
+  // Modal States
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  // ✅ VISIBILITY STATE: Controls if StickyContact is allowed to show
+  const [hideSticky, setHideSticky] = useState(false);
   const walkthroughRef = useRef(null);
 
+  // ✅ SCROLL LISTENER: Hides StickyContact when Walkthrough is reached
   useEffect(() => {
     const handleScroll = () => {
-      // Safety check: ensure refs exist (they won't exist on the Thank You page)
-      if (!heroRef.current || !walkthroughRef.current) return;
-
-      if (window.innerWidth >= 1024) {
-        const heroRect = heroRef.current.getBoundingClientRect();
-        const walkthroughRect = walkthroughRef.current.getBoundingClientRect();
-
-        // 1. Show only AFTER the Hero section has started leaving the view
-        const hasPassedHero = heroRect.bottom < 100;
-        
-        // 2. Hide when the Walkthrough section enters the view
-        const hasReachedWalkthrough = walkthroughRect.top <= window.innerHeight;
-
-        // Sticky is visible ONLY between Hero and Walkthrough
-        setIsStickyVisible(hasPassedHero && !hasReachedWalkthrough);
+      if (!walkthroughRef.current) return;
+      
+      const rect = walkthroughRef.current.getBoundingClientRect();
+      
+      // If the top of Walkthrough is visible in the viewport, HIDE sticky
+      if (rect.top <= window.innerHeight) {
+        setHideSticky(true);
       } else {
-        setIsStickyVisible(true);
+        setHideSticky(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); 
-    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleContactTrigger = () => {
+    if (window.innerWidth < 1024) {
+      setIsMobileOpen(true);
+    } else {
+      setIsPopupOpen(true);
+    }
+  };
 
   return (
     <>
@@ -66,46 +65,45 @@ export default function App() {
       ) : (
         <div className="animate-in fade-in duration-1000 ease-in-out">
           <Routes>
-            
-            {/* --- ROUTE 1: MAIN LANDING PAGE --- */}
             <Route
               path="/"
               element={
                 <div className="w-full overflow-x-hidden relative">
-                  <Header />
+                  <Header onOpenPopup={handleContactTrigger} />
                   
-                  {/* Boundary 1: Show Sticky only after this */}
-                  <div ref={heroRef}>
-                    <Hero />
-                  </div>
-
-                  <AboutProject />
+                  {/* Pass trigger to Hero & About */}
+                  <Hero onOpenPopup={handleContactTrigger} />
+                  <AboutProject onOpenPopup={handleContactTrigger} />
+                  
                   <Why />
                   <Amenities />
                   <Location />
                   <Highlights />
                   <Gallery />
                   
-                  {/* Boundary 2: Hide Sticky once this is reached */}
+                  {/* ✅ Attach Ref here to track position */}
                   <div ref={walkthroughRef}>
                     <Walkthrough />
                   </div>
                   
                   <Contact />
-                  
-                  {/* Optional: Your old footer/thankyou section */}
                   <ThankYouSection /> 
 
-                  {/* STICKY CONTACT */}
-                  {isStickyVisible && <StickyContact />}
+                  <PopupSticky 
+                    isOpen={isPopupOpen} 
+                    setIsOpen={setIsPopupOpen} 
+                  />
+
+                  {/* ✅ Pass the hideSticky prop */}
+                  <StickyContact 
+                    isOpen={isMobileOpen} 
+                    setIsOpen={setIsMobileOpen} 
+                    hideSticky={hideSticky}
+                  />
                 </div>
               }
             />
-
-            {/* --- ROUTE 2: SEPARATE THANK YOU PAGE --- */}
-            {/* ✅ This must be a sibling, not nested inside the element above */}
             <Route path="/Info/Thankyou" element={<ThankyouPage />} />
-
           </Routes>
         </div>
       )}

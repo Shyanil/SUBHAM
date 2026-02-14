@@ -3,19 +3,19 @@
 import React, { useState, useEffect } from "react";
 import { ArrowUpRight, Download, Layout } from "lucide-react";
 
-export default function SubhamHeader() {
+// ✅ Added 'onOpenPopup' to the props
+export default function SubhamHeader({ onOpenPopup }) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // New High-Energy Palette
   const colors = {
     blackish: "#041a14",      
-    vibrantOrange: "#F36F21", // 🟠
-    goldenYellow: "#F4B400",  // 🟡
-    deepOrange: "#D84315",    // 🔴
-    warmCream: "#FFF4E6",     // 🌤 Soft Warm Background
+    vibrantOrange: "#F36F21", 
+    goldenYellow: "#F4B400",  
+    deepOrange: "#D84315",    
+    warmCream: "#FFF4E6",     
   };
 
   const mainNav = [
@@ -26,13 +26,10 @@ export default function SubhamHeader() {
     { name: "Gallery", id: "gallery" }
   ];
 
-  const brochureLink = "https://subhamgroup.com/pdf/subham-kishori-heights-brohcure.pdf";
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
-
       if (currentScrollY > lastScrollY && currentScrollY > 150) {
         setIsVisible(false); 
       } else {
@@ -40,7 +37,6 @@ export default function SubhamHeader() {
       }
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
@@ -72,19 +68,10 @@ export default function SubhamHeader() {
             transform: isScrolled ? "scale(0.98)" : "scale(1)" 
           }}
         >
-          {/* --- BRAND LOGO: Visible on Warm Cream --- */}
-          <div 
-            className="cursor-pointer group py-1" 
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <img 
-              src="/Logo.png" 
-              alt="Subham Logo" 
-              className="h-10 md:h-14 w-auto object-contain transition-transform group-hover:scale-105" 
-            />
+          <div className="cursor-pointer group py-1" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <img src="/Logo.png" alt="Subham Logo" className="h-10 md:h-14 w-auto object-contain transition-transform group-hover:scale-105" />
           </div>
 
-          {/* --- DESKTOP NAVIGATION --- */}
           <nav className="hidden lg:flex items-center space-x-8 text-[11px] font-black uppercase tracking-widest">
             {mainNav.map((item) => (
               <a 
@@ -105,23 +92,15 @@ export default function SubhamHeader() {
               onClick={(e) => scrollToSection(e, 'contact')}
               className="flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300 cursor-pointer"
               style={{ borderColor: `${colors.vibrantOrange}30`, color: colors.vibrantOrange }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = colors.vibrantOrange;
-                e.target.style.color = "white";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "transparent";
-                e.target.style.color = colors.vibrantOrange;
-              }}
             >
               <Download className="w-3 h-3" /> Brochure
             </a>
           </nav>
 
-          {/* --- ACTION BUTTON --- */}
           <div className="flex items-center gap-4">
+            {/* ✅ FIXED: Desktop Button now triggers the Popup */}
             <button 
-              onClick={(e) => scrollToSection(e, 'contact')}
+              onClick={onOpenPopup}
               className="hidden sm:flex items-center gap-2 px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-xl text-white"
               style={{ backgroundColor: colors.deepOrange }}
             >
@@ -147,29 +126,19 @@ export default function SubhamHeader() {
 
           <nav className="flex flex-col space-y-6">
             {mainNav.map((item) => (
-              <a 
-                key={item.id} 
-                href={`#${item.id}`} 
-                onClick={(e) => scrollToSection(e, item.id)} 
-                className="text-4xl font-serif opacity-80 hover:opacity-100 transition-opacity"
-                style={{ color: colors.blackish }}
-              >
+              <a key={item.id} href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} className="text-4xl font-serif opacity-80" style={{ color: colors.blackish }}>
                 {item.name}
               </a>
             ))}
-            <a 
-              href="#contact"
-              onClick={(e) => scrollToSection(e, 'contact')}
-              className="flex items-center gap-3 text-xl font-bold pt-6 border-t border-orange-100 cursor-pointer"
-              style={{ color: colors.vibrantOrange }}
-            >
-              <Download className="w-5 h-5" /> Download Brochure
-            </a>
           </nav>
 
           <div className="mt-12 mb-8">
+            {/* ✅ FIXED: Mobile Button now triggers the Popup */}
             <button 
-              onClick={(e) => scrollToSection(e, 'contact')} 
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onOpenPopup();
+              }} 
               className="w-full py-6 rounded-3xl font-bold text-lg text-white" 
               style={{ backgroundColor: colors.deepOrange }}
             >
