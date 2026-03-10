@@ -69,9 +69,9 @@ export default function HeroSection() {
             </motion.div>
           </div>
           
-          <div className="absolute bottom-8 text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
+          {/* <div className="absolute bottom-8 text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
             A Unit of Lohia Group
-          </div>
+          </div> */}
         </motion.div>
 
         {/* --- RIGHT CARD --- */}
@@ -82,7 +82,7 @@ export default function HeroSection() {
           className="relative h-full min-h-[500px] rounded-[3rem] overflow-hidden group shadow-sm"
         >
           <img 
-            src="/hero.png" 
+            src="/hero21.jpg" 
             alt="Subham Kishori Heights" 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
           />

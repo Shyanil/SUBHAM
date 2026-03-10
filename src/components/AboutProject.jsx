@@ -77,21 +77,21 @@ export default function ActiveLivingHero({ onOpenPopup }) {
 
           {/* --- GRID --- */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 w-full">
-            <div className="p-6 rounded-[2rem] border border-orange-100 flex flex-col items-center justify-center shadow-sm bg-white hover:bg-orange-50 transition-colors">
+            <div className="p-6 rounded-[2rem] border border-orange-100 flex flex-col items-center justify-center shadow-sm bg-white hover:bg-orange-50 transition-colors" >
                <span className="block text-3xl font-serif font-bold italic" style={{ color: colors.deepOrange }}>78%</span>
                <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">Open Space</span>
             </div>
-            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center">
-               <span className="block text-3xl font-serif font-bold italic" style={{ color: colors.blackish }}>65</span>
-               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">Exclusive Units</span>
+            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center" style={{ backgroundColor: colors.blackish }}>
+               <span className="block text-3xl font-serif font-bold italic text-white" >65</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center text-white">Exclusive Units</span>
             </div>
-            <div className="p-6 rounded-[2rem] flex flex-col items-center justify-center shadow-xl" style={{ backgroundColor: colors.blackish }}>
-               <span className="block text-xl font-serif font-bold italic text-white">3 & 4 BHK</span>
-               <span className="text-[9px] uppercase font-bold tracking-widest opacity-60 text-center mt-1 text-white/70">Duplex Available</span>
+            <div className="p-6 rounded-[2rem] flex flex-col items-center justify-center shadow-xl bg-white" >
+               <span className="block text-xl font-serif font-bold italic " style={{ color: colors.deepOrange }}>3 & 4 BHK</span>
+               <span className=" text-[10px] uppercase font-bold tracking-widest opacity-60 text-center">Duplex Available</span>
             </div>
-            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center">
-               <Building2 className="w-6 h-6 mb-1 opacity-40" style={{ color: colors.deepOrange }} />
-               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center leading-tight">Vaastu <br/> Compliant</span>
+            <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col items-center justify-center" style={{ backgroundColor: colors.blackish }}>
+               <span className="block text-xl font-serif font-bold italic text-white" >B + G + 14</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest opacity-60 text-center text-white">Tallest Towers</span>
             </div>
           </div>
 

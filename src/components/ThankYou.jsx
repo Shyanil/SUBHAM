@@ -5,6 +5,7 @@ import { ArrowUp, MapPin, ExternalLink, Award, Zap, Compass, Sparkles, Building 
 import { motion } from "framer-motion";
 
 export default function AboutSubham() {
+  const [selectedLocation, setSelectedLocation] = React.useState("GS ROAD, GUWAHATI");
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -27,10 +28,23 @@ export default function AboutSubham() {
   };
 
   const completedProjects = [
-    "Subham Enclave", "Subham Classic", "Subham Residency", "Subham Park View", 
-    "Subham Heights", "Subham Regency", "Subham Elite", "Subham Garden", 
-    "Subham Greens", "Subham Buildwell", "Subham Velocity", "Subham Redstone", "Bijay Crescent"
-  ];
+  { name: "Subham Enclave", location: "Hatigaon, Guwahati" },
+  { name: "Subham Classic", location: "Ambikagiri Nagar, Guwahati" },
+  { name: "Subham Residency", location: "Kharguli, Guwahati" },
+  { name: "Subham Park View", location: "Fatasil, Guwahati" },
+  { name: "Subham Heights", location: "Kahilipara, Guwahati" },
+  { name: "Subham Regency", location: "Hengrabari, Guwahati" },
+  { name: "Subham Elite", location: "Gandhibasti, Guwahati" },
+  { name: "Subham Manjushree", location: "Datalpara, Guwahati" },
+  { name: "Subham Sapphire", location: "Nalapara, Guwahati" },
+  { name: "Subham Garden", location: "Kalapahar, Guwahati" },
+  { name: "Subham Greens", location: "Lokhra, Guwahati" },
+  { name: "Subham Buildwell", location: "Zoo Road, Guwahati" },
+  { name: "Subham Velocity", location: "G.S Road, Guwahati" },
+  { name: "Subham Redstone", location: "Downtown, Guwahati" },
+  { name: "Bijay Crescent", location: "Pibco, Guwahati" },
+  { name: "Subham Square", location: "Lokhra, Guwahati" }
+];
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -69,9 +83,9 @@ export default function AboutSubham() {
           >
             <div className="relative z-10 mb-12">
                <img 
-                 src="https://subhamgroup.com/img/subham-logo.png" 
+                 src="/Logo.png" 
                  alt="Subham Group" 
-                 className="h-10 md:h-14 w-auto object-contain" 
+                 className="h-10 md:h-14 w-auto object-contain brightness-150" 
                />
             </div>
 
@@ -150,16 +164,17 @@ export default function AboutSubham() {
                <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-8 opacity-40">The Subham Portfolio</p>
                <div className="flex flex-wrap gap-2">
                  {completedProjects.map((project, idx) => (
-                   <span 
-                     key={idx} 
-                     className="px-5 py-2.5 rounded-full border text-[9px] font-bold uppercase tracking-widest transition-all cursor-default"
-                     style={{ backgroundColor: "#ffffff", borderColor: `${colors.blackish}10`, color: colors.blackish }}
-                     onMouseEnter={(e) => { e.target.style.backgroundColor = colors.blackish; e.target.style.color = "white"; }}
-                     onMouseLeave={(e) => { e.target.style.backgroundColor = "#ffffff"; e.target.style.color = colors.blackish; }}
-                   >
-                     {project}
-                   </span>
-                 ))}
+  <span 
+    key={idx}
+    onClick={() => setSelectedLocation(project.location)}
+    className="px-5 py-2.5 rounded-full border text-[9px] font-bold uppercase tracking-widest transition-all cursor-pointer"
+    style={{ backgroundColor: "#ffffff", borderColor: `${colors.blackish}10`, color: colors.blackish }}
+    onMouseEnter={(e) => { e.target.style.backgroundColor = colors.blackish; e.target.style.color = "white"; }}
+    onMouseLeave={(e) => { e.target.style.backgroundColor = "#ffffff"; e.target.style.color = colors.blackish; }}
+  >
+    {project.name}
+  </span>
+))}
                  <span className="px-5 py-2.5 rounded-full text-white text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg" style={{ backgroundColor: colors.mediumOrange }}>
                    Solitaire <ExternalLink className="w-3 h-3" />
                  </span>
@@ -168,7 +183,7 @@ export default function AboutSubham() {
             
             <div className="mt-12 flex items-center justify-between opacity-40">
                <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest">
-                  <MapPin className="w-4 h-4" /> GS ROAD, GUWAHATI
+                  <MapPin className="w-4 h-4" /> {selectedLocation}
                </div>
                <div className="w-12 h-[1px] bg-black/20" />
             </div>

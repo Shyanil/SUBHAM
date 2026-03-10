@@ -94,7 +94,7 @@ export default function Location() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/10 gap-8">
           <div className="flex flex-col gap-1">
             <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
-              A Unit of Subham Group · Legacy Since 2007
+               Legacy Since 2007
             </p>
             <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
               78% Open Space · Vastu Compliant
