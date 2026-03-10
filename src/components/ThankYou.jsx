@@ -83,7 +83,7 @@ export default function AboutSubham() {
           >
             <div className="relative z-10 mb-12">
                <img 
-                 src="/Logo.png" 
+                 src="/logo2.png" 
                  alt="Subham Group" 
                  className="h-10 md:h-14 w-auto object-contain brightness-150" 
                />

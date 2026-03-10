@@ -87,7 +87,7 @@ export default function Specifications() {
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
               
               {/* ✅ CHANGED: Padding reduced for mobile (p-8 vs p-20) */}
-              <div className="absolute inset-0 p-12 lg:p-20 flex flex-col justify-end pointer-events-none">
+              <div className="absolute inset-0 p-14 lg:p-20 flex flex-col justify-end pointer-events-none">
                 <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-2 lg:mb-4 block" style={{ color: colors.brightOrange }}>
                   {img.tag}
                 </span>
