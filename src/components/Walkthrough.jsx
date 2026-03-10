@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+// Change this line
+import React, { useState, useRef, useEffect } from "react";
 // Added ArrowUpRight to the imports below
 import { 
   Play, Pause, X, Volume2, VolumeX, 
@@ -13,6 +14,16 @@ export default function Walkthrough() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
+  // --- INSERT THIS BLOCK HERE ---
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+  // -
 
   const colors = {
     blackish: "#041a14",
@@ -89,16 +100,21 @@ export default function Walkthrough() {
       <div className="flex h-full w-full">
         <div className={`relative h-full transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
           ${isActive ? "w-full lg:w-[70%]" : "w-full"}`}>
-          
           <video
-            ref={videoRef}
-            loop
-            muted={isMuted}
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="https://subhamgroup.com/video/SubhamKishoriHeights.mp4" type="video/mp4" />
-          </video>
+  key={isMobile ? "mobile" : "desktop"} // This resets the player when screen size changes
+  ref={videoRef}
+  loop
+  muted={isMuted}
+  playsInline
+  autoPlay // Add this if you want it to play immediately
+  className={`w-full h-full ${isMobile ? "object-contain" : "object-cover"}`}
+  style={{ objectPosition: 'center' }} // Ensures the video stays centered
+>
+  <source 
+    src={isMobile ? "/mobile-walkthrough.mp4" : "https://subhamgroup.com/video/SubhamKishoriHeights.mp4"} 
+    type="video/mp4" 
+  />
+</video>
 
           <div className={`absolute bottom-10 left-10 flex gap-4 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}>
             <button 
