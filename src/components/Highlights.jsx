@@ -19,12 +19,15 @@ export default function Specifications() {
     { src: "/theme_1.png", title: "Structural Integrity", tag: "Earthquake Resistant" },
     { src: "/theme_2.png", title: "Active Lifestyle", tag: "78% Open Space" },
     { src: "/theme_3.png", title: "Premium Finishes", tag: "Vitrified Interiors" },
+    { src: "/theme_4.png", title: "Community Lawn", tag: "Outdoor Social Spaces" },
+  { src: "/theme_5.png", title: "Fitness Studio", tag: "Modern Gymnasium" },
+  { src: "/theme_6.png", title: "Community Hall", tag: "Celebrate Together" },
   ];
 
   const technicalData = [
     { category: "Structure", icon: <Shield />, info: "RCC Frame with Earthquake Resistant Structure" },
     { category: "Flooring", icon: <History />, info: "Vitrified tiles for all rooms, drawing, and dining" },
-    { category: "Power", icon: <Zap />, info: "24x7 Generator & 2KVA dedicated flat backup" },
+    { category: "Power", icon: <Zap />, info: "24×7 Generator backup for common area & 2KVA Power backup per flat" },
     { category: "Safety", icon: <Flame />, info: "Equipped with fire alarms & fighting devices" },
   ];
 
