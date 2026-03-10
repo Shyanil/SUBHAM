@@ -16,14 +16,14 @@ export default function Gallery() {
   };
 
   const galleryImages = [
-    { title: "Balcony View", tag: "Exterior", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
-    { title: "Kid's Play Area", tag: "Design", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
-    { title: "Lawn", tag: "Master Plan", src: "https://subhamgroup.com/img/subham-kishori-glry4.jpg" },
-    { title: "Swimming Pool", tag: "Active Living", src: "https://subhamgroup.com/img/subham-kishori-glry5.jpg" },
+    { title: "Balcony View", tag: "Outdoor Living", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
+    { title: "Kid's Play Area", tag: "Family & Kids", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
+    { title: "Lawn", tag: "Green Spaces", src: "https://subhamgroup.com/img/subham-kishori-glry4.jpg" },
+    { title: "Swimming Pool", tag: "Leisure", src: "https://subhamgroup.com/img/subham-kishori-glry5.jpg" },
     { title: "Community Hall", tag: "Social Hub", src: "https://subhamgroup.com/img/subham-kishori-glry6.jpg" },
-    { title: "Gymnasium", tag: "Ambiance", src: "https://subhamgroup.com/img/subham-kishori-glry7.jpg" },
+    { title: "Gymnasium", tag: "Health & Fitness", src: "https://subhamgroup.com/img/subham-kishori-glry7.jpg" },
     { title: "Indoor Games Room", tag: "Indoor", src: "https://subhamgroup.com/img/subham-kishori-glry8.jpg" },
-    { title: "Reception Area", tag: "Perspective", src: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" }
+    { title: "Reception Area", tag: "Grand Entrance", src: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" }
   ];
 
   useEffect(() => {
