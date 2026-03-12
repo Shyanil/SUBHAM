@@ -183,9 +183,9 @@ export default function AboutSubham() {
     {project.name}
   </span>
 ))}
-                 <span className="px-5 py-2.5 rounded-full text-white text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg" style={{ backgroundColor: colors.mediumOrange }}>
+                 {/* <span className="px-5 py-2.5 rounded-full text-white text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg" style={{ backgroundColor: colors.mediumOrange }}>
                    Solitaire <ExternalLink className="w-3 h-3" />
-                 </span>
+                 </span> */}
                </div>
             </div>
             
