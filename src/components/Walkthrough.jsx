@@ -99,7 +99,7 @@ export default function Walkthrough() {
       {/* STAGE 2: THE SPLIT THEATER */}
       <div className="flex h-full w-full">
         <div className={`relative h-full transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
-          ${isActive ? "w-full lg:w-[70%]" : "w-full"}`}>
+          ${isActive ? "w-full lg:w-[78%]" : "w-full"}`}>
           <video
   key={isMobile ? "mobile" : "desktop"} // This resets the player when screen size changes
   ref={videoRef}
@@ -107,7 +107,7 @@ export default function Walkthrough() {
   muted={isMuted}
   playsInline
   autoPlay // Add this if you want it to play immediately
-  className={`w-full h-full ${isMobile ? "object-contain" : "object-cover"}`}
+  className={`w-full h-full ${isMobile ? "object-contain" : "object-contain"}`}
   style={{ objectPosition: 'center' }} // Ensures the video stays centered
 >
   <source 
@@ -141,25 +141,25 @@ export default function Walkthrough() {
         </div>
 
         <div className={`relative h-full bg-[#fafaf8] transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] flex flex-col
-          ${isActive ? "w-0 lg:w-[30%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
+          ${isActive ? "w-0 lg:w-[22%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
           
-          <div className="p-12 lg:p-16 flex flex-col h-full justify-between text-[#041a14]">
+          <div className="p-6 lg:p-8 flex flex-col h-full justify-between text-[#041a14]">
             <div>
               <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] mb-12" style={{ color: colors.darkOrange }}>
                 <Sparkles className="w-4 h-4" style={{ color: colors.brightOrange }} />
                 Visual Tour
               </div>
               
-              <h3 className="font-serif text-4xl mb-12 italic leading-tight">
+              <h3 className="font-serif text-2xl lg:text-3xl mb-16 italic leading-tight">
                 Architectural <br /> Verticality.
               </h3>
 
-              <div className="space-y-10">
+              <div className="space-y-6">
                 <div className="flex gap-6 items-start">
-                  <Building2 className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
+                  <Building2 className="w-5 h-5 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Scale</p>
-                    <p className="text-sm font-bold">B+G+14 Modern Towers</p>
+                    <p className="text-xs font-bold">B+G+14 Modern Towers</p>
                   </div>
                 </div>
                 <div className="flex gap-6 items-start">
@@ -181,7 +181,7 @@ export default function Walkthrough() {
 
             <button 
               onClick={scrollToContact}
-              className="group w-full py-6 rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-4 hover:scale-[1.02] transition-transform shadow-lg"
+              className="group w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-4 hover:scale-[1.02] transition-transform shadow-lg"
               style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}
             >
               Book Site Visit <ArrowUpRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />

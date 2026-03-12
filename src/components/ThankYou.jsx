@@ -28,22 +28,30 @@ export default function AboutSubham() {
   };
 
   const completedProjects = [
-  { name: "Subham Enclave", location: "Hatigaon, Guwahati" },
-  { name: "Subham Classic", location: "Ambikagiri Nagar, Guwahati" },
-  { name: "Subham Residency", location: "Kharguli, Guwahati" },
-  { name: "Subham Park View", location: "Fatasil, Guwahati" },
-  { name: "Subham Heights", location: "Kahilipara, Guwahati" },
-  { name: "Subham Regency", location: "Hengrabari, Guwahati" },
-  { name: "Subham Elite", location: "Gandhibasti, Guwahati" },
-  { name: "Subham Manjushree", location: "Datalpara, Guwahati" },
-  { name: "Subham Sapphire", location: "Nalapara, Guwahati" },
-  { name: "Subham Garden", location: "Kalapahar, Guwahati" },
-  { name: "Subham Greens", location: "Lokhra, Guwahati" },
-  { name: "Subham Buildwell", location: "Zoo Road, Guwahati" },
-  { name: "Subham Velocity", location: "G.S Road, Guwahati" },
-  { name: "Subham Redstone", location: "Downtown, Guwahati" },
-  { name: "Bijay Crescent", location: "Pibco, Guwahati" },
-  { name: "Subham Square", location: "Lokhra, Guwahati" }
+  { name: "Subham Enclave", location: "Hatigaon, Residential" },
+  { name: "Subham Park View", location: "Fatasil, Residential" },
+  { name: "Subham Heights", location: "Kahilipara, Residential" },
+  { name: "Subham Classic", location: "Ambikagiri Nagar, Residential" },
+  { name: "Subham Garden", location: "Jorhat, Residential" },
+  { name: "Subham Residency", location: "Kharguli, Residential" },
+  
+  
+  { name: "Subham Regency", location: "Hengrabari, Residential" },
+  { name: "Subham Elite", location: "Gandhibasti, Residential" },
+  { name: "Subham Manjushree", location: "Datalpara, Residential" },
+  { name: "Subham Solitaire", location: "Agartala, Residential cum Commercial" },
+  { name: "Subham Sapphire", location: "Nalapara, Residential" },
+  { name: "Subham Garden", location: "Kalapahar, Residential cum Commercial" },
+  { name: "Subham Greens", location: "Lokhra, Residential cum Commercial" },
+  { name: "Subham Buildwell", location: "Zoo Road,Residential cum Commercial" },
+  { name: "Subham Ashray", location: "Near Airport, Guwahati Residential" },
+  { name: "Subham Velocity", location: "G.S Road, Commercial" },
+  { name: "Subham Redstone", location: "Downtown, Commercial" },
+  
+  { name: "Subham Square", location: "Lokhra, Commercial" },
+  { name: "Bijay Crescent", location: "Pibco, Commercial" },
+  { name: "Subham Park", location: "Bongaigaon, Residential" },
+  { name: "Subham Park", location: "Jorhat, Residential" },
 ];
 
   const fadeInUp = {
@@ -67,7 +75,7 @@ export default function AboutSubham() {
                </span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tighter" style={{ color: colors.blackish }}>
-              Timeless <span className="italic font-light" style={{ color: colors.darkOrange }}>Relationships.</span>
+              Time-Bound Projects and Timeless <span className="italic font-light" style={{ color: colors.darkOrange }}>Relationships.</span>
             </h2>
           </motion.div>
         </div>
@@ -83,7 +91,7 @@ export default function AboutSubham() {
           >
             <div className="relative z-10 mb-12">
                <img 
-                 src="/logo2.png" 
+                 src="/logo4.png" 
                  alt="Subham Group" 
                  className="h-10 md:h-14 w-auto object-contain brightness-150" 
                />

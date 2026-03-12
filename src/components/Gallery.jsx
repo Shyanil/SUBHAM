@@ -23,7 +23,9 @@ export default function Gallery() {
     { title: "Community Hall", tag: "Social Hub", src: "https://subhamgroup.com/img/subham-kishori-glry6.jpg" },
     { title: "Gymnasium", tag: "Health & Fitness", src: "https://subhamgroup.com/img/subham-kishori-glry7.jpg" },
     { title: "Indoor Games Room", tag: "Indoor", src: "https://subhamgroup.com/img/subham-kishori-glry8.jpg" },
-    { title: "Reception Area", tag: "Grand Entrance", src: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" }
+    { title: "Reception Area", tag: "Grand Entrance", srBirtc: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" },
+    { title: "Gate View", tag: "Gate", src: "/Gate_view.jpeg" },
+    { title: "Bird Night Eye View", tag: "Night Eye", src: "/night.jpeg" }
   ];
 
   useEffect(() => {

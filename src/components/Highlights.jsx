@@ -16,12 +16,12 @@ export default function Specifications() {
   };
 
   const themeImages = [
-    { src: "/theme_1.png", title: "Structural Integrity", tag: "Earthquake Resistant" },
-    { src: "/theme_2.png", title: "Active Lifestyle", tag: "78% Open Space" },
-    { src: "/theme_3.png", title: "Premium Finishes", tag: "Vitrified Interiors" },
-    { src: "/theme_4.png", title: "Community Lawn", tag: "Outdoor Social Spaces" },
-  { src: "/theme_5.png", title: "Fitness Studio", tag: "Modern Gymnasium" },
-  { src: "/theme_6.png", title: "Community Hall", tag: "Celebrate Together" },
+    { src: "/theme_1.png", title: "Kids' play area" },
+    { src: "/theme_2.png", title: "Swimming Pool" },
+    { src: "/theme_3.png", title: "Lawn"},
+    { src: "/theme_4.png", title: "Gymnasium" },
+  { src: "/theme_5.png", title: "Indoor Games Room" },
+  { src: "/theme_6.png", title: "Community Hall"},
   ];
 
   const technicalData = [
