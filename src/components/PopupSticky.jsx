@@ -159,7 +159,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
                       <Sparkles className="w-4 h-4" /> Quick Connect
                     </div>
                     <h3 className="font-serif text-3xl md:text-4xl leading-tight">
-                      Experience <br /> <span className="italic font-light text-[#F2A71D]">Subham Kishori.</span>
+                      Experience <br /> <span className="italic font-light text-[#F2A71D]">Subham Kishori Heights.</span>
                     </h3>
                   </div>
                </div>
