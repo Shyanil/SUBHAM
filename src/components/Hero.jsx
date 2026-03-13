@@ -79,13 +79,14 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative w-full h-full min-h-[300px] sm:min-h-[350px] rounded-[3rem] overflow-hidden group shadow-sm"
+          className="relative w-full h-full min-h-[300px] sm:min-h-[350px]  rounded-[3rem] overflow-hidden group shadow-sm"
         >
-          <img 
+           <img 
   src="/hero24.jpg" 
   alt="Subham Kishori Heights" 
   className="absolute inset-0 w-full h-full object-cover object-[6%_center] transition-transform duration-1000 group-hover:scale-105"
 />
+
           <div className="absolute inset-0 bg-black/10" />
           
           {/* Badge using the vibrant orange accent */}

@@ -174,11 +174,11 @@ export default function Gallery() {
 
         {/* Center Preview - Desktop Only */}
         <div className={`hidden lg:flex absolute left-0 top-0 h-full w-[calc(100%-450px)] items-center justify-center p-20 pointer-events-none transition-all duration-300 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-           <div className="relative w-full max-w-5xl shadow-2xl rounded-[4rem] overflow-hidden">
+           <div className="relative w-full max-w-5xl shadow-2xl rounded-[4rem] overflow-hidden aspect-[16/9]">
               <img 
                 src={galleryImages[activeImage].src} 
                 alt="Selected View" 
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
               <div className="absolute bottom-12 left-12 text-white drop-shadow-lg">
                 <p className="text-[10px] uppercase tracking-[0.4em] mb-2" style={{ color: colors.brightOrange }}>{galleryImages[activeImage].tag}</p>
