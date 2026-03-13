@@ -61,11 +61,11 @@ const ActiveLivingShowcase = () => {
             className={`${item.bg} cursor-pointer rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-12 flex flex-col min-h-[380px] md:h-[450px] justify-between group transition-all duration-500 ${item.isHighlighted ? 'md:scale-105' : ''}`}
             style={
   item.title === "For Children"
-    ? {
-        backgroundImage: "url('/children.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      }
+  ? {
+      backgroundImage: "linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/children.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center"
+    }
     : item.customBg
     ? { backgroundColor: item.customBg }
     : {}
@@ -78,7 +78,7 @@ const ActiveLivingShowcase = () => {
             <div>
               <span
   className={`text-[10px] font-black uppercase tracking-widest mb-3 block ${
-    item.title === "For Children" ? "text-black" : ""
+    item.title === "For Children" ? "text-white" : ""
   }`}
 >
   {item.tag}
