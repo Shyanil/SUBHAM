@@ -31,8 +31,8 @@ const Amenities = () => {
       category: "Healthcare",
       icon: <Hospital className="w-6 h-6" />,
       items: [
-        { name: "Srishti Hospital", dist: "1.5 km" },
-        { name: "Assam Medical College", dist: "3.5 km" },
+        { name: "Srishti Hospital & Research Centre", dist: "1.5 km" },
+        { name: "Assam Medical College & Hospital", dist: "3.5 km" },
         { name: "Dibrugarh Cancer Centre", dist: "3.8 km" },
       ],
     },
@@ -42,7 +42,7 @@ const Amenities = () => {
       items: [
         { name: "Little Flower High School", dist: "1.1 km" },
         { name: "St. Mary’s High School", dist: "1.2 km" },
-        { name: "DPS Dibrugarh", dist: "9.7 km" },
+        { name: "Don Bosco High School", dist: "2.8 km" },
       ],
     },
     {
@@ -50,7 +50,7 @@ const Amenities = () => {
       icon: <GraduationCap className="w-6 h-6" />,
       items: [
         { name: "DHSK College", dist: "850 m" },
-        { name: "St. Fernando Nursing", dist: "3.1 km" },
+        { name: "St. Fernando College of Nursing", dist: "3.1 km" },
         { name: "Dibrugarh University", dist: "7.2 km" },
       ],
     },

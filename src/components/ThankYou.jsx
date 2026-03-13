@@ -44,7 +44,7 @@ export default function AboutSubham() {
   { name: "Subham Garden", location: "Kalapahar, Residential cum Commercial" },
   { name: "Subham Greens", location: "Lokhra, Residential cum Commercial" },
   { name: "Subham Buildwell", location: "Zoo Road,Residential cum Commercial" },
-  { name: "Subham Ashray", location: "Near Airport, Guwahati Residential" },
+  { name: "Subham Ashray", location: "Near Airport, Guwahati; Residential" },
   { name: "Subham Velocity", location: "G.S Road, Commercial" },
   { name: "Subham Redstone", location: "Downtown, Commercial" },
   
