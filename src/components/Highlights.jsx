@@ -16,7 +16,7 @@ export default function Specifications() {
   };
 
   const themeImages = [
-    { src: "/theme_1.png", title: "Kids' play area" },
+    { src: "/theme_1.png", title: "Kids' Play Area" },
     { src: "/theme_2.png", title: "Swimming Pool" },
     { src: "/theme_3.png", title: "Lawn"},
     { src: "/theme_4.png", title: "Gymnasium" },

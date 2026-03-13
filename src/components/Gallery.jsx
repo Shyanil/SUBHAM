@@ -52,7 +52,7 @@ export default function Gallery() {
             </h2>
           </div>
           <p className="text-[#041a14]/60 max-w-sm text-base lg:text-lg font-medium border-l-4 pl-6 lg:pl-8 py-2" style={{ borderLeftColor: colors.brightOrange }}>
-            A curated look at the architectural vertical lines and well-lit façades of Kishori Heights.
+            A curated look at the architectural vertical lines and well-lit façades of Subham Kishori Heights.
           </p>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Gallery() {
               />
               <div className="absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" style={{ backgroundColor: colors.blackish }}></div>
               <div className="absolute inset-0 p-6 lg:p-10 flex flex-col justify-end">
-                <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] mb-2" style={{ color: colors.brightOrange }}>{image.tag}</span>
+                <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] mb-2" style={{ color: colors.darkOrange }}>{image.tag}</span>
                 <h3 className="text-white font-serif text-2xl lg:text-3xl italic">{image.title}</h3>
               </div>
             </div>
@@ -139,7 +139,12 @@ export default function Gallery() {
             <div className="lg:hidden w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative mb-6 border-2" style={{ borderColor: colors.brightOrange }}>
                <img src={galleryImages[activeImage].src} alt="Active" className="w-full h-full object-cover" />
                <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
-                  <p className="text-[9px] text-[#F2A71D] font-bold uppercase tracking-widest mb-1">{galleryImages[activeImage].tag}</p>
+                 <p
+  className="text-[9px] font-bold uppercase tracking-widest mb-1"
+  style={{ color: colors.darkOrange }}
+>
+  {galleryImages[activeImage].tag}
+</p>
                   <p className="text-white font-serif text-xl italic">{galleryImages[activeImage].title}</p>
                </div>
             </div>
@@ -161,7 +166,7 @@ export default function Gallery() {
     >
       <img src={image.src} alt="" className="w-full aspect-video object-cover" />
      <div className="absolute bottom-3 left-3 text-white">
-  <p className="text-[10px] text-[#F2A71D]">{image.tag}</p>
+  <p className="text-[10px] " style={{ color: colors.darkOrange }}>{image.tag}</p>
   <p className="italic">{image.title}</p>
 </div>
     </div>
@@ -191,7 +196,7 @@ export default function Gallery() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-12 left-12 text-white drop-shadow-lg">
-                <p className="text-[10px] uppercase tracking-[0.4em] mb-2" style={{ color: colors.brightOrange }}>{galleryImages[activeImage].tag}</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.4em] mb-2" style={{ color: colors.darkOrange }}>{galleryImages[activeImage].tag}</p>
                 <h3 className="text-5xl font-serif italic leading-none">{galleryImages[activeImage].title}</h3>
               </div>
            </div>

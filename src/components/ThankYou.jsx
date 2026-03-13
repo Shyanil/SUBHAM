@@ -26,33 +26,47 @@ export default function AboutSubham() {
     mediumOrange: "#E97323", 
     darkOrange: "#D64B27",   
   };
-
   const completedProjects = [
   { name: "Subham Enclave", location: "Hatigaon, Residential" },
   { name: "Subham Park View", location: "Fatasil, Residential" },
   { name: "Subham Heights", location: "Kahilipara, Residential" },
   { name: "Subham Classic", location: "Ambikagiri Nagar, Residential" },
-  { name: "Subham Garden", location: "Jorhat, Residential" },
   { name: "Subham Residency", location: "Kharguli, Residential" },
-  
-  
   { name: "Subham Regency", location: "Hengrabari, Residential" },
   { name: "Subham Elite", location: "Gandhibasti, Residential" },
   { name: "Subham Manjushree", location: "Datalpara, Residential" },
-  { name: "Subham Solitaire", location: "Agartala, Residential cum Commercial" },
   { name: "Subham Sapphire", location: "Nalapara, Residential" },
   { name: "Subham Garden", location: "Kalapahar, Residential cum Commercial" },
   { name: "Subham Greens", location: "Lokhra, Residential cum Commercial" },
   { name: "Subham Buildwell", location: "Zoo Road,Residential cum Commercial" },
-  { name: "Subham Ashray", location: "Near Airport, Guwahati; Residential" },
   { name: "Subham Velocity", location: "G.S Road, Commercial" },
   { name: "Subham Redstone", location: "Downtown, Commercial" },
-  
   { name: "Subham Square", location: "Lokhra, Commercial" },
-  { name: "Bijay Crescent", location: "Pibco, Commercial" },
-  { name: "Subham Park", location: "Bongaigaon, Residential" },
-  { name: "Subham Park", location: "Jorhat, Residential" },
+  { name: "Bijay Crescent", location: "Pibco, Commercial" }
 ];
+
+const ongoingProjects = [
+  { name: "Subham Garden", location: "Jorhat, Residential" },
+  { name: "Subham Solitaire", location: "Agartala, Residential cum Commercial" },
+  { name: "Subham Ashray", location: "Near Airport, Guwahati; Residential" },
+  { name: "Subham Park", location: "Bongaigaon, Residential" },
+  { name: "Subham Park", location: "Jorhat, Residential" }
+];
+
+  // const completedProjects = [
+  // { name: "Subham Enclave", location: "Hatigaon, Residential" },
+  // { name: "Subham Park View", location: "Fatasil, Residential" },
+  // { name: "Subham Heights", location: "Kahilipara, Residential" },
+  // { name: "Subham Classic", location: "Ambikagiri Nagar, Residential" },
+  // 
+  // { name: "Subham Residency", location: "Kharguli, Residential" },
+  
+  
+  // { name: "Subham Regency", location: "Hengrabari, Residential" },
+  // { name: "Subham Elite", location: "Gandhibasti, Residential" },
+  // 
+  // 
+// ];
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -93,7 +107,7 @@ export default function AboutSubham() {
                <img 
                  src="/logo4.png" 
                  alt="Subham Group" 
-                 className="h-10 md:h-14 w-auto object-contain brightness-150" 
+                 className="h-16 md:h-24 w-auto object-contain brightness-150" 
                />
             </div>
 
@@ -139,18 +153,18 @@ export default function AboutSubham() {
               Book a Site Visit
             </button>
 
-            <div className="absolute -bottom-10 -right-10 opacity-10">
+            {/* <div className="absolute -bottom-10 -right-10 opacity-10">
                <Building className="w-48 h-48 text-white" />
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Feature Image Card */}
           <motion.div 
-            className="md:col-span-5 h-[450px] rounded-[3.5rem] overflow-hidden relative group shadow-xl"
+            className="md:col-span-5 h-full rounded-[3.5rem] overflow-hidden relative group shadow-xl"
             {...fadeInUp}
           >
             <img 
-              src="/final2.png" 
+              src="/hero26.jpeg" 
               alt="Architecture" 
               className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
             />
@@ -170,7 +184,7 @@ export default function AboutSubham() {
           >
             <div>
                <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-8 opacity-40">The Subham Portfolio</p>
-               <div className="flex flex-wrap gap-2">
+               {/* <div className="flex flex-wrap gap-2">
                  {completedProjects.map((project, idx) => (
   <span 
     key={idx}
@@ -182,11 +196,48 @@ export default function AboutSubham() {
   >
     {project.name}
   </span>
-))}
+))} */}
                  {/* <span className="px-5 py-2.5 rounded-full text-white text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg" style={{ backgroundColor: colors.mediumOrange }}>
                    Solitaire <ExternalLink className="w-3 h-3" />
                  </span> */}
-               </div>
+               {/* </div> */}
+               <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-40">
+Completed
+</p>
+
+<div className="flex flex-wrap gap-2 mb-6">
+{completedProjects.map((project, idx) => (
+<span
+key={idx}
+onClick={() => setSelectedLocation(project.location)}
+className="px-5 py-2.5 rounded-full border text-[9px] font-bold uppercase tracking-widest transition-all cursor-pointer"
+style={{ backgroundColor: "#ffffff", borderColor: `${colors.blackish}10`, color: colors.blackish }}
+onMouseEnter={(e) => { e.target.style.backgroundColor = colors.blackish; e.target.style.color = "white"; }}
+onMouseLeave={(e) => { e.target.style.backgroundColor = "#ffffff"; e.target.style.color = colors.blackish; }}
+>
+{project.name}
+</span>
+))}
+</div>
+
+<p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-40">
+Ongoing
+</p>
+
+<div className="flex flex-wrap gap-2">
+{ongoingProjects.map((project, idx) => (
+<span
+key={idx}
+onClick={() => setSelectedLocation(project.location)}
+className="px-5 py-2.5 rounded-full border text-[9px] font-bold uppercase tracking-widest transition-all cursor-pointer"
+style={{ backgroundColor: "#ffffff", borderColor: `${colors.blackish}10`, color: colors.blackish }}
+onMouseEnter={(e) => { e.target.style.backgroundColor = colors.blackish; e.target.style.color = "white"; }}
+onMouseLeave={(e) => { e.target.style.backgroundColor = "#ffffff"; e.target.style.color = colors.blackish; }}
+>
+{project.name}
+</span>
+))}
+</div>
             </div>
             
             <div className="mt-12 flex items-center justify-between opacity-40">
