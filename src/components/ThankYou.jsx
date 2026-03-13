@@ -158,7 +158,7 @@ const ongoingProjects = [
             </div> */}
           </motion.div>
 
-          {/* Feature Image Card */}
+          {/* Feature Image Card
           <motion.div 
             className="md:col-span-5 h-full rounded-[3.5rem] overflow-hidden relative group shadow-xl"
             {...fadeInUp}
@@ -175,11 +175,11 @@ const ongoingProjects = [
                </div>
                <p className="text-white font-serif text-2xl italic">Masterpiece <br/> Landmark</p>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Milestones Card */}
           <motion.div 
-            className="md:col-span-7 p-10 lg:p-14 bg-white rounded-[3.5rem] border border-gray-100 shadow-xl flex flex-col justify-between"
+            className="md:col-span-12 p-10 lg:p-14 bg-white rounded-[3.5rem] border border-gray-100 shadow-xl flex flex-col justify-between"
             {...fadeInUp}
           >
             <div>
