@@ -38,7 +38,7 @@ export default function ActiveLivingHero({ onOpenPopup }) {
         {/* --- LEFT IMAGE --- */}
         <div className="absolute left-0 xl:left-[2%] top-[25%] w-40 h-56 rounded-[3rem] overflow-hidden shadow-2xl hidden xl:block hover:scale-105 transition-transform duration-500 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=600" 
+            src="/hero2.jpg" 
             alt="Modern Architecture" 
             className="w-full h-full object-cover opacity-100" 
           />
@@ -48,7 +48,7 @@ export default function ActiveLivingHero({ onOpenPopup }) {
         {/* --- RIGHT IMAGE --- */}
         <div className="absolute right-0 xl:right-[2%] top-[20%] w-48 h-48 rounded-full overflow-hidden shadow-2xl hidden xl:block border-8 border-white hover:rotate-3 transition-transform duration-500 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=600" 
+            src="/home.png" 
             alt="Wellness Lifestyle" 
             className="w-full h-full object-cover opacity-100" 
           />
@@ -118,8 +118,14 @@ export default function ActiveLivingHero({ onOpenPopup }) {
           100% { transform: translateX(-33.33%); }
         }
         .animate-marquee {
-          animation: marquee 40s linear infinite;
+          animation: marquee 38s linear infinite;
         }
+          /* Mobile speed */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: marquee 10s linear infinite;
+  }
+}
         .font-serif {
           font-family: 'Playfair Display', serif;
         }
