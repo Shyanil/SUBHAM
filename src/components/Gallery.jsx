@@ -16,16 +16,18 @@ export default function Gallery() {
   };
 
   const galleryImages = [
+    { title: "Bird Night Eye View", tag: "Night Eye", src: "/night.jpeg" },
+    { title: "Gate View", tag: "Gate", src: "/Gate_view.jpeg" },
     { title: "Balcony View", tag: "Outdoor Living", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
     { title: "Kid's Play Area", tag: "Family & Kids", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
     { title: "Lawn", tag: "Green Spaces", src: "https://subhamgroup.com/img/subham-kishori-glry4.jpg" },
     { title: "Swimming Pool", tag: "Leisure", src: "https://subhamgroup.com/img/subham-kishori-glry5.jpg" },
     { title: "Community Hall", tag: "Social Hub", src: "https://subhamgroup.com/img/subham-kishori-glry6.jpg" },
-    { title: "Gymnasium", tag: "Health & Fitness", src: "https://subhamgroup.com/img/subham-kishori-glry7.jpg" },
+    { title: "Gymnasium", tag: "Health & Fitness", src: "/subham-kishori-glry7.jpg" },
     { title: "Indoor Games Room", tag: "Indoor", src: "https://subhamgroup.com/img/subham-kishori-glry8.jpg" },
-    { title: "Reception Area", tag: "Grand Entrance", srBirtc: "https://subhamgroup.com/img/subham-kishori-glry9.jpg" },
-    { title: "Gate View", tag: "Gate", src: "/Gate_view.jpeg" },
-    { title: "Bird Night Eye View", tag: "Night Eye", src: "/night.jpeg" }
+    { title: "Reception Area", tag: "Grand Entrance", src: "/subham-kishori-glry9.jpg" }
+    
+    
   ];
 
   useEffect(() => {
