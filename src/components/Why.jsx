@@ -15,14 +15,7 @@ const ActiveLivingShowcase = () => {
   };
 
   const cardData = [
-    { 
-      title: "For Children", 
-      tag: "ENERGY & PLAY",
-      desc: "Designed to spark movement and physical growth through active, purposeful play environments.",
-      icon: <Sparkles className="w-6 h-6" style={{ color: colors.darkOrange }} />,
-      bg: "bg-white border border-gray-100 text-[#041a14]",
-      customBg: null
-    },
+    
     { 
       title: "For Families", 
       tag: "COMMUNITY BONDING",
@@ -31,6 +24,14 @@ const ActiveLivingShowcase = () => {
       bg: "text-white shadow-2xl z-10",
       customBg: colors.blackish,
       isHighlighted: true
+    },
+    { 
+      title: "For Children", 
+      tag: "ENERGY & PLAY",
+      desc: "Designed to spark movement and physical growth through active, purposeful play environments.",
+      icon: <Sparkles className="w-6 h-6" style={{ color: colors.darkOrange }} />,
+      bg: "bg-white border border-gray-100 text-white",
+      customBg: null
     },
     { 
       title: "For Seniors", 
@@ -58,14 +59,30 @@ const ActiveLivingShowcase = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className={`${item.bg} cursor-pointer rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-12 flex flex-col min-h-[380px] md:h-[450px] justify-between group transition-all duration-500 ${item.isHighlighted ? 'md:scale-105' : ''}`}
-            style={item.customBg ? { backgroundColor: item.customBg } : {}}
+            style={
+  item.title === "For Children"
+    ? {
+        backgroundImage: "url('/children.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }
+    : item.customBg
+    ? { backgroundColor: item.customBg }
+    : {}
+}
           >
             <div className={`w-14 h-14 md:w-16 md:h-16 rounded-3xl flex items-center justify-center border shadow-inner transition-transform group-hover:rotate-12 ${idx === 1 ? 'bg-white/10 border-white/20' : 'bg-black/5 border-black/5'}`}>
               {item.icon}
             </div>
             
             <div>
-              <span className="text-[10px] font-black uppercase tracking-widest opacity-50 mb-3 block">{item.tag}</span>
+              <span
+  className={`text-[10px] font-black uppercase tracking-widest mb-3 block ${
+    item.title === "For Children" ? "text-black" : ""
+  }`}
+>
+  {item.tag}
+</span>
               <h3 className="font-serif text-3xl md:text-4xl mb-4 md:mb-6">{item.title}</h3>
               <p className="text-base leading-relaxed opacity-80 font-medium">
                 {item.desc}

@@ -35,24 +35,31 @@ export default function ActiveLivingHero({ onOpenPopup }) {
 
       <main className="relative max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col items-center">
         
-        {/* --- LEFT IMAGE --- */}
-        <div className="absolute left-0 xl:left-[2%] top-[25%] w-40 h-56 rounded-[3rem] overflow-hidden shadow-2xl hidden xl:block hover:scale-105 transition-transform duration-500 z-0">
+        {/* --- LEFT IMAGE ---
+        <div className="absolute left-0 xl:left-[2%] top-[20%] w-48 h-48 rounded-full overflow-hidden shadow-2xl hidden xl:block border-8 border-white hover:rotate-3 transition-transform duration-500 z-0">
+          <img 
+            src="/profile_3.png" 
+            alt="Wellness Lifestyle" 
+            className="w-full h-full object-cover opacity-100" 
+          />
+        </div> */}
+        {/* <div className="absolute left-0 xl:left-[2%] top-[25%] w-40 h-56 rounded-[3rem] overflow-hidden shadow-2xl hidden xl:block hover:scale-105 transition-transform duration-500 z-0">
           <img 
             src="/hero2.jpg" 
             alt="Modern Architecture" 
             className="w-full h-full object-cover opacity-100" 
           />
           <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter text-black">B+G+14 Floors</div>
-        </div>
+        </div> */}
         
         {/* --- RIGHT IMAGE --- */}
-        <div className="absolute right-0 xl:right-[2%] top-[20%] w-48 h-48 rounded-full overflow-hidden shadow-2xl hidden xl:block border-8 border-white hover:rotate-3 transition-transform duration-500 z-0">
+        {/* <div className="absolute right-0 xl:right-[2%] top-[20%] w-48 h-48 rounded-full overflow-hidden shadow-2xl hidden xl:block border-8 border-white hover:rotate-3 transition-transform duration-500 z-0">
           <img 
             src="/home.png" 
             alt="Wellness Lifestyle" 
             className="w-full h-full object-cover opacity-100" 
           />
-        </div>
+        </div> */}
 
         {/* --- MAIN CONTENT --- */}
         <div className="flex flex-col items-center text-center relative z-10 w-full max-w-4xl">

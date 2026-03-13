@@ -125,9 +125,9 @@ const Amenities = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
           {connectivityData.map((section, idx) => (
             <div key={idx} className="group relative">
-              <span className="absolute -left-6 -top-10 text-9xl font-serif italic select-none transition-all duration-700 opacity-[0.05] group-hover:opacity-20 group-hover:-translate-y-2" style={{ color: colors.blackish }}>
+              {/* <span className="absolute -left-6 -top-10 text-9xl font-serif italic select-none transition-all duration-700 opacity-[0.05] group-hover:opacity-20 group-hover:-translate-y-2" style={{ color: colors.blackish }}>
                 0{idx + 1}
-              </span>
+              </span> */}
 
               <div className="relative bg-white/40 backdrop-blur-sm p-8 rounded-[3rem] border border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-2xl">
                 <div className="flex items-center justify-between mb-8 border-b pb-6" style={{ borderBottomColor: `${colors.blackish}10` }}>

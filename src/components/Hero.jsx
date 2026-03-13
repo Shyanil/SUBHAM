@@ -82,9 +82,9 @@ export default function HeroSection() {
           className="relative w-full h-full min-h-[300px] sm:min-h-[350px]  rounded-[3rem] overflow-hidden group shadow-sm"
         >
            <img 
-  src="/hero24.jpg" 
+  src="/hero2.jpg" 
   alt="Subham Kishori Heights" 
-  className="absolute inset-0 w-full h-full object-cover object-[6%_center] transition-transform duration-1000 group-hover:scale-105"
+  className="absolute inset-0 w-full h-full object-cover   transition-transform duration-1000 group-hover:scale-105"
 />
 
           <div className="absolute inset-0 bg-black/10" />
