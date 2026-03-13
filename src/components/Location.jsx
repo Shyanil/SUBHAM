@@ -101,7 +101,7 @@ export default function Location() {
             </p>
           </div>
 
-          <button 
+          {/* <button 
             onClick={scrollToTop}
             className="group flex items-center gap-4 bg-white/5 px-8 py-4 rounded-full transition-all duration-500 border border-white/10"
             onMouseEnter={(e) => {
@@ -115,7 +115,7 @@ export default function Location() {
           >
             <span className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-black">Back to Top</span>
             <ArrowUp className="w-4 h-4 text-white group-hover:text-black group-hover:-translate-y-1 transition-transform" />
-          </button>
+          </button> */}
         </div>
         
       </div>

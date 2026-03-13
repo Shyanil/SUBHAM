@@ -150,7 +150,7 @@ export default function AboutSubham() {
             {...fadeInUp}
           >
             <img 
-              src="/final.png" 
+              src="/final2.png" 
               alt="Architecture" 
               className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
             />
