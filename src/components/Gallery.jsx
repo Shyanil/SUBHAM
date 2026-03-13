@@ -135,7 +135,7 @@ export default function Gallery() {
           {/* Sidebar Scrollable Content */}
           <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4 scroll-smooth">
             
-            {/* ✅ ADDED: Mobile Only Preview Image (Visible only on mobile inside sidebar) */}
+            {activeImage !== 0 && (
             <div className="lg:hidden w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative mb-6 border-2" style={{ borderColor: colors.brightOrange }}>
                <img src={galleryImages[activeImage].src} alt="Active" className="w-full h-full object-cover" />
                <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
@@ -143,22 +143,32 @@ export default function Gallery() {
                   <p className="text-white font-serif text-xl italic">{galleryImages[activeImage].title}</p>
                </div>
             </div>
-
+            )}
             {/* Image List */}
-            {galleryImages.map((image, idx) => (
-              <div 
-                key={idx}
-                className={`group relative rounded-xl lg:rounded-2xl overflow-hidden cursor-pointer border-4 transition-all duration-200 ${activeImage === idx ? "border-[#F2A71D]" : "border-transparent opacity-60 hover:opacity-100"}`}
-                onClick={() => setActiveImage(idx)}
-              >
-                <img src={image.src} alt="" className="w-full aspect-video object-cover" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: `${colors.blackish}66` }}>
-                   <p className="text-white font-bold text-[10px] uppercase tracking-widest">View Details</p>
-                </div>
-              </div>
-            ))}
-          </div>
+            {/* Image List */}
+{galleryImages.map((image, idx) => {
+  
 
+  return (
+    <div 
+      key={idx}
+      className={`group relative rounded-xl lg:rounded-2xl overflow-hidden cursor-pointer border-4 transition-all duration-200 ${
+        activeImage === idx
+          ? "border-[#F2A71D] opacity-100 scale-[1.03]"
+          : "border-transparent opacity-60 hover:opacity-100"
+      }`}
+      onClick={() => setActiveImage(idx)}
+    >
+      <img src={image.src} alt="" className="w-full aspect-video object-cover" />
+     <div className="absolute bottom-3 left-3 text-white">
+  <p className="text-[10px] text-[#F2A71D]">{image.tag}</p>
+  <p className="italic">{image.title}</p>
+</div>
+    </div>
+  );
+})}
+</div>
+                
           {/* Sidebar Footer */}
           <div className="p-6 lg:p-8 shrink-0" style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}>
             <p className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest mb-2 lg:mb-4 opacity-50">Currently Exploring</p>
