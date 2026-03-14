@@ -101,7 +101,7 @@ const ActiveLivingShowcase = () => {
         style={{ backgroundColor: colors.blackish }}
       >
         <img 
-          src="/outside_view_2.png" 
+          src="/why.jpeg" 
           alt="Subham Kishori Heights Architecture" 
           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-60"
         />
