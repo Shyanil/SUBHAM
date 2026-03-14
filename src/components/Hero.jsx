@@ -82,7 +82,7 @@ export default function HeroSection() {
           className="relative w-full h-full min-h-[300px] sm:min-h-[350px]  rounded-[3rem] overflow-hidden group shadow-sm"
         >
            <img 
-  src="/hero2.jpg" 
+  src="/night.jpeg" 
   alt="Subham Kishori Heights" 
   className="absolute inset-0 w-full h-full object-cover   transition-transform duration-1000 group-hover:scale-105"
 />
