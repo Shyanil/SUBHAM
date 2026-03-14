@@ -97,6 +97,14 @@ export default function HeroSection() {
             />
             Dibrugarh, Assam
           </div>
+          {/* New Price Badge in Downwards Position */}
+      <div className="absolute bottom-10 right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full font-extrabold text-[12px] text-white shadow-xl flex items-center gap-2 border border-white/10" style={{ color: colors.deepOrange }}>
+        <div 
+              className="w-1.5 h-1.5 rounded-full animate-pulse" 
+              style={{ backgroundColor: colors.vibrantOrange }}
+            />
+            Starting at 90 Lac
+      </div>
         </motion.div>
 
       </div>
