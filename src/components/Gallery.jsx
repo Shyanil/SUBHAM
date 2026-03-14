@@ -17,7 +17,7 @@ export default function Gallery() {
 
   const galleryImages = [
     { title: "Bird Night Eye View", tag: "Night Eye", src: "/night.jpeg" },
-    { title: "Gate View", tag: "Gate", src: "/gate_view.jpg" },
+    { title: "Gate View", tag: "Gate", src: "/subham-kishori-glry9 (1).jpg" },
     { title: "Balcony View", tag: "Outdoor Living", src: "https://subhamgroup.com/img/subham-kishori-glry2.jpg" },
     { title: "Kid's Play Area", tag: "Family & Kids", src: "https://subhamgroup.com/img/subham-kishori-glry3.jpg" },
     { title: "Lawn", tag: "Green Spaces", src: "https://subhamgroup.com/img/subham-kishori-glry4.jpg" },
