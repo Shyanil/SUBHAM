@@ -301,7 +301,7 @@ export default function PlanningSection() {
      style={{ background: colors.warmCream, padding: "80px 24px 100px" }}>
       {/* Section Header */}
       <div className="text-center mb-16">
-        <motion.span
+        {/* <motion.span
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -314,7 +314,10 @@ export default function PlanningSection() {
           }}
         >
           Floor Plans &amp; Layouts
-        </motion.span>
+        </motion.span> */}
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>
+            Floor Plans &amp; Layouts
+          </p>
 
         {/* <motion.h2
           initial={{ opacity: 0, y: 16 }}
