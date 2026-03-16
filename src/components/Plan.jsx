@@ -337,10 +337,15 @@ export default function PlanningSection() {
           Explore Our{" "}
           <span style={{ color: colors.vibrantOrange }}>Planning Designs</span>
         </motion.h2> */}
-        <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.85] text-[#041a14] mb-12">
-            Explore Our <br />
-            <span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span>
-          </h2>
+        <h2 className="font-serif 
+text-5xl md:text-8xl lg:text-[100px] 
+leading-[1.05] md:leading-[0.9] lg:leading-[0.85] 
+text-[#041a14] mb-12">
+  Explore Our <br />
+  <span className="italic font-light" style={{ color: colors.darkOrange }}>
+    Planning Designs
+  </span>
+</h2>
 
         {/* <motion.p
           initial={{ opacity: 0, y: 12 }}
