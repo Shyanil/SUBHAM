@@ -11,6 +11,7 @@ import AboutProject from "./components/AboutProject";
 import Amenities from "./components/Amenities";
 import Why from "./components/Why";
 import Location from "./components/Location";
+import Plan from "./components/Plan"; 
 import Walkthrough from "./components/Walkthrough";
 import Gallery from "./components/Gallery";
 import Highlights from "./components/Highlights";
@@ -77,6 +78,7 @@ export default function App() {
                   
                   <Why />
                   <Amenities />
+                  <Plan />
                   <Location />
                   <Highlights />
                   <Gallery />

@@ -22,6 +22,7 @@ export default function SubhamHeader({ onOpenPopup }) {
     { name: "Home", id: "hero" },
     { name: "About Project", id: "about" },
     { name: "Amenities", id: "amenities" },
+    { name: "Plan", id: "plan" },
     { name: "Location", id: "location" },
     { name: "Gallery", id: "gallery" }
   ];
