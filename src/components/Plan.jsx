@@ -421,7 +421,7 @@ text-[#041a14] mb-12">
     <img
   src={MASTER_PLAN.src}
   alt="Master Plan"
-  className="w-full aspect-[16/9] md:aspect-[4/3] object-contain bg-[#f8f0e6] p-2"
+  className="w-full h-[220px] md:h-[320px] object-contain bg-[#f8f0e6]"
 />
 
     {/* Footer */}
