@@ -275,7 +275,43 @@ function PlanCard({ plan, index, onClick }) {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-4 py-3 gap-2 md:flex-nowrap flex-wrap">
+      <div className="flex items-center justify-between px-4 py-3 gap-2">
+  <span
+    className="text-sm font-medium whitespace-nowrap"
+    style={{ color: colors.blackish }}
+  >
+    {plan.name}
+  </span>
+
+  <span
+    className="text-xs font-medium px-2 py-1 rounded-full shrink-0 whitespace-nowrap"
+    style={{
+      background: "rgba(244,180,0,0.12)",
+      color: "#a07800",
+    }}
+  >
+    {plan.tag}
+  </span>
+</div>
+      {/* <div className="flex items-center justify-between px-4 py-3 gap-2">
+  <span
+    className="text-sm font-medium"
+    style={{ color: colors.blackish }}
+  >
+    {plan.name}
+  </span>
+
+  <span
+    className="text-xs font-medium px-3 py-1 rounded-full w-fit"
+    style={{
+      background: "rgba(244,180,0,0.12)",
+      color: "#a07800",
+    }}
+  >
+    {plan.tag}
+  </span>
+</div> */}
+      {/* <div className="flex items-center justify-between px-4 py-3 gap-2  flex-wrap">
         <span className="text-sm font-medium whitespace-nowrap" style={{ color: colors.blackish }}>
           {plan.name}
         </span>
@@ -284,14 +320,14 @@ function PlanCard({ plan, index, onClick }) {
   style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
 >
   {plan.tag}
-</span>
+</span> */}
         {/* <span
           className="text-xs font-medium px-3 py-1 rounded-full"
           style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
         >
           {plan.tag}
         </span> */}
-      </div>
+      {/* </div> */}
     </motion.div>
   );
 }
@@ -312,7 +348,7 @@ export default function PlanningSection() {
   return (
     <section
     id="plan"
-     style={{ background: colors.warmCream, padding: "80px 24px 100px" }}>
+     style={{ background: colors.warmCream, padding: "80px 16px 100px" }}>
       {/* Section Header */}
       <div className="text-center mb-16">
         {/* <motion.span
@@ -434,7 +470,7 @@ text-[#041a14] mb-12">
       </span>
 
       <span
-        className="text-sm font-medium px-4 py-1.5 rounded-full"
+        className="text-xs font-medium px-3 py-1 rounded-full shrink-0"
         style={{
           background: "rgba(244,180,0,0.12)",
           color: "#a07800",
@@ -447,15 +483,8 @@ text-[#041a14] mb-12">
 </div>
 
       {/* Grid */}
-      <div
-        className="mx-auto"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 20,
-          maxWidth: 1280,
-        }}
-      >
+      <div className="max-w-[1280px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
         {PLANS.map((plan, i) => (
           <PlanCard key={plan.id} plan={plan} index={i} onClick={() => setActive(plan.id)} />
         ))}
