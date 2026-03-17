@@ -76,8 +76,10 @@ export default function App() {
                   <Hero onOpenPopup={handleContactTrigger} />
                   <AboutProject onOpenPopup={handleContactTrigger} />
                   
+                  
+                  
                   <Why />
-                  <Amenities />
+                  <Amenities onOpenPopup={handleContactTrigger} />
                   <Plan />
                   <Location />
                   <Highlights />

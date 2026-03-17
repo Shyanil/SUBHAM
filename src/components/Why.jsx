@@ -39,7 +39,7 @@ const ActiveLivingShowcase = () => {
       desc: "Emotional grounding and calm aesthetics curated for a healthy, dignified, and energetic lifestyle.",
       icon: <Heart className="w-6 h-6" style={{ color: colors.blackish }} />,
       bg: "text-white",
-      customBg: colors.brightOrange
+      customBg: "#D48806",
     }
   ];
 

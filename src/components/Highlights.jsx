@@ -45,7 +45,7 @@ export default function Specifications() {
 
   return (
     // ✅ CHANGED: Reduced py-24 to py-16 for mobile
-    <section id="specifications" className="w-full bg-[#fafaf8] py-16 lg:py-40 overflow-hidden font-sans text-[#041a14]">
+    <section id="amenities" className="w-full bg-[#fafaf8] py-16 lg:py-40 overflow-hidden font-sans text-[#041a14]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* --- HEADER --- */}

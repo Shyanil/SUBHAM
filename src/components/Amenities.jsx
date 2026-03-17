@@ -1,14 +1,17 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { 
   Train, Hospital, School, 
   ShoppingBag, GraduationCap, Compass, 
   Sparkles, Target, Zap, Waves
 } from "lucide-react";
 
-const Amenities = () => {
+const Amenities = ({ onOpenPopup }) => {
   // Official Brand Palette
+
   const colors = {
     blackish: "#041a14",
     brightOrange: "#F2A71D",
@@ -75,9 +78,10 @@ const Amenities = () => {
   ];
 
   return (
+  
     
-    <section id="amenities" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
-      
+    <section id="transport" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
+
       {/* --- NEW CUSTOM VECTOR ART: TOP RIGHT --- */}
       {/* Created with CSS shapes and icons to replace profile_2 image */}
       <div className="absolute -right-20 top-20 w-[300px] h-[300px] pointer-events-none z-0 select-none opacity-20">
@@ -119,9 +123,54 @@ const Amenities = () => {
       </div> */}
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+      <div className="relative mb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center lg:items-center">
+
+  {/* LEFT SIDE */}
+  <div>
+    <div
+      className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] mb-8"
+      style={{ color: colors.darkOrange }}
+    >
+      <Sparkles
+        className="w-4 h-4 animate-spin-slow"
+        style={{ color: colors.brightOrange }}
+      />
+      Strategic Connectivity
+    </div>
+
+    <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.9] text-[#041a14]">
+  In the Heart of{" "}
+  <span
+    className="italic font-light"
+    style={{ color: colors.darkOrange }}
+  >
+    Everything
+  </span>
+</h2>
+  </div>
+
+  {/* RIGHT SIDE */}
+  <div className="max-w-xl lg:ml-auto text-right lg:text-center mt-10 lg:mt-48">
+
+    <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8">
+      Subham Kishori Heights is strategically located in Dibrugarh, offering 
+      effortless access to premier education, healthcare, and transport hubs.
+    </p>
+
+    <button
+      onClick={onOpenPopup}
+      className="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 shadow-[0_20px_40px_rgba(216,67,21,0.2)] text-white"
+      style={{ backgroundColor: colors.darkOrange }}
+    >
+      Start Your Journey
+      <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+    </button>
+
+  </div>
+
+</div>
         {/* --- HEADER --- */}
-        <div className="relative mb-32">
+        {/* <div className="relative mb-32">
           <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] mb-8" style={{ color: colors.darkOrange }}>
             <Sparkles className="w-4 h-4 animate-spin-slow" style={{ color: colors.brightOrange }} />
             Strategic Connectivity
@@ -136,7 +185,7 @@ const Amenities = () => {
                   effortless access to premier education, healthcare, and transport hubs.
               </p>
           </div>
-        </div>
+        </div> */}
 
         {/* --- CONNECTIVITY GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
@@ -177,7 +226,7 @@ const Amenities = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style >{`
         .animate-spin-slow {
           animation: spin 12s linear infinite;
         }
@@ -193,7 +242,10 @@ const Amenities = () => {
           to { transform: rotate(0deg); }
         }
       `}</style>
+     
     </section>
+
+    
   );
 };
 

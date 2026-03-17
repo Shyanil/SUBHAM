@@ -68,10 +68,6 @@ export default function HeroSection() {
               <ChevronDown className="w-6 h-6 opacity-50" />
             </motion.div>
           </div>
-          
-          {/* <div className="absolute bottom-8 text-white/20 text-[10px] font-black uppercase tracking-[0.4em]">
-            A Unit of Lohia Group
-          </div> */}
         </motion.div>
 
         {/* --- RIGHT CARD --- */}
@@ -79,17 +75,17 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative w-full h-full min-h-[300px] sm:min-h-[350px]  rounded-[3rem] overflow-hidden group shadow-sm"
+          className="relative w-full h-full min-h-[300px] sm:min-h-[350px] rounded-[3rem] overflow-hidden group shadow-sm"
         >
-           <img 
-  src="/night.jpeg" 
-  alt="Subham Kishori Heights" 
-  className="absolute inset-0 w-full h-full object-cover   transition-transform duration-1000 group-hover:scale-105"
-/>
+          <img 
+            src="/night.jpeg" 
+            alt="Subham Kishori Heights" 
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
 
           <div className="absolute inset-0 bg-black/10" />
           
-          {/* Badge using the vibrant orange accent */}
+          {/* Location Badge (Remains Unchanged) */}
           <div className="absolute top-10 right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-widest shadow-sm flex items-center gap-2" style={{ color: colors.deepOrange }}>
             <div 
               className="w-1.5 h-1.5 rounded-full animate-pulse" 
@@ -97,21 +93,43 @@ export default function HeroSection() {
             />
             Dibrugarh, Assam
           </div>
-          {/* New Price Badge in Downwards Position */}
-          <div className="absolute bottom-4 right-4 md:right-10 
-bg-white/95 backdrop-blur-md 
-px-5 py-2.5 md:px-6 md:py-3 
-rounded-full 
-font-black text-[12px] md:text-[22px] lg:text-[26px] 
-uppercase tracking-widest
-shadow-sm flex items-center gap-2 border border-white/10" style={{ color: colors.deepOrange }}>
-{/* <div className="absolute bottom-2 right-10 bg-white/95 backdrop-blur-md px-6 py-3 rounded-full font-extrabold text-[18px] md:text-[22px] lg:text-[26px] shadow-xl flex items-center gap-2 border border-white/10" style={{ color: colors.deepOrange }}> */}
-        <div 
-              className="w-1.5 h-1.5 rounded-full animate-pulse" 
-              style={{ backgroundColor: colors.vibrantOrange }}
-            />
-            Starting at 90 Lac
-      </div>
+
+          {/* --- UPDATED: STARBURST PRICE BADGE --- */}
+          {/* Changes:
+            1. Reduced Mobile Padding (px-4 py-4 -> px-3 py-3) for smaller badge.
+            2. Added -rotate-12 for comic-style 'sticker' tilt.
+            3. Uses clip-path to create a clean, sharp 20-point starburst shape.
+            4. Removed 'backdrop-blur-md' to remove glass effect.
+            5. Adjusted text layout/sizes for better mobile fit.
+          */}
+          <div 
+            className="absolute bottom-4 right-4 md:right-10 
+              bg-white 
+              px-3 py-3 md:px-6 md:py-6 
+              font-black
+              shadow-lg flex items-center justify-center text-center
+              -rotate-12 transition-transform duration-300 hover:scale-105" 
+            style={{ 
+              color: colors.deepOrange,
+              // Creates a precise 20-point starburst shape
+              clipPath: "polygon(100% 50%, 95% 61%, 98% 74%, 87% 78%, 85% 91%, 73% 89%, 66% 99%, 54% 92%, 46% 99%, 34% 92%, 27% 99%, 15% 91%, 13% 78%, 2% 74%, 5% 61%, 0% 50%, 5% 39%, 2% 26%, 13% 22%, 15% 9%, 27% 11%, 34% 1%, 46% 8%, 54% 1%, 66% 8%, 73% 1%, 85% 9%, 87% 22%, 98% 26%, 95% 39%)",
+            }}
+          >
+            <div className="flex flex-col items-center leading-none tracking-tight">
+              {/* Mobile Only Pulse (optional, for compactness can remove) */}
+              <div 
+                className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full animate-pulse mb-0.5 md:mb-1" 
+                style={{ backgroundColor: colors.vibrantOrange }}
+              />
+              <span className="block text-[8px] md:text-[14px] lg:text-[16px] uppercase opacity-90">
+                Starting at
+              </span>
+              {/* Main Price Text: Reduced size slightly on mobile for better fit */}
+              <span className="block text-[11px] md:text-[22px] lg:text-[26px]">
+                90 Lac
+              </span>
+            </div>
+          </div>
         </motion.div>
 
       </div>
