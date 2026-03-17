@@ -48,7 +48,7 @@ export default function Gallery() {
             </div>
             {/* ✅ CHANGED: Responsive font size (text-5xl mobile vs text-100px desktop) */}
             <h2 className="font-serif text-5xl md:text-8xl lg:text-[100px] leading-[0.9] lg:leading-[0.85] text-[#041a14] mb-4 lg:mb-2">
-              The <span className="italic font-light" style={{ color: colors.darkOrange }}>Library.</span>
+              The <span className="italic font-light" style={{ color: colors.darkOrange }}>Library</span>
             </h2>
           </div>
           <p className="text-[#041a14]/60 max-w-sm text-base lg:text-lg font-medium border-l-4 pl-6 lg:pl-8 py-2" style={{ borderLeftColor: colors.brightOrange }}>

@@ -89,7 +89,7 @@ const ongoingProjects = [
                </span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tighter" style={{ color: colors.blackish }}>
-              Time-Bound Projects and Timeless <span className="italic font-light" style={{ color: colors.darkOrange }}>Relationships.</span>
+              Time-Bound Projects and Timeless <span className="italic font-light" style={{ color: colors.darkOrange }}>Relationships</span>
             </h2>
           </motion.div>
         </div>

@@ -27,7 +27,7 @@ export default function Location() {
           </p>
           <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-none text-white">
             Project <br />
-            <span className="italic font-light" style={{ color: colors.darkOrange }}>Location.</span>
+            <span className="italic font-light" style={{ color: colors.darkOrange }}>Location</span>
           </h2>
         </div>
 

@@ -88,7 +88,7 @@ export default function Walkthrough() {
           </button>
           
           <h2 className="font-serif text-5xl md:text-8xl text-white italic leading-none mb-6">
-            Witness the <br /> <span className="not-italic font-bold uppercase tracking-tighter" style={{ color: colors.brightOrange }}>Ascent.</span>
+            Witness the <br /> <span className="not-italic font-bold uppercase tracking-tighter" style={{ color: colors.brightOrange }}>Ascent</span>
           </h2>
           <p className="text-[10px] font-black uppercase tracking-[0.6em] text-white/50">
             Click to start the immersive walkthrough

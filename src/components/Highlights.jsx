@@ -58,7 +58,7 @@ export default function Specifications() {
             {/* ✅ CHANGED: Responsive text sizing to fit mobile screens */}
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[110px] leading-[0.9] lg:leading-[0.8] tracking-tighter text-[#041a14]">
               The <span className="italic font-light" style={{ color: colors.darkOrange }}>Standard</span> <br />
-              of Living.
+              of Living
             </h2>
           </div>
           <div className="lg:col-span-4 lg:pt-20">

@@ -128,7 +128,7 @@ const Amenities = () => {
           </div>
           <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.85] text-[#041a14] mb-12">
             In the Heart of <br />
-            <span className="italic font-light" style={{ color: colors.darkOrange }}>Everything.</span>
+            <span className="italic font-light" style={{ color: colors.darkOrange }}>Everything</span>
           </h2>
           <div className="max-w-xl border-l-4 pl-8" style={{ borderLeftColor: colors.brightOrange }}>
               <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed">
