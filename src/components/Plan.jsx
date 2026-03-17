@@ -62,6 +62,12 @@ function generateFloorPlan(seed) {
     </svg>`
   )}`;
 }
+const MASTER_PLAN = {
+  id:0,
+  name: "MASTER PLAN",
+  tag: "PROJECT OVERVIEW",
+  src: "/Master Plan.jpg",
+};
 const PLANS = [
   { id: 1, name: "BLOCK-A", tag: "UNIT-A", src: "/BLOCK-A.jpg" },
   // { id: 2, name: "BLOCK-A ", tag: "UNIT B", src: "/BLOCK-A UNIT B.jpg" },
@@ -294,7 +300,12 @@ function PlanCard({ plan, index, onClick }) {
 export default function PlanningSection() {
   const [active, setActive] = useState(null);
 
-  const activePlan = active ? PLANS.find((p) => p.id === active) : null;
+  const activePlan =
+  active === 0
+    ? MASTER_PLAN
+    : active
+    ? PLANS.find((p) => p.id === active)
+    : null;
   const prev = () => setActive((a) => (a === 1 ? PLANS.length : a - 1));
   const next = () => setActive((a) => (a === PLANS.length ? 1 : a + 1));
 
@@ -396,6 +407,44 @@ text-[#041a14] mb-12">
           ● {PLANS.length} layouts available ●
         </p>
       </div>
+      {/* --- MASTER PLAN (TOP BIG CARD) --- */}
+<div className="mx-auto mb-10 max-w-5xl">
+  <div
+    onClick={() => setActive(0)}
+    className="rounded-2xl overflow-hidden cursor-pointer"
+    style={{
+      background: "#fff",
+      border: "1.5px solid rgba(4,26,20,0.08)",
+    }}
+  >
+    {/* Image */}
+    <img
+  src={MASTER_PLAN.src}
+  alt="Master Plan"
+  className="w-full aspect-[16/9] md:aspect-[4/3] object-contain bg-[#f8f0e6] p-2"
+/>
+
+    {/* Footer */}
+    <div className="flex items-center justify-between px-6 py-4">
+      <span
+        className="text-lg font-medium"
+        style={{ color: colors.blackish }}
+      >
+        {MASTER_PLAN.name}
+      </span>
+
+      <span
+        className="text-sm font-medium px-4 py-1.5 rounded-full"
+        style={{
+          background: "rgba(244,180,0,0.12)",
+          color: "#a07800",
+        }}
+      >
+        {MASTER_PLAN.tag}
+      </span>
+    </div>
+  </div>
+</div>
 
       {/* Grid */}
       <div
