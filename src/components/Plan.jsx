@@ -121,7 +121,7 @@ function Modal({ plan, onClose, onPrev, onNext, total }) {
             className="flex items-center justify-between px-5 py-3 border-b"
             style={{ background: colors.warmCream, borderColor: "rgba(4,26,20,0.08)" }}
           >
-            <span className="text-sm font-medium shrink-0" style={{ color: colors.blackish }}>
+            <span className="text-sm font-medium " style={{ color: colors.blackish }}>
               {plan.name} ·{" "}
               <span className="text-xs " style={{ color: "#b08030" }}>
                 {plan.tag}
@@ -270,7 +270,7 @@ function PlanCard({ plan, index, onClick }) {
 
       {/* Footer */}
       <div className="flex items-center justify-between px-4 py-3 gap-2 md:flex-nowrap flex-wrap">
-        <span className="text-sm font-medium" style={{ color: colors.blackish }}>
+        <span className="text-sm font-medium whitespace-nowrap" style={{ color: colors.blackish }}>
           {plan.name}
         </span>
        <span
