@@ -71,7 +71,7 @@ export default function Specifications() {
         {/* --- AUTO-PLAYING SLIDER --- */}
         <div 
           // ✅ CHANGED: Mobile aspect ratio & border radius
-          className="relative w-full aspect-[4/3] md:aspect-video lg:aspect-[21/9] rounded-[2rem] lg:rounded-[4rem] overflow-hidden shadow-2xl mb-20 lg:mb-32 group"
+          className="relative w-full aspect-[16/9] md:aspect-video lg:aspect-[21/9] rounded-[2rem] lg:rounded-[4rem] overflow-hidden shadow-2xl mb-20 lg:mb-32 group"
           style={{ backgroundColor: colors.blackish }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -87,11 +87,11 @@ export default function Specifications() {
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
               
               {/* ✅ CHANGED: Padding reduced for mobile (p-8 vs p-20) */}
-              <div className="absolute inset-0 p-14 lg:p-20 flex flex-col justify-end pointer-events-none">
+              <div className="absolute inset-0 p-6 md:p-10 lg:p-20 flex flex-col justify-end pb-6 md:pb-10 lg:pb-20 pointer-events-none">
                 <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-2 lg:mb-4 block" style={{ color: colors.brightOrange }}>
                   {img.tag}
                 </span>
-                <h3 className="font-serif text-3xl md:text-4xl lg:text-6xl text-white italic">
+                <h3 className="font-serif text-lg sm:text-xl md:text-4xl lg:text-6xl text-white italic leading-tight max-w-[80%] md:max-w-none mb-6 md:mb-0">
                   {img.title}
                 </h3>
               </div>
@@ -112,7 +112,7 @@ export default function Specifications() {
 
           {/* MANUAL CONTROLS */}
           {/* ✅ CHANGED: Position adjusted for mobile (bottom-6 right-6) */}
-          <div className="absolute bottom-6 right-6 lg:bottom-12 lg:right-12 flex items-center gap-4 lg:gap-6 z-20">
+          <div className="absolute bottom-1 md:bottom-8 lg:bottom-12 right-4 md:right-8 lg:right-12 flex items-center gap-3 md:gap-4 lg:gap-6 z-20">
              <button 
                 onClick={() => setIsPaused(!isPaused)} 
                 className="w-10 h-10 lg:w-12 lg:h-12 rounded-full backdrop-blur-md bg-white/10 border border-white/20 text-white flex items-center justify-center transition-all hover:bg-white hover:text-black"

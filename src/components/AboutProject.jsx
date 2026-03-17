@@ -16,8 +16,46 @@ export default function ActiveLivingHero({ onOpenPopup }) {
 
   return (
     <div id="about" className="bg-[#fafaf8] font-sans text-[#041a14] overflow-x-hidden relative">
-      
-      {/* --- TICKER --- */}
+      <div
+  className="w-full py-4 overflow-hidden border-b"
+  style={{
+    backgroundColor: colors.blackish,
+    borderBottomColor: `${colors.brightOrange}20`,
+  }}
+>
+  <div className="flex w-max animate-marquee whitespace-nowrap">
+    
+    {/* FIRST COPY */}
+    <div className="flex items-center text-xs font-bold uppercase tracking-[0.3em] px-4"
+      style={{ color: colors.brightOrange }}
+    >
+      <span className="mx-8">To be active is to live</span>
+      <Activity className="w-4 h-4 opacity-50" />
+
+      <span className="mx-8">Activeness flows seven days a week</span>
+      <Activity className="w-4 h-4 opacity-50" />
+
+      <span className="mx-8">Step into a world designed to energize</span>
+      <Activity className="w-4 h-4 opacity-50" />
+    </div>
+
+    {/* SECOND COPY (important for seamless loop) */}
+    <div className="flex items-center text-xs font-bold uppercase tracking-[0.3em] px-4"
+      style={{ color: colors.brightOrange }}
+    >
+      <span className="mx-8">To be active is to live</span>
+      <Activity className="w-4 h-4 opacity-50" />
+
+      <span className="mx-8">Activeness flows seven days a week</span>
+      <Activity className="w-4 h-4 opacity-50" />
+
+      <span className="mx-8">Step into a world designed to energize</span>
+      <Activity className="w-4 h-4 opacity-50" />
+    </div>
+
+  </div>
+</div>
+      {/* --- TICKER ---
       <div className="w-full py-4 overflow-hidden border-b" style={{ backgroundColor: colors.blackish, borderBottomColor: `${colors.brightOrange}20` }}>
         <div className="flex whitespace-nowrap animate-marquee">
           {[1, 2, 3].map((i) => (
@@ -31,7 +69,7 @@ export default function ActiveLivingHero({ onOpenPopup }) {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <main className="relative max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col items-center">
         

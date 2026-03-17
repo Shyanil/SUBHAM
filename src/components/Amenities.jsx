@@ -75,6 +75,7 @@ const Amenities = () => {
   ];
 
   return (
+    
     <section id="amenities" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
       
       {/* --- NEW CUSTOM VECTOR ART: TOP RIGHT --- */}
@@ -97,9 +98,25 @@ const Amenities = () => {
       </div>
 
       {/* --- KEPT ASSET: profile_1.png BOTTOM LEFT --- */}
-      <div className="absolute -left-12 -bottom-12 w-[250px] md:w-[350px] pointer-events-none z-0 select-none rotate-6">
+      <div className="
+  absolute 
+  left-0 md:-left-12 
+  bottom-0 md:-bottom-12 
+  w-[120px] md:w-[350px] 
+  pointer-events-none 
+  z-10 
+  select-none 
+  rotate-6
+">
+  <img
+    src="/profile_1.png"
+    alt="Design Element"
+    className="w-full h-auto drop-shadow-xl"
+  />
+</div>
+      {/* <div className="absolute -left-12 bottom-0 md:-bottom-12 w-[200px] md:w-[350px] pointer-events-none z-0 select-none rotate-6">
         <img src="/profile_1.png" alt="Design Element" className="w-full h-auto drop-shadow-xl" />
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -130,7 +147,7 @@ const Amenities = () => {
               </span> */}
 
               <div className="relative bg-white/40 backdrop-blur-sm p-8 rounded-[3rem] border border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-2xl">
-                <div className="flex items-center justify-between mb-8 border-b pb-6" style={{ borderBottomColor: `${colors.blackish}10` }}>
+                <div className="flex items-center justify-between gap-3 mb-8 border-b pb-6" style={{ borderBottomColor: `${colors.blackish}10` }}>
                   <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 group-hover:rotate-[360deg] group-hover:scale-110" style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}>
                     {section.icon}
                   </div>

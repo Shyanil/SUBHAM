@@ -115,8 +115,11 @@ export default function Walkthrough() {
     type="video/mp4" 
   />
 </video>
-
-          <div className={`absolute bottom-10 left-10 flex gap-4 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}>
+<div className={`absolute bottom-10 left-1/2 -translate-x-1/2 
+flex gap-3 md:gap-4 flex-wrap justify-center w-[90%]
+transition-opacity duration-1000 
+${isActive ? "opacity-100" : "opacity-0"}`}>
+          {/* <div className={`absolute bottom-10 left-10 flex gap-4 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}> */}
             <button 
               onClick={togglePlay}
               className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
@@ -140,8 +143,9 @@ export default function Walkthrough() {
           </div>
         </div>
 
-        <div className={`relative h-full bg-[#fafaf8] transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] flex flex-col
-          ${isActive ? "w-0 lg:w-[22%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
+        <div className={`relative h-full bg-[#fafaf8] transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
+hidden lg:flex flex-col
+  ${isActive ? "lg:w-[22%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
           
           <div className="p-6 lg:p-8 flex flex-col h-full justify-between text-[#041a14]">
             <div>

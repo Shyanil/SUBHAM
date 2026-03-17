@@ -63,25 +63,25 @@ function generateFloorPlan(seed) {
   )}`;
 }
 const PLANS = [
-  { id: 1, name: "BLOCK-A", tag: "2BHK", src: "/BLOCK-A.jpg" },
-  { id: 2, name: "BLOCK-A ", tag: "UNIT B", src: "/BLOCK-A UNIT B.jpg" },
-  { id: 3, name: "BLOCK A", tag: "UNIT B TYPE 1", src: "/BLOCK A UNIT B TYPE 1.jpg" },
-  { id: 4, name: "BLOCK A  ", tag: "UNIT 1 TYPE 2", src: "/BLOCK A UNIT 1 TYPE 2.jpg" },
+  { id: 1, name: "BLOCK-A", tag: "UNIT-A", src: "/BLOCK-A.jpg" },
+  // { id: 2, name: "BLOCK-A ", tag: "UNIT B", src: "/BLOCK-A UNIT B.jpg" },
+  { id: 2, name: "BLOCK A", tag: "UNIT-B | TYPE 1", src: "/BLOCK A UNIT B TYPE 1.jpg" },
+  { id: 3, name: "BLOCK A  ", tag: "UNIT-B | TYPE 2", src: "/BLOCK A UNIT 1 TYPE 2.jpg" },
   
-  { id: 5, name: "BLOCK A ", tag: "UNIT B TYPE 3", src: "/BLOCK A TYPE 3.jpg" },
-  { id: 6, name: "BLOCK A ", tag: "UNIT B LOWER FLOOR", src: "/BLOCK A 13TH FLOOR.jpg" },
-  { id: 7, name: "BLOCK A ", tag: "UNIT B UPPER FLOOR", src: "/BLOCK A 14TH FLOOR.jpg" },
-  { id: 8, name: "BLOCK B ", tag: "UNIT C", src: "/BLOCK B UNIT C.jpg" },
-  { id: 9, name: "BLOCK B ", tag: "UNIT D TYPE 1", src: "/BLOCK B UNIT D.jpg" },
-  { id: 10, name: "BLOCK B ", tag: "UNIT D TYPE 2", src: "/BLOCK B UNIT 2 TYPE 2.jpg" },
+  { id: 4, name: "BLOCK A ", tag: "UNIT-B | TYPE 3", src: "/BLOCK A TYPE 3.jpg" },
+  { id: 5, name: "BLOCK A ", tag: "UNIT-B(DUPLEX) | LOWER FLOOR", src: "/BLOCK A 13TH FLOOR.jpg" },
+  { id: 6, name: "BLOCK A ", tag: "UNIT-B(DUPLEX) | UPPER FLOOR", src: "/BLOCK A 14TH FLOOR.jpg" },
+  { id: 7, name: "BLOCK B ", tag: "UNIT C", src: "/BLOCK B UNIT C.jpg" },
+  { id: 8, name: "BLOCK B ", tag: "UNIT-D | TYPE 1", src: "/BLOCK B UNIT D.jpg" },
+  { id: 9, name: "BLOCK B ", tag: "UNIT-D | TYPE 2", src: "/BLOCK B UNIT 2 TYPE 2.jpg" },
   
-  { id: 11, name: "BLOCK B", tag: "UNIT E", src: "/BLOCK B UNIT E.jpg" },
-  { id: 12, name: "BLOCK B ", tag: "UNIT F LOWER FLOOR", src: "/BLOCK B UNIT F.jpg" },
-  { id: 13, name: "BLOCK B ", tag: "UNIT F UPPER FLOOR", src: "/BLOCK B UNIT F UPPER FLOOR.jpg" },
-  { id: 14, name: "BLOCK B ", tag: "UNIT G LOWER FLOOR", src: "/BLOCK B UNIT G.jpg" },
-  { id: 15, name: "BLOCK B ", tag: "UNIT G UPPER FLOOR", src: "/BLOCK B UNIT G UPPER FLOOR.jpg" },
-  { id: 16, name: "BLOCK B", tag: "UNIT H LOWER FLOOR", src: "/BLOCK B UNIT H LOWER FLOOR.jpg" },
-  { id: 17, name: "BLOCK B", tag: "UNIT H UPPER FLOOR", src: "/BLOCK H UPPER FLOOR.jpg" },
+  { id: 10, name: "BLOCK B", tag: "UNIT E", src: "/BLOCK B UNIT E.jpg" },
+  { id: 11, name: "BLOCK B ", tag: "UNIT-F(DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT F.jpg" },
+  { id: 12, name: "BLOCK B ", tag: "UNIT-F(DUPLEX) | UPPER FLOOR", src: "/BLOCK B UNIT F UPPER FLOOR.jpg" },
+  { id: 13, name: "BLOCK B ", tag: "UNIT-G(DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT G.jpg" },
+  { id: 14, name: "BLOCK B ", tag: "UNIT-G(DUPLEX) | UPPER FLOOR", src: "/BLOCK B UNIT G UPPER FLOOR.jpg" },
+  { id: 15, name: "BLOCK B", tag: "UNIT-H(DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT H LOWER FLOOR.jpg" },
+  { id: 16, name: "BLOCK B", tag: "UNIT-H(DUPLEX) | UPPER FLOOR", src: "/BLOCK H UPPER FLOOR.jpg" },
 ];
 // const PLANS = Array.from({ length: 16 }, (_, i) => ({
 //   id: i + 1,
@@ -121,9 +121,9 @@ function Modal({ plan, onClose, onPrev, onNext, total }) {
             className="flex items-center justify-between px-5 py-3 border-b"
             style={{ background: colors.warmCream, borderColor: "rgba(4,26,20,0.08)" }}
           >
-            <span className="text-sm font-medium" style={{ color: colors.blackish }}>
+            <span className="text-sm font-medium shrink-0" style={{ color: colors.blackish }}>
               {plan.name} ·{" "}
-              <span className="text-xs" style={{ color: "#b08030" }}>
+              <span className="text-xs " style={{ color: "#b08030" }}>
                 {plan.tag}
               </span>
             </span>
@@ -269,19 +269,22 @@ function PlanCard({ plan, index, onClick }) {
       </div>
 
       {/* Footer */}
-      <div
-        className="flex items-center justify-between px-4 py-3"
-        style={{ borderTop: "1px solid rgba(4,26,20,0.06)" }}
-      >
+      <div className="flex items-center justify-between px-4 py-3 gap-2 md:flex-nowrap flex-wrap">
         <span className="text-sm font-medium" style={{ color: colors.blackish }}>
           {plan.name}
         </span>
-        <span
+       <span
+  className="text-xs font-medium px-3 py-1 rounded-full whitespace-normal md:whitespace-nowrap shrink-0"
+  style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
+>
+  {plan.tag}
+</span>
+        {/* <span
           className="text-xs font-medium px-3 py-1 rounded-full"
           style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
         >
           {plan.tag}
-        </span>
+        </span> */}
       </div>
     </motion.div>
   );
@@ -369,7 +372,7 @@ text-[#041a14] mb-12">
     className="text-lg md:text-xl font-medium leading-relaxed"
     style={{ color: colors.blackish }}
   >
-    Browse our curated collection of thoughtfully crafted floor plans —
+    Browse our curated collection of thoughtfully crafted unit plans —
     designed for modern living, comfort, and elegance.
   </p>
 </div>
