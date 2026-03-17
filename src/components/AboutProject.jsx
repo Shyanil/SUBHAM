@@ -108,15 +108,14 @@ export default function ActiveLivingHero({ onOpenPopup }) {
           </div>
 
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1] mb-6" style={{ color: colors.blackish }}>
-            Subham <br />
+            Introducing Subham <br />
             <span className="italic font-light" style={{ color: colors.deepOrange }}>Kishori</span> Heights
           </h1>
 
           <div className="max-w-2xl mb-12">
             <p className="text-lg md:text-xl font-medium leading-relaxed" style={{ color: colors.blackish }}>
-              An architectural icon standing tall as Dibrugarh’s first "Active Lifestyle" landmark. 
-              Designed specifically for the modern family, our spaces ensure that everyone 
-              stays physically vibrant and emotionally connected every single day.
+              An architectural icon standing tall as Dibrugarh’s first "Active Lifestyle" landmark. Designed specifically for the modern family, our spaces ensure that everyone stays physically vibrant and emotionally connected every single day.
+With only 65 exclusive residences, Subham Kishori Heights offers a rare blend of privacy, light-filled interiors, and a serene environment — the perfect place for families to live fully, connect deeply, and invest wisely in their future.
             </p>
           </div>
 
