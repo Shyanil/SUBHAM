@@ -71,11 +71,11 @@ const PLANS = [
   { id: 4, name: "BLOCK A ", tag: "UNIT-B | TYPE 3", src: "/BLOCK A TYPE 3.jpg" },
   { id: 5, name: "BLOCK A ", tag: "UNIT-B(DUPLEX) | LOWER FLOOR", src: "/BLOCK A 13TH FLOOR.jpg" },
   { id: 6, name: "BLOCK A ", tag: "UNIT-B(DUPLEX) | UPPER FLOOR", src: "/BLOCK A 14TH FLOOR.jpg" },
-  { id: 7, name: "BLOCK B ", tag: "UNIT C", src: "/BLOCK B UNIT C.jpg" },
+  { id: 7, name: "BLOCK B ", tag: "UNIT-C", src: "/BLOCK B UNIT C.jpg" },
   { id: 8, name: "BLOCK B ", tag: "UNIT-D | TYPE 1", src: "/BLOCK B UNIT D.jpg" },
   { id: 9, name: "BLOCK B ", tag: "UNIT-D | TYPE 2", src: "/BLOCK B UNIT 2 TYPE 2.jpg" },
   
-  { id: 10, name: "BLOCK B", tag: "UNIT E", src: "/BLOCK B UNIT E.jpg" },
+  { id: 10, name: "BLOCK B", tag: "UNIT-E", src: "/BLOCK B UNIT E.jpg" },
   { id: 11, name: "BLOCK B ", tag: "UNIT-F(DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT F.jpg" },
   { id: 12, name: "BLOCK B ", tag: "UNIT-F(DUPLEX) | UPPER FLOOR", src: "/BLOCK B UNIT F UPPER FLOOR.jpg" },
   { id: 13, name: "BLOCK B ", tag: "UNIT-G(DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT G.jpg" },
