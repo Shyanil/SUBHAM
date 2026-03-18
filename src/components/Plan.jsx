@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const colors = {
@@ -10,77 +10,23 @@ const colors = {
   warmCream: "#FFF4E6",
 };
 
-// ── Generate SVG floor plans (replace src with real image URLs if needed) ──
-function generateFloorPlan(seed) {
-  const variants = [
-    [
-      [20, 20, 200, 100, "Living", 1],
-      [20, 130, 95, 80, "Bed 1", 2],
-      [125, 130, 95, 80, "Bed 2", 2],
-      [20, 220, 95, 60, "Kitchen", 3],
-      [125, 220, 95, 60, "Bath", 4],
-    ],
-    [
-      [20, 20, 90, 80, "Master", 2],
-      [120, 20, 100, 80, "Living", 1],
-      [20, 110, 200, 60, "Kitchen+Dining", 3],
-      [20, 180, 90, 60, "Bath", 4],
-      [120, 180, 100, 60, "Study", 5],
-    ],
-    [
-      [20, 20, 200, 70, "Open Living", 1],
-      [20, 100, 60, 140, "Bath", 4],
-      [90, 100, 130, 70, "Bed 1", 2],
-      [90, 180, 130, 60, "Bed 2", 2],
-    ],
-    [
-      [20, 20, 100, 200, "Living", 1],
-      [130, 20, 90, 80, "Kitchen", 3],
-      [130, 110, 90, 60, "Bed", 2],
-      [130, 180, 90, 40, "Bath", 4],
-    ],
-  ];
-  const fills = ["", "#fff8f2", "#eef5ff", "#e8f9f0", "#f5f0ff", "#fffbe8"];
-  const dims = ["240x180cm", "320x240cm", "280x200cm", "360x260cm"];
-  const v = variants[seed % 4];
-  const paths = v
-    .map(
-      ([x, y, w, h, lbl, type]) =>
-        `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${fills[type] || "#f9f9f9"}" stroke="#c8a87a" stroke-width="1.5"/>` +
-        (lbl
-          ? `<text x="${x + w / 2}" y="${y + h / 2 + 4}" text-anchor="middle" fill="#8a6a40" font-size="9" font-family="sans-serif" font-weight="500">${lbl}</text>`
-          : "")
-    )
-    .join("\n");
-
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-    `<svg viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg">
-      <rect width="280" height="260" fill="#fdf6ed"/>
-      <rect x="10" y="10" width="260" height="240" rx="4" fill="none" stroke="#d4a96a" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
-      ${paths}
-      <text x="140" y="253" text-anchor="middle" fill="#b08030" font-size="8" font-family="sans-serif" opacity="0.7">Plan ${String(seed + 1).padStart(2, "0")} · ${dims[seed % 4]}</text>
-    </svg>`
-  )}`;
-}
 const MASTER_PLAN = {
-  id:0,
+  id: 0,
   name: "MASTER PLAN",
-  tag: "PROJECT OVERVIEW",
+  tag: "", // Removed tag content
   src: "/Master Plan.jpg",
 };
+
 const PLANS = [
   { id: 1, name: "BLOCK-A", tag: "UNIT-A", src: "/BLOCK-A.jpg" },
-  // { id: 2, name: "BLOCK-A ", tag: "UNIT B", src: "/BLOCK-A UNIT B.jpg" },
   { id: 2, name: "BLOCK A", tag: "UNIT-B | TYPE 1", src: "/BLOCK A UNIT B TYPE 1.jpg" },
-  { id: 3, name: "BLOCK A  ", tag: "UNIT-B | TYPE 2", src: "/BLOCK A UNIT 1 TYPE 2.jpg" },
-  
-  { id: 4, name: "BLOCK A ", tag: "UNIT-B | TYPE 3", src: "/BLOCK A TYPE 3.jpg" },
-  { id: 5, name: "BLOCK A ", tag: "UNIT-B (DUPLEX) | LOWER FLOOR", src: "/BLOCK A 13TH FLOOR.jpg" },
-  { id: 6, name: "BLOCK A ", tag: "UNIT-B (DUPLEX) | UPPER FLOOR", src: "/BLOCK A 14TH FLOOR.jpg" },
+  { id: 3, name: "BLOCK A ", tag: "UNIT-B | TYPE 2", src: "/BLOCK A UNIT 1 TYPE 2.jpg" },
+  { id: 4, name: "BLOCK A", tag: "UNIT-B | TYPE 3", src: "/BLOCK A TYPE 3.jpg" },
+  { id: 5, name: "BLOCK A", tag: "UNIT-B (DUPLEX) | LOWER FLOOR", src: "/BLOCK A 13TH FLOOR.jpg" },
+  { id: 6, name: "BLOCK A", tag: "UNIT-B (DUPLEX) | UPPER FLOOR", src: "/BLOCK A 14TH FLOOR.jpg" },
   { id: 7, name: "BLOCK B ", tag: "UNIT-C", src: "/BLOCK B UNIT C.jpg" },
   { id: 8, name: "BLOCK B ", tag: "UNIT-D | TYPE 1", src: "/BLOCK B UNIT D.jpg" },
   { id: 9, name: "BLOCK B ", tag: "UNIT-D | TYPE 2", src: "/BLOCK B UNIT 2 TYPE 2.jpg" },
-  
   { id: 10, name: "BLOCK B", tag: "UNIT-E", src: "/BLOCK B UNIT E.jpg" },
   { id: 11, name: "BLOCK B ", tag: "UNIT-F (DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT F.jpg" },
   { id: 12, name: "BLOCK B ", tag: "UNIT-F (DUPLEX) | UPPER FLOOR", src: "/BLOCK B UNIT F UPPER FLOOR.jpg" },
@@ -89,25 +35,13 @@ const PLANS = [
   { id: 15, name: "BLOCK B", tag: "UNIT-H (DUPLEX) | LOWER FLOOR", src: "/BLOCK B UNIT H LOWER FLOOR.jpg" },
   { id: 16, name: "BLOCK B", tag: "UNIT-H (DUPLEX) | UPPER FLOOR", src: "/BLOCK H UPPER FLOOR.jpg" },
 ];
-// const PLANS = Array.from({ length: 16 }, (_, i) => ({
-//   id: i + 1,
-//   name: `Layout Plan ${String(i + 1).padStart(2, "0")}`,
-//   tag: ["2BHK", "3BHK", "Villa", "Duplex", "Studio", "Penthouse", "4BHK", "Cottage"][i % 8],
-//   src: "/BLOCK-A.jpg", // 🔁 Replace with: src: "/images/plan-01.jpg"
-// }));
 
-// ── Modal ──────────────────────────────────────────────────────────────────
-function Modal({ plan, onClose, onPrev, onNext, total }) {
-  const [zoom, setZoom] = useState(1);
-
-  const zoomIn = () => setZoom((z) => Math.min(z + 0.25, 3));
-  const zoomOut = () => setZoom((z) => Math.max(z - 0.25, 0.5));
-  const resetZoom = () => setZoom(1);
-
+// ── Modal Component ──
+function Modal({ plan, onClose, onPrev, onNext }) {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center p-6"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
         style={{ background: "rgba(4,26,20,0.88)", backdropFilter: "blur(6px)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -115,81 +49,25 @@ function Modal({ plan, onClose, onPrev, onNext, total }) {
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         <motion.div
-          className="flex flex-col rounded-2xl overflow-hidden w-full max-w-2xl"
-          style={{ background: "#fff", maxHeight: "90vh", boxShadow: "0 40px 100px rgba(0,0,0,0.5)" }}
-          initial={{ opacity: 0, scale: 0.92, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.92, y: 20 }}
-          transition={{ type: "spring", stiffness: 320, damping: 28 }}
+          className="flex flex-col rounded-2xl overflow-hidden w-full max-w-3xl"
+          style={{ background: "#fff", maxHeight: "90vh" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
         >
-          {/* Header */}
-          <div
-            className="flex items-center justify-between px-5 py-3 border-b"
-            style={{ background: colors.warmCream, borderColor: "rgba(4,26,20,0.08)" }}
-          >
-            <span className="text-sm font-medium " style={{ color: colors.blackish }}>
-              {plan.name} ·{" "}
-              <span className="text-xs " style={{ color: "#b08030" }}>
-                {plan.tag}
-              </span>
-            </span>
-            <div className="flex items-center gap-2">
-              <CtrlBtn onClick={zoomOut}>−</CtrlBtn>
-              <button
-                onClick={resetZoom}
-                className="text-xs font-medium px-3 py-1 rounded-lg border transition-colors"
-                style={{ borderColor: "rgba(4,26,20,0.12)", color: "rgba(4,26,20,0.5)" }}
-              >
-                {Math.round(zoom * 100)}%
-              </button>
-              <CtrlBtn onClick={zoomIn}>+</CtrlBtn>
-              <div className="w-px h-5 mx-1" style={{ background: "rgba(4,26,20,0.1)" }} />
-              <button
-                onClick={onClose}
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-lg transition-colors"
-                style={{
-                  border: `1.5px solid rgba(216,67,21,0.3)`,
-                  background: "rgba(216,67,21,0.06)",
-                  color: colors.deepOrange,
-                }}
-              >
-                ✕
-              </button>
+          <div className="flex items-center justify-between px-5 py-3 border-b gap-4" style={{ background: colors.warmCream }}>
+            <div className="flex items-center min-w-0 flex-1 gap-2">
+              <span className="text-sm font-bold text-[#041a14] whitespace-nowrap flex-shrink-0">{plan.name}</span>
+              {plan.tag && <span className="text-sm font-normal opacity-50 whitespace-nowrap overflow-hidden text-ellipsis">| {plan.tag}</span>}
             </div>
+            <button onClick={onClose} className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center bg-black/5 text-xl hover:bg-black/10 transition-colors">✕</button>
           </div>
-
-          {/* Image */}
-          <div
-            className="flex-1 overflow-auto flex items-center justify-center p-6"
-            style={{ background: "#f5ece0", minHeight: 360 }}
-          >
-            <img
-              src={plan.src}
-              alt={plan.name}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "55vh",
-                objectFit: "contain",
-                borderRadius: 8,
-                transform: `scale(${zoom})`,
-                transformOrigin: "center",
-                transition: "transform 0.25s ease",
-                cursor: zoom > 1 ? "zoom-out" : "zoom-in",
-              }}
-              onClick={() => (zoom < 2 ? zoomIn() : resetZoom())}
-            />
+          <div className="flex-1 overflow-auto flex items-center justify-center p-4 bg-[#f5ece0]">
+            <img src={plan.src} alt={plan.name} className="max-w-full max-h-[60vh] object-contain" />
           </div>
-
-          {/* Footer Nav */}
-          <div
-            className="flex items-center justify-center gap-3 px-5 py-3 border-t"
-            style={{ background: colors.warmCream, borderColor: "rgba(4,26,20,0.08)" }}
-          >
-            <NavBtn onClick={onPrev}>← Prev</NavBtn>
-            <span className="text-xs" style={{ color: "rgba(4,26,20,0.4)", padding: "0 12px" }}>
-              {plan.id} / {total}
-            </span>
-            <NavBtn onClick={onNext}>Next →</NavBtn>
+          <div className="flex items-center justify-center gap-4 py-4 border-t" style={{ background: colors.warmCream }}>
+            <button onClick={onPrev} className="px-6 py-2 border rounded-full text-xs font-bold hover:bg-white transition-all">← Prev</button>
+            <button onClick={onNext} className="px-6 py-2 border rounded-full text-xs font-bold hover:bg-white transition-all">Next →</button>
           </div>
         </motion.div>
       </motion.div>
@@ -197,320 +75,134 @@ function Modal({ plan, onClose, onPrev, onNext, total }) {
   );
 }
 
-function CtrlBtn({ onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className="w-9 h-9 rounded-lg flex items-center justify-center text-lg transition-colors"
-      style={{ border: "1.5px solid rgba(4,26,20,0.12)", background: "#fff", color: colors.blackish }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function NavBtn({ onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className="px-4 py-1.5 rounded-lg text-xs font-medium tracking-wide transition-colors"
-      style={{ border: "1.5px solid rgba(4,26,20,0.12)", background: "#fff", color: colors.blackish }}
-    >
-      {children}
-    </button>
-  );
-}
-
-// ── Plan Card ──────────────────────────────────────────────────────────────
+// ── Plan Card Component ──
 function PlanCard({ plan, index, onClick }) {
   return (
     <motion.div
       onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onClick()}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.22, 0.68, 0, 1.2] }}
-      whileHover={{ scale: 1.035, y: -4 }}
-      className="group relative rounded-xl overflow-hidden cursor-pointer"
-      style={{
-        background: "#fff",
-        border: "1.5px solid rgba(4,26,20,0.07)",
-        transition: "border-color 0.25s, box-shadow 0.25s",
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+      whileHover={{ y: -5 }}
+      className="bg-white rounded-xl overflow-hidden border border-black/5 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full"
     >
-      {/* Image */}
-      <div className="relative">
-        <img
-          src={plan.src}
-          alt={plan.name}
-          className="w-full block"
-          style={{ aspectRatio: "4/3", objectFit: "contain", background: "#f8f0e6", padding: 8 }}
-          loading="lazy"
-        />
-
-        {/* Hover Overlay */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center rounded-xl"
-          style={{ background: "rgba(4,26,20,0.45)" }}
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-        >
-          <motion.div
-            className="w-12 h-12 rounded-full flex items-center justify-center"
-            style={{ background: colors.vibrantOrange, boxShadow: "0 4px 20px rgba(243,111,33,0.5)" }}
-            initial={{ scale: 0.6, rotate: -15 }}
-            whileHover={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 18 }}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
-            </svg>
-          </motion.div>
-        </motion.div>
+      <div className="bg-[#f8f0e6] p-4 aspect-[4/3] flex items-center justify-center group">
+        <img src={plan.src} alt={plan.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
       </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between px-4 py-3 gap-2">
-  <span
-    className="text-sm font-medium whitespace-nowrap"
-    style={{ color: colors.blackish }}
-  >
-    {plan.name}
-  </span>
-
-  <span
-    className="text-xs font-medium px-2 py-1 rounded-full shrink-0 whitespace-nowrap"
-    style={{
-      background: "rgba(244,180,0,0.12)",
-      color: "#a07800",
-    }}
-  >
-    {plan.tag}
-  </span>
-</div>
-      {/* <div className="flex items-center justify-between px-4 py-3 gap-2">
-  <span
-    className="text-sm font-medium"
-    style={{ color: colors.blackish }}
-  >
-    {plan.name}
-  </span>
-
-  <span
-    className="text-xs font-medium px-3 py-1 rounded-full w-fit"
-    style={{
-      background: "rgba(244,180,0,0.12)",
-      color: "#a07800",
-    }}
-  >
-    {plan.tag}
-  </span>
-</div> */}
-      {/* <div className="flex items-center justify-between px-4 py-3 gap-2  flex-wrap">
-        <span className="text-sm font-medium whitespace-nowrap" style={{ color: colors.blackish }}>
-          {plan.name}
-        </span>
-       <span
-  className="text-xs font-medium px-3 py-1 rounded-full whitespace-normal md:whitespace-nowrap shrink-0"
-  style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
->
-  {plan.tag}
-</span> */}
-        {/* <span
-          className="text-xs font-medium px-3 py-1 rounded-full"
-          style={{ background: "rgba(244,180,0,0.12)", color: "#a07800" }}
-        >
-          {plan.tag}
-        </span> */}
-      {/* </div> */}
+      
+      <div className="p-4 flex items-center justify-between gap-1 overflow-hidden">
+        <h4 className="text-sm font-bold text-[#041a14] whitespace-nowrap flex-shrink-0">
+          {plan.name.trim()}
+        </h4>
+        {/* Removed bg-orange-100 and rounded-full. Added conditional rendering to hide box if tag is empty */}
+        {plan.tag && (
+          <span className="text-[11px] md:text-[9px] leading-tight font-bold px-2 py-1 text-orange-700 whitespace-nowrap overflow-hidden text-ellipsis min-w-0 flex-1 text-right">
+            {plan.tag}
+          </span>
+        )}
+      </div>
     </motion.div>
   );
 }
 
-// ── Main Section ───────────────────────────────────────────────────────────
+// ── Main Section ──
 export default function PlanningSection() {
-  const [active, setActive] = useState(null);
+  const [activeTab, setActiveTab] = useState("Master Plan");
+  const [activeSubTab, setActiveSubTab] = useState("All");
+  const [activeId, setActiveId] = useState(null);
 
-  const activePlan =
-  active === 0
-    ? MASTER_PLAN
-    : active
-    ? PLANS.find((p) => p.id === active)
-    : null;
-  const prev = () => setActive((a) => (a === 1 ? PLANS.length : a - 1));
-  const next = () => setActive((a) => (a === PLANS.length ? 1 : a + 1));
+  const filteredPlans = useMemo(() => {
+    if (activeTab === "Master Plan") return [MASTER_PLAN];
+    const blockKeyword = activeTab.toUpperCase(); 
+    let list = PLANS.filter(p => 
+      p.name.toUpperCase().replace(/-/g, " ").includes(blockKeyword)
+    );
+    if (activeSubTab !== "All") {
+      list = list.filter(p => p.tag.toUpperCase().includes(activeSubTab.toUpperCase()));
+    }
+    return list;
+  }, [activeTab, activeSubTab]);
+
+  const subTabs = useMemo(() => {
+    if (activeTab === "Master Plan") return [];
+    const blockKeyword = activeTab.toUpperCase();
+    const currentBlockPlans = PLANS.filter(p => p.name.toUpperCase().includes(blockKeyword));
+    
+    const types = new Set(["All"]);
+    currentBlockPlans.forEach(p => {
+      if (p.tag.includes("|")) types.add(p.tag.split("|")[0].trim());
+      else if (p.tag.includes("DUPLEX")) types.add("Duplex");
+      else types.add(p.tag.split(" ")[0]);
+    });
+    return Array.from(types);
+  }, [activeTab]);
+
+  const activePlan = activeId === 0 ? MASTER_PLAN : PLANS.find(p => p.id === activeId);
 
   return (
-    <section
-    id="plan"
-     style={{ background: colors.warmCream, padding: "80px 16px 100px" }}>
-      {/* Section Header */}
-      <div className="text-center mb-16">
-        {/* <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-block text-xs font-medium tracking-widest uppercase px-4 py-1.5 rounded-full mb-4"
-          style={{
-            color: colors.vibrantOrange,
-            background: "rgba(243,111,33,0.08)",
-            border: "1px solid rgba(243,111,33,0.25)",
-            letterSpacing: "0.2em",
-          }}
-        >
-          Floor Plans &amp; Layouts
-        </motion.span> */}
-        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>
-            Floor Plans &amp; Layouts
-          </p>
+    <section id="plan" style={{ background: colors.warmCream, padding: "80px 16px" }}>
+      <div className="text-center mb-12">
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>Layouts & Architecture</p>
+        <h2 className="font-serif text-5xl md:text-7xl text-[#041a14] mb-12">Explore Our <br /><span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span></h2>
 
-        {/* <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.08 }}
-          className="mx-auto mb-5"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(32px, 5vw, 54px)",
-            fontWeight: 700,
-            color: colors.blackish,
-            lineHeight: 1.12,
-            maxWidth: 640,
-          }}
-        >
-          Explore Our{" "}
-          <span style={{ color: colors.vibrantOrange }}>Planning Designs</span>
-        </motion.h2> */}
-        <h2 className="font-serif 
-text-5xl md:text-8xl lg:text-[100px] 
-leading-[1.05] md:leading-[0.9] lg:leading-[0.85] 
-text-[#041a14] mb-12">
-  Explore Our <br />
-  <span className="italic font-light" style={{ color: colors.darkOrange }}>
-    Planning Designs
-  </span>
-</h2>
+        <div className="grid grid-cols-3 gap-2 mb-8 md:flex md:justify-center md:gap-3">
+          {["Master Plan", "Block A", "Block B"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => { setActiveTab(tab); setActiveSubTab("All"); }}
+              className={`w-full text-center px-2 py-2.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all border-2 ${
+  activeTab === tab
+    ? "bg-[#041a14] text-white border-[#041a14]"
+    : "bg-transparent text-[#041a14]/50 border-[#041a14]/10 hover:border-[#041a14]/30"
+}`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-        {/* <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.14 }}
-          className="mx-auto"
-          style={{
-            fontSize: 15,
-            color: "rgba(4,26,20,0.55)",
-            maxWidth: 480,
-            lineHeight: 1.7,
-            fontWeight: 300,
-          }}
-        >
-          Browse our curated collection of thoughtfully crafted floor plans —
-          designed for modern living, comfort, and elegance.
-        </motion.p> */}
-        <div className="max-w-2xl mx-auto mb-12 text-center">
-  <p 
-    className="text-lg md:text-xl font-medium leading-relaxed"
-    style={{ color: colors.blackish }}
-  >
-    Browse our curated collection of thoughtfully crafted unit plans —
-    designed for modern living, comfort, and elegance.
-  </p>
-</div>
-        
-
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mx-auto mt-6 rounded-full"
-          style={{
-            width: 60,
-            height: 3,
-            background: `linear-gradient(90deg, ${colors.vibrantOrange}, ${colors.goldenYellow})`,
-            transformOrigin: "left",
-          }}
-        />
-
-        <p className="mt-4 text-xs" style={{ color: "rgba(4,26,20,0.4)" }}>
-          ● {PLANS.length} layouts available ●
-        </p>
+        <AnimatePresence mode="wait">
+          {subTabs.length > 1 && (
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10 px-4">
+              {subTabs.map(sub => (
+                <button 
+                  key={sub} 
+                  onClick={() => setActiveSubTab(sub)} 
+                  className={`text-xs uppercase tracking-[0.2em] font-bold pb-1 border-b-2 transition-all ${activeSubTab === sub ? "border-orange-500 text-orange-600" : "border-transparent text-black/30 hover:text-black/60"}`}
+                >
+                  {sub}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      {/* --- MASTER PLAN (TOP BIG CARD) --- */}
-<div className="mx-auto mb-10 max-w-5xl">
-  <div
-    onClick={() => setActive(0)}
-    className="rounded-2xl overflow-hidden cursor-pointer"
-    style={{
-      background: "#fff",
-      border: "1.5px solid rgba(4,26,20,0.08)",
-    }}
-  >
-    {/* Image */}
-    <img
-  src={MASTER_PLAN.src}
-  alt="Master Plan"
-  className="w-full h-[220px] md:h-[320px] object-contain bg-[#f8f0e6]"
-/>
 
-    {/* Footer */}
-    <div className="flex items-center justify-between px-6 py-4">
-      <span
-        className="text-lg font-medium"
-        style={{ color: colors.blackish }}
-      >
-        {MASTER_PLAN.name}
-      </span>
-
-      <span
-        className="text-xs font-medium px-3 py-1 rounded-full shrink-0"
-        style={{
-          background: "rgba(244,180,0,0.12)",
-          color: "#a07800",
-        }}
-      >
-        {MASTER_PLAN.tag}
-      </span>
-    </div>
-  </div>
-</div>
-
-      {/* Grid */}
-      <div className="max-w-[1280px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-        {PLANS.map((plan, i) => (
-          <PlanCard key={plan.id} plan={plan} index={i} onClick={() => setActive(plan.id)} />
+      <div className={`max-w-[1200px] mx-auto ${filteredPlans.length === 1 ? 'flex justify-center' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'}`}>
+        {filteredPlans.map((plan, i) => (
+          <div key={plan.id} className={filteredPlans.length === 1 ? 'max-w-md w-full' : ''}>
+            <PlanCard plan={plan} index={i} onClick={() => setActiveId(plan.id)} />
+          </div>
         ))}
       </div>
 
-      {/* Modal */}
-      {activePlan && (
+      {activeId !== null && activePlan && (
         <Modal
           plan={activePlan}
-          onClose={() => setActive(null)}
-          onPrev={prev}
-          onNext={next}
-          total={PLANS.length}
+          onClose={() => setActiveId(null)}
+          onPrev={() => {
+            const idx = filteredPlans.findIndex(p => p.id === activeId);
+            setActiveId(filteredPlans[idx === 0 ? filteredPlans.length - 1 : idx - 1].id);
+          }}
+          onNext={() => {
+            const idx = filteredPlans.findIndex(p => p.id === activeId);
+            setActiveId(filteredPlans[(idx + 1) % filteredPlans.length].id);
+          }}
         />
       )}
 
-      {/* Responsive styles */}
       <style>{`
         .font-serif { font-family: 'Playfair Display', serif; }
-        @media (max-width: 1024px) {
-          section > div:last-of-type { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 600px) {
-          section > div:last-of-type { grid-template-columns: 1fr !important; }
-          section { padding: 48px 16px 64px !important; }
-        }
       `}</style>
     </section>
   );

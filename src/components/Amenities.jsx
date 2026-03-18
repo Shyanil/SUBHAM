@@ -151,11 +151,18 @@ const Amenities = ({ onOpenPopup }) => {
 
   {/* RIGHT SIDE */}
   <div className="max-w-xl lg:ml-auto text-right lg:text-center mt-10 lg:mt-48">
-
-    <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8">
+<p 
+  className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8 text-justify [text-justify:inter-word] [hyphens:auto] lg:[text-align-last:center] [text-align-last:right]"
+  style={{ color: colors.blackish }}
+  lang="en"
+>
+  Subham Kishori Heights is strategically located in Dibrugarh, offering 
+  effortless access to premier education, healthcare, and transport hubs.
+</p>
+    {/* <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8">
       Subham Kishori Heights is strategically located in Dibrugarh, offering 
       effortless access to premier education, healthcare, and transport hubs.
-    </p>
+    </p> */}
 
     <button
       onClick={onOpenPopup}

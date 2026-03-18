@@ -21,7 +21,7 @@ export default function SubhamHeader({ onOpenPopup }) {
   const mainNav = [
     { name: "Home", id: "hero" },
     { name: "About Project", id: "about" },
-    { name: "Amenities", id: "amenities" },
+    { name: "Amenities", id: "highlights" },
     { name: "Plan", id: "plan" },
     { name: "Location", id: "location" },
     { name: "Gallery", id: "gallery" }

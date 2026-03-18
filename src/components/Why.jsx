@@ -44,7 +44,7 @@ const ActiveLivingShowcase = () => {
   ];
 
   return (
-    <section id="highlights" className="w-full bg-[#fafaf8] pt-0 pb-10 px-4 md:px-12 lg:px-24 font-sans text-[#041a14]">
+    <section id="why" className="w-full bg-[#fafaf8] pt-0 pb-10 px-4 md:px-12 lg:px-24 font-sans text-[#041a14]">
       
       {/* --- MULTI-GENERATIONAL FOCUS --- */}
       {/* Increased mb-12 to mb-24 to push the image card lower */}
