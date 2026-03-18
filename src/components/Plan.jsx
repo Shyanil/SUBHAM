@@ -150,7 +150,7 @@ export default function PlanningSection() {
             <button
               key={tab}
               onClick={() => { setActiveTab(tab); setActiveSubTab("All"); }}
-              className={`w-full text-center px-2 py-2.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all border-2 ${
+              className={`text-center px-2 py-2.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all border-2 md:px-8 ${
   activeTab === tab
     ? "bg-[#041a14] text-white border-[#041a14]"
     : "bg-transparent text-[#041a14]/50 border-[#041a14]/10 hover:border-[#041a14]/30"
