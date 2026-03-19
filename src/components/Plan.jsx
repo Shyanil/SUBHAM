@@ -121,16 +121,21 @@ export default function PlanningSection() {
   list = list.filter(p => {
     const tag = p.tag.toUpperCase();
     const subTab = activeSubTab.toUpperCase();
-
     const isDuplex = tag.includes("DUPLEX");
 
-    // ✅ Agar DUPLEX tab select hai → sirf duplex dikhao
-    if (subTab.includes("DUPLEX")) {
-      return isDuplex && tag.includes(subTab.split(" ")[0]); 
+    // ✅ UNIT-B → only non-duplex
+    if (subTab === "UNIT-B") {
+      return tag.startsWith("UNIT-B") && !isDuplex;
     }
 
-    // ✅ Normal UNIT-B → duplex hata do
-    return tag.includes(subTab) && !isDuplex;
+    // ✅ DUPLEX tabs (UNIT-F/G/H)
+    if (subTab.includes("DUPLEX")) {
+      const unit = subTab.split(" ")[0]; // UNIT-F, UNIT-G, UNIT-H
+      return tag.startsWith(unit) && isDuplex;
+    }
+
+    // ✅ Normal tabs (UNIT-C, D, E etc.)
+    return tag.startsWith(subTab);
   });
 }
     return list;
