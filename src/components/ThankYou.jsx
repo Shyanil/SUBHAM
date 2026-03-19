@@ -256,14 +256,14 @@ onMouseLeave={(e) => { e.target.style.backgroundColor = "#ffffff"; e.target.styl
             <span>Trust · Innovation · Relationships</span>
           </div>
 
-          <button 
+          {/* <button 
             onClick={scrollToTop}
             className="flex items-center gap-4 px-10 py-5 rounded-full text-white shadow-2xl transition-all duration-300 group hover:scale-105"
             style={{ backgroundColor: colors.blackish }}
           >
             <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: colors.brightOrange }}>Back to Top</span>
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-          </button>
+          </button> */}
         </div>
         
       </div>

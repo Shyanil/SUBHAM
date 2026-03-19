@@ -117,9 +117,22 @@ export default function PlanningSection() {
     let list = PLANS.filter(p => 
       p.name.toUpperCase().replace(/-/g, " ").includes(blockKeyword)
     );
-    if (activeSubTab !== "All") {
-      list = list.filter(p => p.tag.toUpperCase().includes(activeSubTab.toUpperCase()));
+   if (activeSubTab !== "All") {
+  list = list.filter(p => {
+    const tag = p.tag.toUpperCase();
+    const subTab = activeSubTab.toUpperCase();
+
+    const isDuplex = tag.includes("DUPLEX");
+
+    // ✅ Agar DUPLEX tab select hai → sirf duplex dikhao
+    if (subTab.includes("DUPLEX")) {
+      return isDuplex && tag.includes(subTab.split(" ")[0]); 
     }
+
+    // ✅ Normal UNIT-B → duplex hata do
+    return tag.includes(subTab) && !isDuplex;
+  });
+}
     return list;
   }, [activeTab, activeSubTab]);
 

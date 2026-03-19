@@ -25,7 +25,7 @@ export default function Gallery() {
     { title: "Community Hall", tag: "Social Hub", src: "https://subhamgroup.com/img/subham-kishori-glry6.jpg" },
     { title: "Gymnasium", tag: "Health & Fitness", src: "/subham-kishori-glry7.jpg" },
     { title: "Indoor Games Room", tag: "Indoor", src: "https://subhamgroup.com/img/subham-kishori-glry8.jpg" },
-    { title: "Reception Area", tag: "Grand Entrance", src: "/subham-kishori-glry9.jpg" }
+    { title: "Reception Area", tag: "Grand Entrance", src: "/subham-kishori-glry9 (1).jpg" }
     
     
   ];
