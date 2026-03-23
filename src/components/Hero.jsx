@@ -161,16 +161,25 @@ export default function HeroSection() {
   const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
+    // Check if it's a mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // If mobile, don't run any popup logic
     if (isMobile) return;
+
+    // Logic for Desktop (Exit Intent)
     const handleMouseLeave = (e) => {
-      if (e.clientY <= 0 && !hasShown) {
+      // Trigger ONLY when mouse moves above the top edge (clientY <= 5)
+      if (e.clientY <= 5 && !hasShown) {
         setIsPopupOpen(true);
         setHasShown(true);
       }
     };
+
     document.addEventListener("mouseleave", handleMouseLeave);
-    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, [hasShown]);
 
   const scrollToAbout = () => {
@@ -222,11 +231,11 @@ export default function HeroSection() {
             <img src="/night.jpeg" alt="Subham Kishori Heights" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
             <div className="absolute inset-0 bg-black/10" />
             
-            {/* UPDATED PREMIUM BADGE - Adjusted mobile positioning */}
+            {/* UPDATED PREMIUM BADGE - Adjusted mobile positioning (bottom-2) */}
             <motion.div 
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-4 right-4 md:bottom-10 md:right-10 
+              className="absolute bottom-2 right-4 md:bottom-10 md:right-10 
                 backdrop-blur-xl border border-white/20
                 flex flex-col items-center justify-center text-center
                 -rotate-12 transition-all duration-300 hover:scale-110 hover:rotate-0 z-20 overflow-hidden" 
