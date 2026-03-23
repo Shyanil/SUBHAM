@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { 
   Send, X, Phone, User, Sparkles, Lock, 
-  CheckCircle2, ChevronDown, Clock, Mail 
+  CheckCircle2, ChevronDown, Clock, Mail, Briefcase, MapPin 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -19,14 +19,15 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const lastScrollY = useRef(0);
 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "", // Added Email to state
+    email: "",
+    profession: "", 
+    pincode: "",    
     interest: "3 BHK",
-    callTime: "Morning", 
+    callTime: "9 AM to 12 PM", 
     utm_source: "direct",
     utm_medium: "",
     utm_campaign: "",
@@ -35,23 +36,24 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
   });
 
   useEffect(() => {
-    // Timer to auto-show after 2 seconds
-    const timer = setTimeout(() => {
-      if (!submitted) setIsVisible(true);
-    }, 2000);
+    const section = document.getElementById("why-section");
+    if (!section) return;
 
-    // Scroll Logic
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY < lastScrollY.current && currentScrollY > 100) {
+      const scrollY = window.scrollY;
+      const sectionTop = section.offsetTop;
+
+      // Show if we have reached the section, stay visible for everything below it
+      if (scrollY >= sectionTop - 200) {
         setIsVisible(true);
+      } else {
+        setIsVisible(false);
       }
-      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check position on mount
 
-    // Capture UTMs
     const params = new URLSearchParams(window.location.search);
     setFormData(prev => ({
       ...prev,
@@ -62,25 +64,19 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
       utm_content: params.get("utm_content") || ""
     }));
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [submitted]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // ✅ UPDATED: Exact Webhook Pattern from Contact.jsx
   const sendToWebhook = async (data) => {
     try {
-      // 1. Prepare data (using URLSearchParams to avoid CORS/404 issues)
       const payload = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         payload.append(key, value);
       });
 
-      // 2. Send to Webhook
       await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMTA0MzA1MjZkNTUzMjUxMzMi_pc", {
         method: "POST",
-        mode: "no-cors", // Bypasses preflight checks
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -124,13 +120,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
     if (!otp) return alert("Enter OTP");
     setLoading(true);
     try {
-      // 1. Verify OTP
       await confirmationResult.confirm(otp);
-      
-      // 2. Send to Webhook (Exact Pattern)
       await sendToWebhook(formData);
-      
-      // 3. Success & Redirect
       setSubmitted(true);
       setTimeout(() => navigate("/Info/Thankyou"), 1500);
     } catch (error) {
@@ -155,7 +146,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-6 left-0 w-full z-[80] hidden lg:flex justify-center pointer-events-none"
           >
-            {/* Increased max-width to fit Email field */}
             <div className="pointer-events-auto bg-[#041a14]/95 backdrop-blur-md text-white p-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-2 max-w-6xl w-full mx-6 transition-all duration-500 hover:scale-[1.01]">
               
               <div className="flex items-center gap-3 pl-4 pr-6 border-r border-white/10 shrink-0">
@@ -168,9 +158,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                  </div>
               </div>
 
-              <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2">
-                
-                {/* Name */}
+              <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2 justify-between">
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-32 focus-within:bg-white/10 transition-colors shrink-0">
                    <User className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
@@ -180,7 +168,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                    />
                 </div>
 
-                {/* Phone & OTP Trigger */}
                 <div className="h-10 pl-4 pr-1 rounded-full bg-white/5 border border-white/10 flex items-center w-40 focus-within:bg-white/10 transition-colors relative shrink-0">
                    <Phone className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
@@ -199,7 +186,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                    )}
                 </div>
 
-                {/* ✅ NEW: Email Field (Desktop) */}
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-40 focus-within:bg-white/10 transition-colors shrink-0">
                    <Mail className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
@@ -209,7 +195,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                    />
                 </div>
 
-                {/* Interest */}
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-24 cursor-pointer hover:bg-white/10 shrink-0">
                    <select 
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
@@ -222,7 +207,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                    <ChevronDown className="w-3 h-3 text-gray-400 ml-1" />
                 </div>
 
-                {/* Call Time */}
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-28 cursor-pointer hover:bg-white/10 shrink-0">
                    <select 
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
@@ -256,7 +240,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
 
                 <button 
                   type="submit" disabled={!isOtpSent || loading}
-                  className="h-10 px-6 ml-auto rounded-full bg-[#F36F21] hover:bg-[#D84315] text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_14px_rgba(243,111,33,0.4)] shrink-0"
+                 className="h-10 px-6 rounded-full bg-[#F36F21] hover:bg-[#D84315] text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all disabled:bg-gray-300 disabled:text-black disabled:opacity-100 disabled:cursor-not-allowed shadow-[0_4px_14px_rgba(243,111,33,0.4)] shrink-0"
                 >
                   {loading ? "..." : <>Confirm <Send className="w-3 h-3" /></>}
                 </button>
@@ -270,73 +254,62 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
         )}
       </AnimatePresence>
 
-      {/* --- MOBILE: BOTTOM SHEET MODAL --- */}
+      {/* --- MOBILE: BOTTOM SHEET --- */}
       <AnimatePresence>
         {isOpen && (
           <div className="lg:hidden fixed inset-0 z-[100] flex items-end justify-center">
-            <motion.div 
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsOpen(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             
             <motion.div 
               initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full bg-white rounded-t-[2.5rem] overflow-hidden"
+              className="relative w-full bg-white rounded-t-[2.5rem] overflow-hidden max-h-[90vh] overflow-y-auto no-scrollbar"
             >
               <div className="bg-[#041a14] p-6 pb-8 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#F36F21] blur-[60px] opacity-20" />
-                <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5 p-2 bg-white/10 rounded-full">
-                  <X className="w-5 h-5" />
-                </button>
-                <p className="text-[#F36F21] text-[10px] font-black uppercase tracking-widest mb-1 flex items-center gap-2">
-                   <Sparkles className="w-3 h-3" /> Priority Access
-                </p>
+                <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5 p-2 bg-white/10 rounded-full"><X className="w-5 h-5" /></button>
+                <p className="text-[#F36F21] text-[10px] font-black uppercase tracking-widest mb-1 flex items-center gap-2"><Sparkles className="w-3 h-3" /> Priority Access</p>
                 <h3 className="font-serif text-2xl">Request Callback</h3>
               </div>
 
-              <div className="p-6 -mt-4 bg-white rounded-t-[2rem] relative z-10 space-y-4">
+              <div className="p-6 -mt-4 bg-white rounded-t-[2rem] relative z-10 space-y-4 pb-12">
                  <form onSubmit={handleVerify} className="space-y-4">
-                   <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input type="text" placeholder="Full Name" required 
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]"
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      />
+                   <div className="grid grid-cols-1 gap-4">
+                     <div className="relative">
+                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input type="text" placeholder="Full Name" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                     </div>
+                     <div className="relative">
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input type="email" placeholder="Email Address" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                     </div>
+                   </div>
+
+                   <div className="grid grid-cols-2 gap-3">
+                     <div className="relative">
+                        <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input type="text" placeholder="Profession" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, profession: e.target.value})} />
+                     </div>
+                     <div className="relative">
+                        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input type="number" placeholder="Pincode" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, pincode: e.target.value})} />
+                     </div>
                    </div>
 
                    <div className="relative">
                       <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input type="tel" placeholder="Phone Number" required disabled={isOtpSent}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-24 py-3.5 text-sm outline-none focus:border-[#F36F21]"
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      />
+                      <input type="tel" placeholder="Phone Number" required disabled={isOtpSent} className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-24 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                       {!isOtpSent && formData.phone.length >= 10 && (
-                        <button type="button" onClick={handleSendOtp} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#041a14] text-white text-[10px] font-bold px-3 py-1.5 rounded-lg">
-                           OTP
-                        </button>
+                        <button type="button" onClick={handleSendOtp} className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#041a14] text-white text-[10px] font-bold px-3 py-1.5 rounded-lg">OTP</button>
                       )}
-                   </div>
-
-                   {/* ✅ NEW: Email Field (Mobile) */}
-                   <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input type="email" placeholder="Email Address" required 
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]"
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      />
                    </div>
 
                    <AnimatePresence>
                       {isOtpSent && (
-                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} className="overflow-hidden">
+                        <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} className="overflow-hidden">
                            <div className="relative">
                              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F36F21]" />
-                             <input type="text" placeholder="Enter OTP" required 
-                               className="w-full bg-[#FFF4E6] border border-[#F36F21] rounded-xl pl-11 py-3.5 text-sm font-bold text-[#F36F21] outline-none"
-                               onChange={(e) => setOtp(e.target.value)}
-                             />
+                             <input type="text" placeholder="Enter OTP" required className="w-full bg-[#FFF4E6] border border-[#F36F21] rounded-xl pl-11 py-3.5 text-sm font-bold text-[#F36F21] outline-none" onChange={(e) => setOtp(e.target.value)} />
                            </div>
                         </motion.div>
                       )}
@@ -344,9 +317,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
 
                    <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
-                        <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none appearance-none"
-                          value={formData.interest}
-                          onChange={(e) => setFormData({...formData, interest: e.target.value})}>
+                        <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none appearance-none" value={formData.interest} onChange={(e) => setFormData({...formData, interest: e.target.value})}>
                           <option>3 BHK</option>
                           <option>4 BHK</option>
                           <option>Duplex</option>
@@ -354,21 +325,18 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       </div>
                       <div className="relative">
-                        <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none appearance-none"
-                          onChange={(e) => setFormData({...formData, callTime: e.target.value})}>
-                          <option>Morning</option>
-                          <option>Afternoon</option>
-                          <option>Evening</option>
+                        <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none appearance-none" onChange={(e) => setFormData({...formData, callTime: e.target.value})}>
+                          <option>Before 9 AM</option>
+                          <option>9 AM to 12 PM</option>
+                          <option>12 PM to 3 PM</option>
+                          <option>3 PM to 5 PM</option>
+                          <option>5 PM to 7 PM</option>
                         </select>
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       </div>
                    </div>
 
-                   <button type="submit" disabled={!isOtpSent || loading} 
-                     className="w-full py-4 rounded-xl bg-[#F36F21] text-white font-bold uppercase tracking-wide shadow-lg disabled:opacity-50"
-                   >
-                     {loading ? "Verifying..." : "Confirm Request"}
-                   </button>
+                   <button type="submit" disabled={!isOtpSent || loading} className="w-full py-4 rounded-xl bg-[#F36F21] text-white font-bold uppercase tracking-wide shadow-lg disabled:opacity-50">{loading ? "Verifying..." : "Confirm Request"}</button>
                  </form>
               </div>
             </motion.div>

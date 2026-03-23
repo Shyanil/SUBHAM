@@ -178,12 +178,12 @@ export default function Gallery() {
           <div className="p-6 lg:p-8 shrink-0" style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}>
             <p className="text-[9px] lg:text-[10px] font-black uppercase tracking-widest mb-2 lg:mb-4 opacity-50">Currently Exploring</p>
             <h4 className="font-serif text-2xl lg:text-3xl italic mb-4 lg:mb-6 leading-none text-white">{galleryImages[activeImage].title}</h4>
-            <button 
+            {/* <button 
               className="w-full py-4 lg:py-5 rounded-xl lg:rounded-2xl font-bold text-[10px] lg:text-xs uppercase tracking-[0.2em] hover:scale-[1.02] transition-transform"
               style={{ backgroundColor: colors.mediumOrange, color: "white" }}
             >
               Download Brochure
-            </button>
+            </button> */}
           </div>
         </div>
 

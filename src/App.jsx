@@ -79,16 +79,21 @@ export default function App() {
                   
                   
                   <Why />
-                  <Amenities onOpenPopup={handleContactTrigger} />
-                  <Plan />
-                  <Location />
                   <Highlights />
-                  <Gallery />
-                  
                   {/* ✅ Attach Ref here to track position */}
                   <div ref={walkthroughRef}>
                     <Walkthrough />
                   </div>
+                  <Gallery />
+                  <Plan />
+                  <Amenities onOpenPopup={handleContactTrigger} />
+                  
+                  <Location />
+                  
+                  
+                  
+                  
+                  
                   
                   <Contact />
                   <ThankYouSection /> 

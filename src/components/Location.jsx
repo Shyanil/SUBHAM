@@ -61,9 +61,9 @@ export default function Location() {
             </div>
           </div>
 
-          {/* GOOGLE MAPS COLUMN */}
+          {/* GOOGLE MAPS COLUMN - Increased Height */}
           <div className="lg:col-span-2">
-            <div className="relative w-full h-[350px] md:h-[450px] rounded-[3rem] overflow-hidden border border-white/10 group grayscale transition-all duration-700 hover:grayscale-0 shadow-2xl">
+            <div className="relative w-full h-[450px] md:h-[600px] rounded-[3rem] overflow-hidden border border-white/10 group grayscale transition-all duration-700 hover:grayscale-0 shadow-2xl">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7079.215212334554!2d94.931217!3d27.481473!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374099001efa57bd%3A0x663a1239c1e15167!2sSUBHAM%20KISHORI%20HEIGHTS!5e0!3m2!1sen!2sin!4v1770731429352!5m2!1sen!2sin" 
                 width="100%" 
@@ -74,48 +74,15 @@ export default function Location() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Subham Kishori Heights Location"
               />
-              
-              {/* Directions Button Overlay */}
-              <a 
-                href="https://maps.google.com/?q=Subham+Kishori+Heights+Dibrugarh" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="absolute bottom-8 right-8 px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-bold text-[10px] uppercase tracking-widest hover:scale-105 transition-transform"
-                style={{ backgroundColor: colors.mediumOrange, color: "white" }}
-              >
-                <Navigation className="w-4 h-4" />
-                Open in Maps
-              </a>
             </div>
           </div>
         </div>
 
-        {/* --- FOOTER ACTION --- */}
+        {/* --- FOOTER ACTION - Text Removed --- */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/10 gap-8">
           <div className="flex flex-col gap-1">
-            <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
-               Legacy Since 2007
-            </p>
-            <p className="text-[9px] font-black uppercase tracking-widest opacity-30 text-white">
-              78% Open Space · Vastu Compliant
-            </p>
+            {/* Footer Text Removed as per request */}
           </div>
-
-          {/* <button 
-            onClick={scrollToTop}
-            className="group flex items-center gap-4 bg-white/5 px-8 py-4 rounded-full transition-all duration-500 border border-white/10"
-            onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = colors.brightOrange;
-                e.currentTarget.style.borderColor = colors.brightOrange;
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-            }}
-          >
-            <span className="text-[10px] font-black uppercase tracking-widest text-white group-hover:text-black">Back to Top</span>
-            <ArrowUp className="w-4 h-4 text-white group-hover:text-black group-hover:-translate-y-1 transition-transform" />
-          </button> */}
         </div>
         
       </div>

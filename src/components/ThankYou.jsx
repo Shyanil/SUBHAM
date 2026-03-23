@@ -62,7 +62,7 @@ export default function AboutSubham() {
   };
 
   return (
-    <footer className="w-full bg-[#fafaf8] py-12 lg:py-24 font-sans text-[#041a14]">
+    <footer id="aboutus"className="w-full bg-[#fafaf8] pt-12 pb-4 lg:pt-16 lg:pb-6 font-sans text-[#041a14]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* --- SECTION 1: HEADER --- */}
@@ -102,21 +102,15 @@ export default function AboutSubham() {
                 "We don't just build structures; <br/> we curate lifestyles."
               </p>
               <p className="text-white/60 text-lg leading-relaxed mb-8 font-light">
-                Since 2007, Subham Group has been the silent force behind Guwahati’s skyline, 
+                Since 2007, Subham Group has been the silent force behind Assam’s skyline, 
                 blending architectural bravery with the warmth of a home.
               </p>
-              <div className="flex items-center gap-4">
-                 <Award className="w-6 h-6" style={{ color: colors.brightOrange }} />
-                 <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-                   Awarded 'Most Trusted Developer' — Northeast India
-                 </span>
-              </div>
             </div>
 
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#F2A71D]/5 rounded-full blur-[120px] -mr-32 -mt-32 group-hover:bg-[#F2A71D]/10 transition-all duration-1000" />
           </motion.div>
 
-          {/* PREMIUM "EXPERIENCE" CARD */}
+          {/* PREMIUM "EXPERIENCE" CARD (ORANGE CARD) */}
           <motion.div 
             className="md:col-span-4 p-10 rounded-[3.5rem] flex flex-col justify-between relative overflow-hidden group shadow-xl"
             style={{ backgroundColor: colors.darkOrange }}
@@ -124,19 +118,25 @@ export default function AboutSubham() {
           >
             <div className="relative z-10">
                <Compass className="w-10 h-10 text-white/30 mb-6 group-hover:rotate-45 transition-transform duration-700" />
-               <h4 className="text-white font-serif text-3xl leading-tight mb-4">See the Ascent <br/> for Yourself</h4>
-               <p className="text-white/70 text-sm font-medium leading-relaxed">
-                 Walk through the corridors of Kishori Heights and feel the spirit of active living.
-               </p>
-            </div>
+               <h4 className="text-white font-serif text-3xl leading-tight mb-10">Awarded 'Most Trusted Developer'- Northeast India</h4>
+               
+               <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-serif italic font-bold text-white">10+</span>
+                    <span className="text-lg font-medium text-white/90">Years of Expertise</span>
+                  </div>
 
-            <button 
-              onClick={scrollToContact}
-              className="relative z-10 w-full py-5 rounded-2xl bg-white text-[11px] font-black uppercase tracking-widest transition-all hover:bg-[#fafafa] hover:scale-[1.02] shadow-xl active:scale-95"
-              style={{ color: colors.blackish }}
-            >
-              Book a Site Visit
-            </button>
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-serif italic font-bold text-white">5</span>
+                    <span className="text-lg font-medium text-white/90">Ongoing Projects</span>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-serif italic font-bold text-white">16+</span>
+                    <span className="text-lg font-medium text-white/90">Completed Projects</span>
+                  </div>
+               </div>
+            </div>
           </motion.div>
 
           {/* Milestones Card */}
@@ -189,15 +189,54 @@ export default function AboutSubham() {
           </motion.div>
         </div>
 
-        {/* --- SECTION 3: COPYRIGHT BAR --- */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t gap-8" style={{ borderTopColor: `${colors.blackish}10` }}>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-12 text-[9px] font-black uppercase tracking-[0.3em] opacity-30 text-center md:text-left">
-            <div className="flex gap-12">
-              <span>© 2026 Subham Group</span>
-              <span>Trust · Innovation · Relationships</span>
-            </div>
-            <span>Rera Registration No.: RERAA DI 102 of 2025-2026</span>
+        {/* --- UPDATED FOOTER SECTION (Ref: image_58fa63.png) --- */}
+        <div className="mt-20 flex flex-col items-center text-center">
+          <motion.div {...fadeInUp} className="mb-12">
+            <img 
+              src="/Subham_Logo (1).png" 
+              alt="Subham Group" 
+              className="h-16 md:h-20 w-auto object-contain mx-auto mb-2" 
+            />
+            <p className="text-[9px] font-black uppercase tracking-[0.5em] opacity-40">Building Lifestyles</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl pb-16">
+            {/* Site Address */}
+            <motion.div {...fadeInUp} className="flex flex-col items-center space-y-3">
+              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Site Address</h5>
+              <p className="text-[12px] font-bold leading-relaxed uppercase tracking-wider opacity-70">
+                Seujpur<br/>
+                Dibrugarh, Assam<br/>
+                Pin — 786001
+              </p>
+            </motion.div>
+
+            {/* Corporate Office */}
+            <motion.div {...fadeInUp} className="flex flex-col items-center space-y-3">
+              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Corporate Address</h5>
+              <p className="text-[12px] font-bold leading-relaxed uppercase tracking-wider opacity-70">
+                Subham Infra, Subham Velocity<br/>
+                5th Floor, Honuram Boro Path<br/>
+                GS Road, Guwahati<br/>
+                Pin — 781005
+              </p>
+            </motion.div>
+
+            {/* RERA Number */}
+            <motion.div {...fadeInUp} className="flex flex-col items-center space-y-3">
+              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">RERA Number</h5>
+              <p className="text-[12px] font-bold leading-relaxed uppercase tracking-wider opacity-70">
+                RERAA DI 102 of 2025-2026<br/>
+                
+              </p>
+            </motion.div>
           </div>
+
+          
+          {/* <div className="w-full pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 opacity-30 text-[9px] font-black uppercase tracking-[0.3em]" style={{ borderTopColor: `${colors.blackish}10` }}>
+            <span>© 2026 Subham Group</span>
+            <span>Trust · Innovation · Relationships</span>
+          </div> */}
         </div>
         
       </div>

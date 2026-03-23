@@ -1,17 +1,14 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { 
   Train, Hospital, School, 
   ShoppingBag, GraduationCap, Compass, 
-  Sparkles, Target, Zap, Waves
+  Sparkles, Target, Zap, Waves, Award 
 } from "lucide-react";
 
 const Amenities = ({ onOpenPopup }) => {
   // Official Brand Palette
-
   const colors = {
     blackish: "#041a14",
     brightOrange: "#F2A71D",
@@ -78,12 +75,10 @@ const Amenities = ({ onOpenPopup }) => {
   ];
 
   return (
-  
-    
-    <section id="transport" className="relative w-full bg-[#fafaf8] py-24 lg:py-40 overflow-hidden font-sans text-[#041a14]">
+    // Reduced py-24 lg:py-40 to py-12 lg:py-24 to make it compact
+    <section id="transport" className="relative w-full bg-[#fafaf8] py-12 lg:py-24 overflow-hidden font-sans text-[#041a14]">
 
-      {/* --- NEW CUSTOM VECTOR ART: TOP RIGHT --- */}
-      {/* Created with CSS shapes and icons to replace profile_2 image */}
+      {/* --- CUSTOM VECTOR ART --- */}
       <div className="absolute -right-20 top-20 w-[300px] h-[300px] pointer-events-none z-0 select-none opacity-20">
         <div className="relative w-full h-full">
             <div className="absolute inset-0 border-[40px] rounded-full animate-spin-slow" style={{ borderColor: `${colors.brightOrange}10` }} />
@@ -101,107 +96,36 @@ const Amenities = ({ onOpenPopup }) => {
         <Zap className="w-6 h-6" style={{ color: colors.brightOrange }} />
       </div>
 
-      {/* --- KEPT ASSET: profile_1.png BOTTOM LEFT --- */}
-      <div className="
-  absolute 
-  left-0 md:-left-12 
-  bottom-0 md:-bottom-12 
-  w-[120px] md:w-[350px] 
-  pointer-events-none 
-  z-10 
-  select-none 
-  rotate-6
-">
-  <img
-    src="/profile_1.png"
-    alt="Design Element"
-    className="w-full h-auto drop-shadow-xl"
-  />
-</div>
-      {/* <div className="absolute -left-12 bottom-0 md:-bottom-12 w-[200px] md:w-[350px] pointer-events-none z-0 select-none rotate-6">
+      <div className="absolute left-0 md:-left-12 bottom-0 md:-bottom-12 w-[120px] md:w-[350px] pointer-events-none z-10 select-none rotate-6">
         <img src="/profile_1.png" alt="Design Element" className="w-full h-auto drop-shadow-xl" />
-      </div> */}
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-      <div className="relative mb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center lg:items-center">
-
-  {/* LEFT SIDE */}
-  <div>
-    <div
-      className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] mb-8"
-      style={{ color: colors.darkOrange }}
-    >
-      <Sparkles
-        className="w-4 h-4 animate-spin-slow"
-        style={{ color: colors.brightOrange }}
-      />
-      Strategic Connectivity
-    </div>
-
-    <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.9] text-[#041a14]">
-  In the Heart of{" "}
-  <span
-    className="italic font-light"
-    style={{ color: colors.darkOrange }}
-  >
-    Everything
-  </span>
-</h2>
-  </div>
-
-  {/* RIGHT SIDE */}
-  <div className="max-w-xl lg:ml-auto text-right lg:text-center mt-10 lg:mt-48">
-<p 
-  className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8 text-justify [text-justify:inter-word] [hyphens:auto] lg:[text-align-last:center] [text-align-last:right]"
-  style={{ color: colors.blackish }}
-  lang="en"
->
-  Subham Kishori Heights is strategically located in Dibrugarh, offering 
-  effortless access to premier education, healthcare, and transport hubs.
-</p>
-    {/* <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed mb-8">
-      Subham Kishori Heights is strategically located in Dibrugarh, offering 
-      effortless access to premier education, healthcare, and transport hubs.
-    </p> */}
-
-    <button
-      onClick={onOpenPopup}
-      className="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 shadow-[0_20px_40px_rgba(216,67,21,0.2)] text-white"
-      style={{ backgroundColor: colors.darkOrange }}
-    >
-      Start Your Journey
-      <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-    </button>
-
-  </div>
-
-</div>
-        {/* --- HEADER --- */}
-        {/* <div className="relative mb-32">
-          <div className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.5em] mb-8" style={{ color: colors.darkOrange }}>
-            <Sparkles className="w-4 h-4 animate-spin-slow" style={{ color: colors.brightOrange }} />
-            Strategic Connectivity
+        
+        {/* --- HEADER (FOLLOWING REQUESTED DESIGN) --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-16 lg:mb-24 items-start">
+          <div className="lg:col-span-8">
+            <div className="flex items-center gap-3 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-6 lg:mb-10" style={{ color: colors.darkOrange }}>
+              <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 animate-spin-slow" style={{ color: colors.brightOrange }} />
+              Strategic Connectivity
+            </div>
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-[100px] leading-[0.9] lg:leading-[0.8] tracking-tighter text-[#041a14]">
+              In the Heart of <br />
+              <span className="italic font-light" style={{ color: colors.darkOrange }}>Everything</span>
+            </h2>
           </div>
-          <h2 className="font-serif text-6xl md:text-8xl lg:text-[100px] leading-[0.85] text-[#041a14] mb-12">
-            In the Heart of <br />
-            <span className="italic font-light" style={{ color: colors.darkOrange }}>Everything</span>
-          </h2>
-          <div className="max-w-xl border-l-4 pl-8" style={{ borderLeftColor: colors.brightOrange }}>
-              <p className="text-[#041a14]/70 text-lg md:text-xl font-medium leading-relaxed">
-                  Subham Kishori Heights is strategically located in Dibrugarh, offering 
-                  effortless access to premier education, healthcare, and transport hubs.
-              </p>
+          <div className="lg:col-span-4 lg:pt-20">
+            <p className="text-[#041a14]/70 text-lg lg:text-xl font-medium leading-relaxed border-l-4 pl-6 lg:pl-8" style={{ borderLeftColor: colors.brightOrange }}>
+              Subham Kishori Heights is strategically located in Dibrugarh, offering 
+              effortless access to premier education, healthcare, and transport hubs.
+            </p>
           </div>
-        </div> */}
+        </div>
 
         {/* --- CONNECTIVITY GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
           {connectivityData.map((section, idx) => (
             <div key={idx} className="group relative">
-              {/* <span className="absolute -left-6 -top-10 text-9xl font-serif italic select-none transition-all duration-700 opacity-[0.05] group-hover:opacity-20 group-hover:-translate-y-2" style={{ color: colors.blackish }}>
-                0{idx + 1}
-              </span> */}
-
               <div className="relative bg-white/40 backdrop-blur-sm p-8 rounded-[3rem] border border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-2xl">
                 <div className="flex items-center justify-between gap-3 mb-8 border-b pb-6" style={{ borderBottomColor: `${colors.blackish}10` }}>
                   <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 group-hover:rotate-[360deg] group-hover:scale-110" style={{ backgroundColor: colors.blackish, color: colors.brightOrange }}>
@@ -233,7 +157,7 @@ const Amenities = ({ onOpenPopup }) => {
         </div>
       </div>
 
-      <style >{`
+      <style>{`
         .animate-spin-slow {
           animation: spin 12s linear infinite;
         }
@@ -249,10 +173,7 @@ const Amenities = ({ onOpenPopup }) => {
           to { transform: rotate(0deg); }
         }
       `}</style>
-     
     </section>
-
-    
   );
 };
 

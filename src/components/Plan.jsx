@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ZoomIn, ZoomOut, Building2, Activity } from "lucide-react";
 
 const colors = {
   blackish: "#041a14",
@@ -8,12 +9,13 @@ const colors = {
   darkOrange: "#D64B27",
   deepOrange: "#D84315",
   warmCream: "#FFF4E6",
+  brightOrange: "#F2A71D", // Added from first component
 };
 
 const MASTER_PLAN = {
   id: 0,
   name: "MASTER PLAN",
-  tag: "", // Removed tag content
+  tag: "", 
   src: "/Master Plan.jpg",
 };
 
@@ -37,7 +39,12 @@ const PLANS = [
 ];
 
 // ── Modal Component ──
-function Modal({ plan, onClose, onPrev, onNext }) {
+function Modal({ plan, onClose }) {
+  const [scale, setScale] = useState(1);
+
+  const handleZoomIn = () => setScale(prev => Math.min(prev + 0.25, 3));
+  const handleZoomOut = () => setScale(prev => Math.max(prev - 0.25, 0.5));
+
   return (
     <AnimatePresence>
       <motion.div
@@ -49,7 +56,7 @@ function Modal({ plan, onClose, onPrev, onNext }) {
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         <motion.div
-          className="flex flex-col rounded-2xl overflow-hidden w-full max-w-3xl"
+          className="flex flex-col rounded-2xl overflow-hidden w-full max-w-4xl"
           style={{ background: "#fff", maxHeight: "90vh" }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -62,12 +69,24 @@ function Modal({ plan, onClose, onPrev, onNext }) {
             </div>
             <button onClick={onClose} className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center bg-black/5 text-xl hover:bg-black/10 transition-colors">✕</button>
           </div>
-          <div className="flex-1 overflow-auto flex items-center justify-center p-4 bg-[#f5ece0]">
-            <img src={plan.src} alt={plan.name} className="max-w-full max-h-[60vh] object-contain" />
+          
+          <div className="flex-1 overflow-auto flex items-center justify-center p-4 bg-[#f5ece0] relative group">
+            <motion.img 
+              animate={{ scale }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              src={plan.src} 
+              alt={plan.name} 
+              className="max-w-full max-h-[70vh] object-contain origin-center" 
+            />
           </div>
-          <div className="flex items-center justify-center gap-4 py-4 border-t" style={{ background: colors.warmCream }}>
-            <button onClick={onPrev} className="px-6 py-2 border rounded-full text-xs font-bold hover:bg-white transition-all">← Prev</button>
-            <button onClick={onNext} className="px-6 py-2 border rounded-full text-xs font-bold hover:bg-white transition-all">Next →</button>
+
+          <div className="flex items-center justify-center gap-6 py-4 border-t" style={{ background: colors.warmCream }}>
+            <button onClick={handleZoomOut} className="p-3 border rounded-full hover:bg-white transition-all bg-black/5 flex items-center justify-center shadow-sm">
+              <ZoomOut className="w-6 h-6 text-[#041a14]" />
+            </button>
+            <button onClick={handleZoomIn} className="p-3 border rounded-full hover:bg-white transition-all bg-black/5 flex items-center justify-center shadow-sm">
+              <ZoomIn className="w-6 h-6 text-[#041a14]" />
+            </button>
           </div>
         </motion.div>
       </motion.div>
@@ -76,7 +95,7 @@ function Modal({ plan, onClose, onPrev, onNext }) {
 }
 
 // ── Plan Card Component ──
-function PlanCard({ plan, index, onClick }) {
+function PlanCard({ plan, index, onClick, isMaster }) {
   return (
     <motion.div
       onClick={onClick}
@@ -84,9 +103,9 @@ function PlanCard({ plan, index, onClick }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
       whileHover={{ y: -5 }}
-      className="bg-white rounded-xl overflow-hidden border border-black/5 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full"
+      className={`bg-white rounded-xl overflow-hidden border border-black/5 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full ${isMaster ? 'max-w-4xl' : ''}`}
     >
-      <div className="bg-[#f8f0e6] p-4 aspect-[4/3] flex items-center justify-center group">
+      <div className={`bg-[#f8f0e6] p-4 flex items-center justify-center group ${isMaster ? 'aspect-video' : 'aspect-[4/3]'}`}>
         <img src={plan.src} alt={plan.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
       </div>
       
@@ -94,7 +113,6 @@ function PlanCard({ plan, index, onClick }) {
         <h4 className="text-sm font-bold text-[#041a14] whitespace-nowrap flex-shrink-0">
           {plan.name.trim()}
         </h4>
-        {/* Removed bg-orange-100 and rounded-full. Added conditional rendering to hide box if tag is empty */}
         {plan.tag && (
           <span className="text-[11px] md:text-[9px] leading-tight font-bold px-2 py-1 text-orange-700 whitespace-nowrap overflow-hidden text-ellipsis min-w-0 flex-1 text-right">
             {plan.tag}
@@ -117,27 +135,19 @@ export default function PlanningSection() {
     let list = PLANS.filter(p => 
       p.name.toUpperCase().replace(/-/g, " ").includes(blockKeyword)
     );
-   if (activeSubTab !== "All") {
-  list = list.filter(p => {
-    const tag = p.tag.toUpperCase();
-    const subTab = activeSubTab.toUpperCase();
-    const isDuplex = tag.includes("DUPLEX");
-
-    // ✅ UNIT-B → only non-duplex
-    if (subTab === "UNIT-B") {
-      return tag.startsWith("UNIT-B") && !isDuplex;
+    if (activeSubTab !== "All") {
+      list = list.filter(p => {
+        const tag = p.tag.toUpperCase();
+        const subTab = activeSubTab.toUpperCase();
+        const isDuplex = tag.includes("DUPLEX");
+        if (subTab === "UNIT-B") return tag.startsWith("UNIT-B") && !isDuplex;
+        if (subTab.includes("DUPLEX")) {
+          const unit = subTab.split(" ")[0]; 
+          return tag.startsWith(unit) && isDuplex;
+        }
+        return tag.startsWith(subTab);
+      });
     }
-
-    // ✅ DUPLEX tabs (UNIT-F/G/H)
-    if (subTab.includes("DUPLEX")) {
-      const unit = subTab.split(" ")[0]; // UNIT-F, UNIT-G, UNIT-H
-      return tag.startsWith(unit) && isDuplex;
-    }
-
-    // ✅ Normal tabs (UNIT-C, D, E etc.)
-    return tag.startsWith(subTab);
-  });
-}
     return list;
   }, [activeTab, activeSubTab]);
 
@@ -158,70 +168,124 @@ export default function PlanningSection() {
   const activePlan = activeId === 0 ? MASTER_PLAN : PLANS.find(p => p.id === activeId);
 
   return (
-    <section id="plan" style={{ background: colors.warmCream, padding: "80px 16px" }}>
-      <div className="text-center mb-12">
-        <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>Layouts & Architecture</p>
-        <h2 className="font-serif text-5xl md:text-7xl text-[#041a14] mb-12">Explore Our <br /><span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span></h2>
+    <>
+      <section id="plan" style={{ background: colors.warmCream, padding: "80px 16px" }}>
+        <div className="text-center mb-12">
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>Layouts & Architecture</p>
+          <h2 className="font-serif text-5xl md:text-7xl text-[#041a14] mb-12">Explore Our <br /><span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span></h2>
 
-        <div className="grid grid-cols-3 gap-2 mb-8 md:flex md:justify-center md:gap-3">
-          {["Master Plan", "Block A", "Block B"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => { setActiveTab(tab); setActiveSubTab("All"); }}
-              className={`text-center px-2 py-2.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all border-2 md:px-8 ${
-  activeTab === tab
-    ? "bg-[#041a14] text-white border-[#041a14]"
-    : "bg-transparent text-[#041a14]/50 border-[#041a14]/10 hover:border-[#041a14]/30"
-}`}
-            >
-              {tab}
-            </button>
+          <div className="grid grid-cols-3 gap-2 mb-8 md:flex md:justify-center md:gap-3">
+            {["Master Plan", "Block A", "Block B"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => { setActiveTab(tab); setActiveSubTab("All"); }}
+                className={`text-center px-2 py-2.5 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all border-2 md:px-8 ${
+                  activeTab === tab
+                    ? "bg-[#041a14] text-white border-[#041a14]"
+                    : "bg-transparent text-[#041a14]/50 border-[#041a14]/10 hover:border-[#041a14]/30"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          <AnimatePresence mode="wait">
+            {subTabs.length > 1 && (
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10 px-4">
+                {subTabs.map(sub => (
+                  <button 
+                    key={sub} 
+                    onClick={() => setActiveSubTab(sub)} 
+                    className={`text-xs uppercase tracking-[0.2em] font-bold pb-1 border-b-2 transition-all ${activeSubTab === sub ? "border-orange-500 text-orange-600" : "border-transparent text-black/30 hover:text-black/60"}`}
+                  >
+                    {sub}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div className={`max-w-[1200px] mx-auto mb-24 ${
+          activeTab === "Master Plan" 
+            ? 'flex justify-center px-4' 
+            : activeTab === "Block A" && activeSubTab === "All"
+              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8' 
+              : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'
+        }`}>
+          {filteredPlans.map((plan, i) => (
+            <div key={plan.id} className={activeTab === "Master Plan" ? 'w-full max-w-4xl' : ''}>
+              <PlanCard 
+                plan={plan} 
+                index={i} 
+                onClick={() => setActiveId(plan.id)} 
+                isMaster={activeTab === "Master Plan"} 
+              />
+            </div>
           ))}
         </div>
 
-        <AnimatePresence mode="wait">
-          {subTabs.length > 1 && (
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10 px-4">
-              {subTabs.map(sub => (
-                <button 
-                  key={sub} 
-                  onClick={() => setActiveSubTab(sub)} 
-                  className={`text-xs uppercase tracking-[0.2em] font-bold pb-1 border-b-2 transition-all ${activeSubTab === sub ? "border-orange-500 text-orange-600" : "border-transparent text-black/30 hover:text-black/60"}`}
-                >
-                  {sub}
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+        {/* --- ARCHITECTURAL VISION INTEGRATED HERE --- */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[600px] md:h-[700px] group shadow-2xl" 
+            style={{ backgroundColor: colors.blackish }}
+          >
+            <img 
+              src="/why.jpg" 
+              alt="Subham Kishori Heights Architecture" 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-60"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t" style={{ backgroundImage: `linear-gradient(to top, ${colors.blackish}, transparent)` }}></div>
+            
+            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-end">
+              <div className="flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-12">
+                <div className="max-w-2xl w-full text-left">
+                  <div className="w-16 md:w-20 h-1 mb-6 md:mb-8" style={{ backgroundColor: colors.brightOrange }}></div>
+                  <h3 className="font-serif text-4xl md:text-6xl text-white mb-6 md:mb-8 leading-tight">
+                    Architecture <br/> <span className="italic font-light" style={{ color: colors.brightOrange }}>in Harmony</span>
+                  </h3>
+                  <p className="text-white/80 text-lg md:text-xl leading-relaxed font-light">
+                    Modern high-rise towers with clean vertical lines and a well-lit facade. 
+                    Thoughtful space planning ensures natural light and open views for all 
+                    65 exclusive residences.
+                  </p>
+                </div>
+                
+                <div className="flex flex-row w-full lg:w-auto gap-4 md:gap-6">
+                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-white/20 text-white text-center min-w-[120px] md:min-w-[160px]">
+                      <Building2 className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
+                      <p className="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Structure</p>
+                      <p className="text-lg md:text-xl font-serif">2 Towers</p>
+                   </div>
+                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-white/20 text-white text-center min-w-[120px] md:min-w-[160px]">
+                      <Activity className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
+                      <p className="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Elevation</p>
+                      <p className="text-lg md:text-xl font-serif">B+G+14</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
-      <div className={`max-w-[1200px] mx-auto ${filteredPlans.length === 1 ? 'flex justify-center' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'}`}>
-        {filteredPlans.map((plan, i) => (
-          <div key={plan.id} className={filteredPlans.length === 1 ? 'max-w-md w-full' : ''}>
-            <PlanCard plan={plan} index={i} onClick={() => setActiveId(plan.id)} />
-          </div>
-        ))}
-      </div>
-
-      {activeId !== null && activePlan && (
-        <Modal
-          plan={activePlan}
-          onClose={() => setActiveId(null)}
-          onPrev={() => {
-            const idx = filteredPlans.findIndex(p => p.id === activeId);
-            setActiveId(filteredPlans[idx === 0 ? filteredPlans.length - 1 : idx - 1].id);
-          }}
-          onNext={() => {
-            const idx = filteredPlans.findIndex(p => p.id === activeId);
-            setActiveId(filteredPlans[(idx + 1) % filteredPlans.length].id);
-          }}
-        />
-      )}
+        {activeId !== null && activePlan && (
+          <Modal
+            plan={activePlan}
+            onClose={() => setActiveId(null)}
+          />
+        )}
+      </section>
 
       <style>{`
         .font-serif { font-family: 'Playfair Display', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-    </section>
+    </>
   );
 }

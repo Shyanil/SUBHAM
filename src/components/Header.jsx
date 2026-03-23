@@ -19,12 +19,14 @@ export default function SubhamHeader({ onOpenPopup }) {
   };
 
   const mainNav = [
-    { name: "Home", id: "hero" },
-    { name: "About Project", id: "about" },
+    
+    { name: "Overview", id: "about" },
     { name: "Amenities", id: "highlights" },
+    { name: "Gallery", id: "gallery" },
     { name: "Plan", id: "plan" },
     { name: "Location", id: "location" },
-    { name: "Gallery", id: "gallery" }
+    { name: "About Us", id: "aboutus" },
+    
   ];
 
   useEffect(() => {
@@ -105,7 +107,7 @@ export default function SubhamHeader({ onOpenPopup }) {
               className="hidden sm:flex items-center gap-2 px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-xl text-white"
               style={{ backgroundColor: colors.deepOrange }}
             >
-              Contact Now <ArrowUpRight className="w-4 h-4" />
+              Download Brochure <ArrowUpRight className="w-4 h-4" />
             </button>
 
             <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2" style={{ color: colors.vibrantOrange }}>
