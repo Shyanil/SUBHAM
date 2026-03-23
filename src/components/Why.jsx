@@ -43,7 +43,7 @@ const ActiveLivingShowcase = () => {
   ];
 
   return (
-    <section id="why-section" className="w-full bg-[#fafaf8] pt-0 pb-10 px-4 md:px-12 lg:px-24 font-sans text-[#041a14]">
+    <section id="highlights" className="w-full bg-[#fafaf8] pt-0 pb-10 px-4 md:px-12 lg:px-24 font-sans text-[#041a14]">
       
       {/* --- MULTI-GENERATIONAL FOCUS --- */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20 lg:mb-24">

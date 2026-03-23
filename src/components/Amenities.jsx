@@ -75,7 +75,7 @@ const Amenities = ({ onOpenPopup }) => {
   ];
 
   return (
-    <section id="transport" className="relative w-full bg-[#fafaf8] py-12 lg:py-24 overflow-hidden font-sans text-[#041a14]">
+    <section id="location" className="relative w-full bg-[#fafaf8] py-12 lg:py-24 overflow-hidden font-sans text-[#041a14]">
 
       {/* --- CUSTOM VECTOR ART --- */}
       <div className="absolute -right-20 top-20 w-[300px] h-[300px] pointer-events-none z-0 select-none opacity-20">

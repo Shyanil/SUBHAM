@@ -22,10 +22,12 @@ export default function SubhamHeader({ onOpenPopup }) {
     
     { name: "Overview", id: "about" },
     { name: "Amenities", id: "highlights" },
+    { name: "Walkthrough Video", id: "video" },
     { name: "Gallery", id: "gallery" },
-    { name: "Plan", id: "plan" },
+    { name: "Plans", id: "plan" },
     { name: "Location", id: "location" },
     { name: "About Us", id: "aboutus" },
+
     
   ];
 
@@ -90,17 +92,17 @@ export default function SubhamHeader({ onOpenPopup }) {
               </a>
             ))}
 
-            <a 
+            {/* <a 
               href="#contact"
               onClick={(e) => scrollToSection(e, 'contact')}
               className="flex items-center gap-2 px-5 py-2 rounded-full border transition-all duration-300 cursor-pointer"
               style={{ borderColor: `${colors.vibrantOrange}30`, color: colors.vibrantOrange }}
             >
               <Download className="w-3 h-3" /> Brochure
-            </a>
+            </a> */}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-0">
             {/* ✅ FIXED: Desktop Button now triggers the Popup */}
             <button 
               onClick={onOpenPopup}

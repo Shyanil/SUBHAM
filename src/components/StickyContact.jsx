@@ -35,8 +35,8 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
     utm_content: ""
   });
 
-  useEffect(() => {
-    const section = document.getElementById("why-section");
+ useEffect(() => {
+    const section = document.getElementById("highlights");
     if (!section) return;
 
     const handleScroll = () => {
@@ -144,7 +144,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
             initial={{ y: 100, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-6 left-0 w-full z-[80] hidden lg:flex justify-center pointer-events-none"
+            className="fixed bottom-6 left-0 w-full z-[9999] hidden lg:flex justify-center pointer-events-none"
           >
             <div className="pointer-events-auto bg-[#041a14]/95 backdrop-blur-md text-white p-2 rounded-full shadow-2xl border border-white/10 flex items-center gap-2 max-w-6xl w-full mx-6 transition-all duration-500 hover:scale-[1.01]">
               
@@ -158,7 +158,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                  </div>
               </div>
 
-              <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2 justify-between">
+              <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2 ">
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-32 focus-within:bg-white/10 transition-colors shrink-0">
                    <User className="w-3 h-3 text-gray-400 mr-2" />
                    <input 

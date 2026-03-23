@@ -88,7 +88,7 @@ export default function ActiveLivingHero({ onOpenPopup }) {
           </h1>
 
           <div className="max-w-2xl mb-12">
-            <p className="text-base md:text-lg font-medium leading-relaxed text-justify break-words" style={{ color: colors.blackish }}>
+            <p className="text-base md:text-lg font-medium leading-relaxed text-center break-words" style={{ color: colors.blackish }}>
               An architectural icon and Dibrugarh’s first “Active Lifestyle” landmark designed for modern families.
 With only 65 exclusive residences, it offers privacy, light-filled interiors, and a serene environment.
 A perfect place to live actively, stay connected, and invest in your future.

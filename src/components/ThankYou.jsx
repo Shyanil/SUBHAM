@@ -7,19 +7,6 @@ import { motion } from "framer-motion";
 export default function AboutSubham() {
   const [selectedLocation, setSelectedLocation] = React.useState("GS ROAD, GUWAHATI");
   
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const scrollToContact = () => {
-    const element = document.getElementById("contact");
-    if (element) {
-      const yOffset = -100;
-      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
-
   const colors = {
     blackish: "#041a14",      
     brightOrange: "#F2A71D", 
@@ -62,11 +49,11 @@ export default function AboutSubham() {
   };
 
   return (
-    <footer id="aboutus"className="w-full bg-[#fafaf8] pt-12 pb-4 lg:pt-16 lg:pb-6 font-sans text-[#041a14]">
+    <footer id="aboutus"className="w-full bg-[#fafaf8] pt-12 pb-4 lg:pt-4 lg:pb-6 font-sans text-[#041a14]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* --- SECTION 1: HEADER --- */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-6 gap-6">
           <motion.div {...fadeInUp} className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                <Zap className="w-5 h-5" style={{ color: colors.brightOrange }} />
@@ -110,29 +97,46 @@ export default function AboutSubham() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#F2A71D]/5 rounded-full blur-[120px] -mr-32 -mt-32 group-hover:bg-[#F2A71D]/10 transition-all duration-1000" />
           </motion.div>
 
-          {/* PREMIUM "EXPERIENCE" CARD (ORANGE CARD) */}
+          {/* --- PREMIUM "EXPERIENCE" CARD (ORANGE CARD) --- */}
           <motion.div 
-            className="md:col-span-4 p-10 rounded-[3.5rem] flex flex-col justify-between relative overflow-hidden group shadow-xl"
+            className="md:col-span-4 p-10 rounded-[3.5rem] flex flex-col relative overflow-hidden group shadow-xl"
             style={{ backgroundColor: colors.darkOrange }}
             {...fadeInUp}
           >
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col h-full">
+               {/* Compass Icon */}
                <Compass className="w-10 h-10 text-white/30 mb-6 group-hover:rotate-45 transition-transform duration-700" />
-               <h4 className="text-white font-serif text-3xl leading-tight mb-10">Awarded 'Most Trusted Developer'- Northeast India</h4>
                
-               <div className="space-y-6">
+               {/* Title */}
+               <h4 className="text-white font-serif text-3xl leading-tight mb-12">
+                 'Awarded Most Trusted Developer- Northeast India'
+               </h4>
+               
+               {/* Stat Rows - Flex Container */}
+               <div className="flex flex-col gap-6 mt-auto">
+                  {/* Row 1: 10+ */}
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl font-serif italic font-bold text-white">10+</span>
+                    {/* Fixed-width number container ensures alignment */}
+                    <div className="w-20 text-right">
+                        <span className="text-3xl font-serif italic font-bold text-white">10+</span>
+                    </div>
+                    {/* Stat Text */}
                     <span className="text-lg font-medium text-white/90">Years of Expertise</span>
                   </div>
 
+                  {/* Row 2: 5 */}
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl font-serif italic font-bold text-white">5</span>
+                    <div className="w-20 text-right">
+                        <span className="text-3xl font-serif italic font-bold text-white">5</span>
+                    </div>
                     <span className="text-lg font-medium text-white/90">Ongoing Projects</span>
                   </div>
 
+                  {/* Row 3: 16+ */}
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl font-serif italic font-bold text-white">16+</span>
+                    <div className="w-20 text-right">
+                        <span className="text-3xl font-serif italic font-bold text-white">16+</span>
+                    </div>
                     <span className="text-lg font-medium text-white/90">Completed Projects</span>
                   </div>
                </div>
@@ -189,7 +193,7 @@ export default function AboutSubham() {
           </motion.div>
         </div>
 
-        {/* --- UPDATED FOOTER SECTION (Ref: image_58fa63.png) --- */}
+        {/* --- SECTION 3: FOOTER ADDRESSES --- */}
         <div className="mt-20 flex flex-col items-center text-center">
           <motion.div {...fadeInUp} className="mb-12">
             <img 
@@ -227,16 +231,9 @@ export default function AboutSubham() {
               <h5 className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">RERA Number</h5>
               <p className="text-[12px] font-bold leading-relaxed uppercase tracking-wider opacity-70">
                 RERAA DI 102 of 2025-2026<br/>
-                
               </p>
             </motion.div>
           </div>
-
-          
-          {/* <div className="w-full pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 opacity-30 text-[9px] font-black uppercase tracking-[0.3em]" style={{ borderTopColor: `${colors.blackish}10` }}>
-            <span>© 2026 Subham Group</span>
-            <span>Trust · Innovation · Relationships</span>
-          </div> */}
         </div>
         
       </div>

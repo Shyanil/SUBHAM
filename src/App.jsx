@@ -34,22 +34,23 @@ export default function App() {
 
   // ✅ SCROLL LISTENER: Hides StickyContact when Walkthrough is reached
   useEffect(() => {
-    const handleScroll = () => {
-      if (!walkthroughRef.current) return;
-      
-      const rect = walkthroughRef.current.getBoundingClientRect();
-      
-      // If the top of Walkthrough is visible in the viewport, HIDE sticky
-      if (rect.top <= window.innerHeight) {
-        setHideSticky(true);
-      } else {
-        setHideSticky(false);
-      }
-    };
+  const handleScroll = () => {
+    if (!walkthroughRef.current) return;
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const rect = walkthroughRef.current.getBoundingClientRect();
+
+    if (rect.top <= 0 && rect.bottom >= 0) {
+      setHideSticky(true);
+    } else {
+      setHideSticky(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // 👈 IMPORTANT (initial check)
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   const handleContactTrigger = () => {
     if (window.innerWidth < 1024) {

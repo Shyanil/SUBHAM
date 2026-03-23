@@ -66,7 +66,7 @@ export default function Walkthrough() {
   };
 
   return (
-    <section id="walkthrough" className="relative w-full h-screen min-h-[750px] overflow-hidden font-sans mt-20" style={{ backgroundColor: colors.blackish }}>
+    <section id="video" className="relative w-full h-screen min-h-[750px] overflow-visible font-sans mt-20" style={{ backgroundColor: colors.blackish }}>
       {/* STAGE 1: CINEMATIC MASK */}
       <div 
         className={`absolute inset-0 z-20 flex items-center justify-center transition-all duration-1000 ease-in-out
@@ -74,7 +74,7 @@ export default function Walkthrough() {
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         
-        <div className="relative z-30 text-center flex flex-col items-center">
+        <div className="relative z-0 text-center flex flex-col items-center">
           <button 
             onClick={handleStart}
             className="group relative w-32 h-32 md:w-44 md:h-44 flex items-center justify-center mb-10"
