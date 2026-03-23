@@ -60,33 +60,36 @@ function ContactModal({ onClose }) {
     } catch (error) { alert("Invalid OTP."); } finally { setLoading(false); }
   };
 
-  const inputStyle = "w-full bg-white border border-gray-100 rounded-2xl px-12 py-4 outline-none focus:ring-2 focus:ring-[#F2A71D]/20 transition-all placeholder:text-gray-400 text-gray-700 shadow-sm";
-  const iconStyle = "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300";
+  const inputStyle = "w-full bg-white border border-gray-100 rounded-2xl px-10 md:px-12 py-3.5 md:py-4 outline-none focus:ring-2 focus:ring-[#F2A71D]/20 transition-all placeholder:text-gray-400 text-gray-700 shadow-sm text-sm md:text-base";
+  const iconStyle = "absolute left-3.5 md:left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-300";
 
   return (
-    <div className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden font-sans border border-gray-100">
+    <div className="relative w-full max-w-[92vw] md:max-w-xl bg-white rounded-[2.5rem] md:rounded-[3rem] shadow-2xl overflow-hidden font-sans border border-gray-100 mx-auto">
       <div id="recaptcha-container"></div>
-      <div className="p-10 pt-12 pb-16 relative" style={{ backgroundColor: colors.blackish }}>
+      
+      {/* HEADER: Background color container */}
+      <div className="p-6 md:p-8 pt-8 md:pt-10 pb-12 md:pb-14 relative" style={{ backgroundColor: colors.blackish }}>
         <div className="flex justify-between items-start mb-3">
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: colors.brightOrange }}>
-            <Sparkles className="w-4 h-4" /> Quick Connect
+          <div className="flex items-center gap-2 text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: colors.brightOrange }}>
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4" /> Quick Connect
           </div>
-          <button onClick={onClose} className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-            <X className="w-5 h-5 text-white" />
+          <button onClick={onClose} className="p-1.5 md:p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+            <X className="w-4 h-4 md:w-5 md:h-5 text-white" />
           </button>
         </div>
-        <h2 className="text-white font-serif text-4xl mb-2">Experience</h2>
-        <h3 className="italic font-light text-3xl" style={{ color: colors.brightOrange }}>Subham Kishori Heights.</h3>
+        <h2 className="text-white font-serif text-3xl md:text-4xl mb-1 leading-tight">Experience</h2>
+        <h3 className="italic font-light text-2xl md:text-3xl" style={{ color: colors.brightOrange }}>Subham Kishori Heights.</h3>
       </div>
-      <div className="px-8 pb-10 -mt-8 relative z-10">
-        <div className="bg-white rounded-[2.5rem] p-8 shadow-xl">
+
+      {/* FORM: Integrated into the single card container */}
+      <div className="px-5 md:px-10 pb-8 md:pb-10 -mt-6 md:-mt-8 relative z-10">
+        <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-5 md:p-0 md:pt-4">
           {!submitted ? (
-            <form onSubmit={handleFinalSubmit} className="space-y-4">
-              {/* UPDATED: grid-cols-2 ensures side-by-side layout on mobile */}
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <form onSubmit={handleFinalSubmit} className="space-y-3 md:space-y-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="relative">
                   <User className={iconStyle} />
-                  <input type="text" placeholder="Full Name" required className={inputStyle} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                  <input type="text" placeholder="Name" required className={inputStyle} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                 </div>
                 <div className="relative">
                   <Mail className={iconStyle} />
@@ -97,7 +100,7 @@ function ContactModal({ onClose }) {
                 <PhoneIcon className={iconStyle} />
                 <input type="tel" placeholder="10-digit Phone" required className={inputStyle} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                 {formData.phone.length >= 10 && !isOtpSent && (
-                  <button type="button" onClick={handleSendOtp} className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold uppercase tracking-tighter text-[#F2A71D] bg-[#0b1c14] px-3 py-2 rounded-xl">Verify</button>
+                  <button type="button" onClick={handleSendOtp} className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 text-[8px] md:text-[10px] font-bold uppercase tracking-tighter text-[#F2A71D] bg-[#0b1c14] px-2 md:px-3 py-1.5 md:py-2 rounded-xl">Verify</button>
                 )}
               </div>
               <AnimatePresence>
@@ -105,16 +108,16 @@ function ContactModal({ onClose }) {
                   <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="relative"><Lock className={iconStyle} /><input type="text" placeholder="Enter 6-digit OTP" className={inputStyle} onChange={(e) => setOtp(e.target.value)} /></motion.div>
                 )}
               </AnimatePresence>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="relative"><select className={`${inputStyle} appearance-none`} onChange={(e) => setFormData({...formData, interest: e.target.value})}><option>3 BHK</option><option>4 BHK</option><option>Duplex</option></select><ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" /></div>
-                <div className="relative"><select className={`${inputStyle} appearance-none`} onChange={(e) => setFormData({...formData, callTime: e.target.value})}><option>Morning</option><option>Afternoon</option><option>Evening</option></select><ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" /></div>
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
+                <div className="relative"><select className={`${inputStyle} appearance-none`} onChange={(e) => setFormData({...formData, interest: e.target.value})}><option>3 BHK</option><option>4 BHK</option><option>Duplex</option></select><ChevronDown className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" /></div>
+                <div className="relative"><select className={`${inputStyle} appearance-none`} onChange={(e) => setFormData({...formData, callTime: e.target.value})}><option>Morning</option><option>Afternoon</option><option>Evening</option></select><ChevronDown className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 text-gray-400" /></div>
               </div>
-              <button type="submit" disabled={loading} className="w-full py-5 rounded-2xl font-bold text-lg shadow-inner flex items-center justify-center gap-3 transition-all" style={{ backgroundColor: isOtpSent ? colors.blackish : '#e5e7eb', color: isOtpSent ? 'white' : '#9ca3af' }}>
-                {loading ? "Processing..." : isOtpSent ? "Confirm Inquiry" : "Send Verification"} <Send className="w-5 h-5" />
+              <button type="submit" disabled={loading} className="w-full py-3.5 md:py-4.5 rounded-2xl font-bold text-base md:text-lg shadow-inner flex items-center justify-center gap-2 md:gap-3 transition-all" style={{ backgroundColor: isOtpSent ? colors.blackish : '#e5e7eb', color: isOtpSent ? 'white' : '#9ca3af' }}>
+                {loading ? "..." : isOtpSent ? "Confirm Inquiry" : "Send Verification"} <Send className="w-4 h-4 md:w-5 md:h-5" />
               </button>
-              <div className="flex items-center justify-center gap-2 text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-6"><CheckCircle2 className="w-4 h-4 text-green-500" /> Secure Rera Verified Inquiry</div>
+              <div className="flex items-center justify-center gap-1.5 md:gap-2 text-[8px] md:text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-4 md:mt-6"><CheckCircle2 className="w-3 h-3 md:w-4 md:h-4 text-green-500" /> Secure Rera Verified</div>
             </form>
-          ) : ( <div className="py-20 text-center"><CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" /><h3 className="text-2xl font-serif">Thank You!</h3></div> )}
+          ) : ( <div className="py-12 md:py-16 text-center"><CheckCircle2 className="w-12 h-12 md:w-16 md:h-16 text-green-500 mx-auto mb-4" /><h3 className="text-xl md:text-2xl font-serif">Thank You!</h3></div> )}
         </div>
       </div>
     </div>
@@ -152,7 +155,7 @@ export default function HeroSection() {
       <section id="hero" className="w-full min-h-screen bg-white px-4 py-6 md:px-8 lg:px-12 flex flex-col font-sans">
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
           
-          {/* --- LEFT CARD: BLACKISH BACKGROUND --- */}
+          {/* --- LEFT CARD --- */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -212,7 +215,7 @@ export default function HeroSection() {
         {isPopupOpen && (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsPopupOpen(false)} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative w-full max-w-xl max-h-[95vh] overflow-y-auto no-scrollbar rounded-[3rem]">
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="relative w-full flex justify-center items-center max-h-[95vh] overflow-y-auto no-scrollbar">
               <ContactModal onClose={() => setIsPopupOpen(false)} />
             </motion.div>
           </div>
