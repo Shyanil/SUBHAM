@@ -75,7 +75,6 @@ const Amenities = ({ onOpenPopup }) => {
   ];
 
   return (
-    // Reduced py-24 lg:py-40 to py-12 lg:py-24 to make it compact
     <section id="transport" className="relative w-full bg-[#fafaf8] py-12 lg:py-24 overflow-hidden font-sans text-[#041a14]">
 
       {/* --- CUSTOM VECTOR ART --- */}
@@ -96,13 +95,14 @@ const Amenities = ({ onOpenPopup }) => {
         <Zap className="w-6 h-6" style={{ color: colors.brightOrange }} />
       </div>
 
-      <div className="absolute left-0 md:-left-12 bottom-0 md:-bottom-12 w-[120px] md:w-[350px] pointer-events-none z-10 select-none rotate-6">
-        <img src="/profile_1.png" alt="Design Element" className="w-full h-auto drop-shadow-xl" />
+      {/* FIXED: Increased z-index to 30 and adjusted bottom/left for visibility over cards */}
+      <div className="absolute left-0 md:-left-12 -bottom-6 md:-bottom-12 w-[140px] md:w-[350px] pointer-events-none z-30 select-none rotate-6">
+        <img src="/profile_1.png" alt="Design Element" className="w-full h-auto drop-shadow-2xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* --- HEADER (FOLLOWING REQUESTED DESIGN) --- */}
+        {/* --- HEADER --- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-16 lg:mb-24 items-start">
           <div className="lg:col-span-8">
             <div className="flex items-center gap-3 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-6 lg:mb-10" style={{ color: colors.darkOrange }}>
@@ -123,7 +123,8 @@ const Amenities = ({ onOpenPopup }) => {
         </div>
 
         {/* --- CONNECTIVITY GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+        {/* FIXED: Added relative z-20 to ensure cards stay below the profile image */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 relative z-0">
           {connectivityData.map((section, idx) => (
             <div key={idx} className="group relative">
               <div className="relative bg-white/40 backdrop-blur-sm p-8 rounded-[3rem] border border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-2xl">
