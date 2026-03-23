@@ -66,7 +66,7 @@ export default function Walkthrough() {
   };
 
   return (
-    <section id="walkthrough" className="relative w-full h-screen min-h-[750px] overflow-hidden font-sans" style={{ backgroundColor: colors.blackish }}>
+    <section id="walkthrough" className="relative w-full h-screen min-h-[750px] overflow-hidden font-sans mt-20" style={{ backgroundColor: colors.blackish }}>
       {/* STAGE 1: CINEMATIC MASK */}
       <div 
         className={`absolute inset-0 z-20 flex items-center justify-center transition-all duration-1000 ease-in-out
