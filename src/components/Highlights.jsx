@@ -53,7 +53,7 @@ export default function Specifications() {
           <div className="lg:col-span-8">
             <div className="flex items-center gap-3 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-6 lg:mb-10" style={{ color: colors.darkOrange }}>
               <Award className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: colors.brightOrange }} />
-              Legacy Since 2007
+              Curated Amenities
             </div>
             {/* ✅ CHANGED: Responsive text sizing to fit mobile screens */}
             <h2 className="font-serif text-5xl md:text-7xl lg:text-[110px] leading-[0.9] lg:leading-[0.8] tracking-tighter text-[#041a14]">

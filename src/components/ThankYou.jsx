@@ -71,7 +71,7 @@ export default function AboutSubham() {
             <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                <Zap className="w-5 h-5" style={{ color: colors.brightOrange }} />
                <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: colors.darkOrange }}>
-                 The Legacy
+                 The Legacy Since 2007
                </span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tighter" style={{ color: colors.blackish }}>
