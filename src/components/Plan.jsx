@@ -9,7 +9,7 @@ const colors = {
   darkOrange: "#D64B27",
   deepOrange: "#D84315",
   warmCream: "#FFF4E6",
-  brightOrange: "#F2A71D", // Added from first component
+  brightOrange: "#F2A71D",
 };
 
 const MASTER_PLAN = {
@@ -38,10 +38,8 @@ const PLANS = [
   { id: 16, name: "BLOCK B", tag: "UNIT-H (DUPLEX) | UPPER FLOOR", src: "/BLOCK H UPPER FLOOR.jpg" },
 ];
 
-// ── Modal Component ──
 function Modal({ plan, onClose }) {
   const [scale, setScale] = useState(1);
-
   const handleZoomIn = () => setScale(prev => Math.min(prev + 0.25, 3));
   const handleZoomOut = () => setScale(prev => Math.max(prev - 0.25, 0.5));
 
@@ -94,7 +92,6 @@ function Modal({ plan, onClose }) {
   );
 }
 
-// ── Plan Card Component ──
 function PlanCard({ plan, index, onClick, isMaster }) {
   return (
     <motion.div
@@ -123,7 +120,6 @@ function PlanCard({ plan, index, onClick, isMaster }) {
   );
 }
 
-// ── Main Section ──
 export default function PlanningSection() {
   const [activeTab, setActiveTab] = useState("Master Plan");
   const [activeSubTab, setActiveSubTab] = useState("All");
@@ -207,7 +203,7 @@ export default function PlanningSection() {
           </AnimatePresence>
         </div>
 
-        <div className={`max-w-[1200px] mx-auto mb-24 ${
+        <div className={`max-w-[1200px] mx-auto mb-20 md:mb-32 ${
           activeTab === "Master Plan" 
             ? 'flex justify-center px-4' 
             : activeTab === "Block A" && activeSubTab === "All"
@@ -226,8 +222,8 @@ export default function PlanningSection() {
           ))}
         </div>
 
-        {/* --- ARCHITECTURAL VISION INTEGRATED HERE --- */}
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
+        {/* --- ARCHITECTURAL VISION --- */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-12">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

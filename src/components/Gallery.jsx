@@ -36,7 +36,7 @@ export default function Gallery() {
 
   return (
     // ✅ CHANGED: Reduced vertical padding for mobile (py-16)
-    <section id="gallery" className="relative w-full bg-[#fafaf8] py-16 lg:py-40 font-sans text-[#041a14]">
+    <section id="gallery" className="relative w-full bg-[#fafaf8] py-20 font-sans text-[#041a14]">
       
       {/* --- HEADER --- */}
       <div className="max-w-7xl mx-auto px-6 mb-12 lg:mb-20">

@@ -45,11 +45,11 @@ export default function Specifications() {
 
   return (
     // ✅ CHANGED: Reduced py-24 to py-16 for mobile
-    <section id="highlights" className="w-full bg-[#fafaf8] py-10 lg:py-16 overflow-hidden font-sans text-[#041a14]">
+    <section id="highlights" className="w-full bg-[#fafaf8] py-5 overflow-hidden font-sans text-[#041a14]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* --- HEADER --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-16 lg:mb-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-16 lg:mb-18 items-start">
           <div className="lg:col-span-8">
             <div className="flex items-center gap-3 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] mb-6 lg:mb-10" style={{ color: colors.darkOrange }}>
               <Award className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: colors.brightOrange }} />

@@ -100,7 +100,7 @@ export default function SubhamHeader({ onOpenPopup }) {
             </a>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {/* ✅ FIXED: Desktop Button now triggers the Popup */}
             <button 
               onClick={onOpenPopup}
