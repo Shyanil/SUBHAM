@@ -47,6 +47,16 @@ export default function Intro({ onComplete }) {
       <div className="relative h-full w-full flex flex-col items-center justify-center">
         
         <div className={`flex flex-col items-center transition-all duration-1000 ${stage === 'reveal' ? 'tracking-[2em] opacity-0' : 'tracking-normal opacity-100'}`}>
+          
+          {/* LOGO ELEMENT */}
+          <div className="mb-6 md:mb-8 transition-opacity duration-500">
+             <img 
+                src="/logo22.png" 
+                alt="Logo" 
+                className="h-16 w-auto md:h-24 object-contain"
+             />
+          </div>
+
           {/* Brand Name with Orange Cursor */}
           <h1 className="font-serif text-white text-7xl md:text-9xl font-bold uppercase leading-none flex items-baseline">
             {brandName.substring(0, textIndex)}
