@@ -119,9 +119,9 @@ function ContactModal({ onClose }) {
               <div className="grid grid-cols-2 gap-3">
                 <div className="relative">
                   <select className={`${inputStyle} appearance-none cursor-pointer`} onChange={(e) => setFormData({...formData, interest: e.target.value})}>
-                    <option>3 BHK</option>
-                    <option>4 BHK</option>
-                    <option>Duplex</option>
+                    <option>3 BHK-Starting at @90L</option>
+                    <option>4 BHK-Starting at @1.15Cr</option>
+                    <option>Duplex-Starting at @1.65cr</option>
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
                 </div>

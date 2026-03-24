@@ -273,9 +273,9 @@ export default function Contact() {
                   <div>
                     <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5 block ml-1">Interested In</label>
                     <select className={`${inputStyle} appearance-none cursor-pointer`} value={formData.interest} onChange={(e) => setFormData({...formData, interest: e.target.value})}>
-                      <option>3 BHK</option>
-                      <option>4 BHK</option>
-                      <option>Duplex</option>
+                      <option>3 BHK-Starting at @90L</option>
+                      <option>4 BHK-Starting at @1.15Cr</option>
+                      <option>Duplex-Starting at @1.65cr</option>
                     </select>
                   </div>
                   <div className="relative">

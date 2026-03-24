@@ -200,9 +200,9 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
                      onChange={(e) => setFormData({...formData, interest: e.target.value})}
                    >
-                     <option className="text-black">3 BHK</option>
-                     <option className="text-black">4 BHK</option>
-                     <option className="text-black">Duplex</option>
+                     <option>3 BHK-Starting at @90L</option>
+                      <option>4 BHK-Starting at @1.15Cr</option>
+                      <option>Duplex-Starting at @1.65cr</option>
                    </select>
                    <ChevronDown className="w-3 h-3 text-gray-400 ml-1" />
                 </div>
@@ -318,9 +318,9 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                    <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
                         <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm outline-none appearance-none" value={formData.interest} onChange={(e) => setFormData({...formData, interest: e.target.value})}>
-                          <option>3 BHK</option>
-                          <option>4 BHK</option>
-                          <option>Duplex</option>
+                          <option>3 BHK-Starting at @90L</option>
+                      <option>4 BHK-Starting at @1.15Cr</option>
+                      <option>Duplex-Starting at @1.65cr</option>
                         </select>
                         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       </div>

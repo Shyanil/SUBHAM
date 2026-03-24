@@ -118,26 +118,32 @@ export default function AboutSubham() {
                   <div className="flex items-center gap-4">
                     {/* Fixed-width number container ensures alignment */}
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">10+</span>
+                        <span className="text-3xl font-serif italic font-bold text-white">16+</span>
                     </div>
                     {/* Stat Text */}
-                    <span className="text-lg font-medium text-white/90">Years of Expertise</span>
+                    <span className="text-lg font-medium text-white/90">Completed Projects</span>
                   </div>
 
                   {/* Row 2: 5 */}
                   <div className="flex items-center gap-4">
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">5</span>
+                        <span className="text-3xl font-serif italic font-bold text-white">28Lac</span>
                     </div>
-                    <span className="text-lg font-medium text-white/90">Ongoing Projects</span>
+                    <span className="text-lg font-medium text-white/90">Sq.Ft. Constructed</span>
                   </div>
 
                   {/* Row 3: 16+ */}
                   <div className="flex items-center gap-4">
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">16+</span>
+                        <span className="text-3xl font-serif italic font-bold text-white">15Lac</span>
                     </div>
-                    <span className="text-lg font-medium text-white/90">Completed Projects</span>
+                    <span className="text-lg font-medium text-white/90">Sq. Ft. Ongoing</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-20 text-right">
+                        <span className="text-3xl font-serif italic font-bold text-white">6000+</span>
+                    </div>
+                    <span className="text-lg font-medium text-white/90">Happy Residents</span>
                   </div>
                </div>
             </div>
