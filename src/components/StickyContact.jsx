@@ -158,7 +158,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                  </div>
               </div>
 
-              <form onSubmit={handleVerify} className="flex-1 flex items-center gap-2 px-2 ">
+              <form onSubmit={handleVerify} className="flex-none flex items-center gap-2 px-2 ">
                 <div className="h-10 px-4 rounded-full bg-white/5 border border-white/10 flex items-center w-32 focus-within:bg-white/10 transition-colors shrink-0">
                    <User className="w-3 h-3 text-gray-400 mr-2" />
                    <input 
@@ -200,9 +200,9 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                      className={`${inputClass} bg-transparent cursor-pointer appearance-none text-white`}
                      onChange={(e) => setFormData({...formData, interest: e.target.value})}
                    >
-                     <option>3 BHK-Starting at @90L</option>
-                      <option>4 BHK-Starting at @1.15Cr</option>
-                      <option>Duplex-Starting at @1.65cr</option>
+                     <option className="text-black">3 BHK-Starting at @90L</option>
+                      <option className="text-black">4 BHK-Starting at @1.15Cr</option>
+                      <option className="text-black">Duplex-Starting at @1.65cr</option>
                    </select>
                    <ChevronDown className="w-3 h-3 text-gray-400 ml-1" />
                 </div>

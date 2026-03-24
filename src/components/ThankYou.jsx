@@ -203,7 +203,7 @@ export default function AboutSubham() {
         <div className="mt-20 flex flex-col items-center text-center">
           <motion.div {...fadeInUp} className="mb-12">
             <img 
-              src="/Subham_Logo (1).png" 
+              src="/footer.png" 
               alt="Subham Group" 
               className="h-16 md:h-20 w-auto object-contain mx-auto mb-2" 
             />

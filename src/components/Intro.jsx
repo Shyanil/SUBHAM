@@ -51,7 +51,7 @@ export default function Intro({ onComplete }) {
           {/* LOGO ELEMENT */}
           <div className="mb-6 md:mb-8 transition-opacity duration-500">
              <img 
-                src="/logo22.png" 
+                src="/logo4.png" 
                 alt="Logo" 
                 className="h-16 w-auto md:h-24 object-contain"
              />
