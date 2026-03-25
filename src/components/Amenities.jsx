@@ -124,7 +124,7 @@ const Amenities = ({ onOpenPopup }) => {
 
         {/* --- CONNECTIVITY GRID --- */}
         {/* FIXED: Added relative z-20 to ensure cards stay below the profile image */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20 relative z-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 md:gap-x-12 gap-y-10 md:gap-y-12 lg:gap-y-12 relative z-0">
           {connectivityData.map((section, idx) => (
             <div key={idx} className="group relative">
               <div className="relative bg-white/40 backdrop-blur-sm p-8 rounded-[3rem] border border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-2xl">

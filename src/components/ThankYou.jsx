@@ -118,7 +118,7 @@ export default function AboutSubham() {
                   <div className="flex items-center gap-4">
                     {/* Fixed-width number container ensures alignment */}
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">16+</span>
+                        <span className="text-xl md:text-3xl font-serif italic font-bold text-white">16+</span>
                     </div>
                     {/* Stat Text */}
                     <span className="text-lg font-medium text-white/90">Completed Projects</span>
@@ -127,7 +127,7 @@ export default function AboutSubham() {
                   {/* Row 2: 5 */}
                   <div className="flex items-center gap-4">
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">28Lac</span>
+                        <span className="text-xl md:text-3xl font-serif italic font-bold text-white">28Lac</span>
                     </div>
                     <span className="text-lg font-medium text-white/90">Sq.Ft. Constructed</span>
                   </div>
@@ -135,13 +135,13 @@ export default function AboutSubham() {
                   {/* Row 3: 16+ */}
                   <div className="flex items-center gap-4">
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">15Lac</span>
+                        <span className="text-xl md:text-3xl font-serif italic font-bold text-white">15Lac</span>
                     </div>
                     <span className="text-lg font-medium text-white/90">Sq. Ft. Ongoing</span>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="w-20 text-right">
-                        <span className="text-3xl font-serif italic font-bold text-white">6000+</span>
+                        <span className="text-xl md:text-3xl font-serif italic font-bold text-white">6000+</span>
                     </div>
                     <span className="text-lg font-medium text-white/90">Happy Residents</span>
                   </div>
@@ -158,7 +158,7 @@ export default function AboutSubham() {
                <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-8 opacity-40">The Subham Portfolio</p>
                
                <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-40">Completed</p>
-               <div className="flex flex-wrap gap-2 mb-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-wrap gap-2 mb-6">
                 {completedProjects.map((project, idx) => (
                   <span
                     key={idx}
