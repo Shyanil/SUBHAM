@@ -228,7 +228,7 @@ export default function PlanningSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[600px] md:h-[700px] group shadow-2xl" 
+            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[480px] md:h-[600px] lg:h-[700px] group shadow-2xl" 
             style={{ backgroundColor: colors.blackish }}
           >
             <img 
