@@ -168,7 +168,7 @@ export default function Contact() {
               </span>
               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
                 Your Future <br />
-                <span className="italic font-light" style={{ color: colors.brightOrange }}>Among 65</span> Home
+                <span className="italic font-light" style={{ color: colors.brightOrange }}>Among 65</span>
               </h2>
               <p className="text-white/70 text-base lg:text-lg font-medium leading-relaxed max-w-xs">
                 Subham Kishori Heights offers a lifestyle-focused residential experience in the heart of Dibrugarh.
