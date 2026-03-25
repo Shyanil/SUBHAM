@@ -52,7 +52,7 @@ export default function Gallery() {
             </h2>
           </div>
           <p className="text-[#041a14]/60 max-w-sm text-base lg:text-lg font-medium border-l-4 pl-6 lg:pl-8 py-2" style={{ borderLeftColor: colors.brightOrange }}>
-            A curated look at the architectural vertical lines and well-lit façades of Subham Kishori Heights.
+            Experience Subham Kishori Heights — where striking architecture meets thoughtful design and active living.
           </p>
         </div>
       </div>

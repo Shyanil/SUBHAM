@@ -89,8 +89,9 @@ export default function AboutSubham() {
                 "We don't just build structures; <br/> we curate lifestyles."
               </p>
               <p className="text-white/60 text-lg leading-relaxed mb-8 font-light">
-                Since 2007, Subham Group has been the silent force behind Assam’s skyline, 
-                blending architectural bravery with the warmth of a home.
+                Since 2007, Subham Group has been the silent force behind Assam’s skyline, blending architectural bravery with the warmth of a home.
+Based in Guwahati, we are known for innovation, timely delivery, and dedicated customer support.
+Driven by passion, we create lasting value through time-bound projects and timeless relationships.
               </p>
             </div>
 

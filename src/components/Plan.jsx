@@ -169,7 +169,10 @@ export default function PlanningSection() {
         <div className="text-center mb-12">
           <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>Layouts & Architecture</p>
           <h2 className="font-serif text-5xl md:text-7xl text-[#041a14] mb-12">Explore Our <br /><span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span></h2>
-
+          <p className="text-sm md:text-base text-[#041a14]/70 max-w-3xl mx-auto leading-relaxed mb-8">
+  Explore our 3 & 4 BHK residences and duplex homes, designed for comfort, privacy, and style. 
+  Smart layouts ensure natural light, ventilation, and practical living for modern families.
+</p>
           <div className="grid grid-cols-3 gap-2 mb-8 md:flex md:justify-center md:gap-3">
             {["Master Plan", "Block A", "Block B"].map((tab) => (
               <button

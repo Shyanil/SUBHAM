@@ -63,7 +63,7 @@ export default function Specifications() {
           </div>
           <div className="lg:col-span-4 lg:pt-20">
             <p className="text-[#041a14]/70 text-lg lg:text-xl font-medium leading-relaxed border-l-4 pl-6 lg:pl-8" style={{ borderLeftColor: colors.brightOrange }}>
-             Experience thoughtfully designed living with modern amenities that ensure comfort, safety, and convenience for every resident.
+             Every detail at Subham Kishori Heights is designed for an active, vibrant lifestyle with comfort, wellness, and modern living.
             </p>
           </div>
         </div>
