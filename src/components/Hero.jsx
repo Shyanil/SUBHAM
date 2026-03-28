@@ -250,7 +250,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent pointer-events-none" />
               <div className="relative z-10 flex flex-col items-center leading-none text-white">
                 <Star className="w-3 h-3 mb-1 fill-white animate-pulse" />
-                <span className="block text-[9px] md:text-[10px] uppercase font-black tracking-widest opacity-80 mb-1">Starting</span>
+                <span className="block text-[9px] md:text-[10px] uppercase font-black tracking-widest opacity-80 mb-1">Starting at</span>
                 <div className="flex items-baseline">
                   <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter">90</span>
                   <span className="text-[10px] md:text-[12px] font-bold ml-0.5">LAC</span>

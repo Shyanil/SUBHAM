@@ -241,7 +241,7 @@ export default function PlanningSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t" style={{ backgroundImage: `linear-gradient(to top, ${colors.blackish}, transparent)` }}></div>
             
-            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-center pt-16 pb-12">
+            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-center pt-20 pb-10">
               <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-12">
                 <div className="max-w-2xl w-full text-left">
                   <div className="w-16 md:w-20 h-1 mb-6 md:mb-8" style={{ backgroundColor: colors.brightOrange }}></div>
