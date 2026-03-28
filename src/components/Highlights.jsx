@@ -83,7 +83,7 @@ export default function Specifications() {
                 idx === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
               }`}
             >
-              <img src={img.src} alt={img.title} className="w-full h-full object-cover opacity-80" />
+              <img src={img.src} alt={img.title} className="w-full h-full object-contain md:object-cover opacity-80" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
               
               {/* ✅ CHANGED: Padding reduced for mobile (p-8 vs p-20) */}
