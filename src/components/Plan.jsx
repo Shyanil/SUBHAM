@@ -231,7 +231,7 @@ export default function PlanningSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[480px] md:h-[600px] lg:h-[700px] group shadow-2xl" 
+            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[520px] md:h-[600px] lg:h-[700px] group shadow-2xl" 
             style={{ backgroundColor: colors.blackish }}
           >
             <img 
@@ -241,8 +241,8 @@ export default function PlanningSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t" style={{ backgroundImage: `linear-gradient(to top, ${colors.blackish}, transparent)` }}></div>
             
-            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-end">
-              <div className="flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-12">
+            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-center pt-16 pb-12">
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-12">
                 <div className="max-w-2xl w-full text-left">
                   <div className="w-16 md:w-20 h-1 mb-6 md:mb-8" style={{ backgroundColor: colors.brightOrange }}></div>
                   <h3 className="font-serif text-4xl md:text-6xl text-white mb-6 md:mb-8 leading-tight">
