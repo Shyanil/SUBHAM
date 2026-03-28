@@ -175,7 +175,7 @@ Driven by passion, we create lasting value through time-bound projects and timel
                </div>
 
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-40">Ongoing</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-wrap gap-2">
                 {ongoingProjects.map((project, idx) => (
                   <span
                     key={idx}
