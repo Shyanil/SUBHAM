@@ -1,8 +1,6 @@
 "use client";
 
-// Change this line
 import React, { useState, useRef, useEffect } from "react";
-// Added ArrowUpRight to the imports below
 import { 
   Play, Pause, X, Volume2, VolumeX, 
   ArrowUpRight, ArrowRight, Sparkles, Building2, 
@@ -14,7 +12,6 @@ export default function Walkthrough() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
-  // --- INSERT THIS BLOCK HERE ---
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,7 +20,6 @@ export default function Walkthrough() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-  // -
 
   const colors = {
     blackish: "#041a14",
@@ -66,7 +62,12 @@ export default function Walkthrough() {
   };
 
   return (
-    <section id="video" className="relative w-full h-screen min-h-[750px] overflow-visible font-sans mt-20" style={{ backgroundColor: colors.blackish }}>
+    <section 
+      id="video" 
+      className={`relative w-full overflow-hidden font-sans transition-all duration-700
+        ${isMobile && isActive ? "h-auto min-h-0 mt-10" : "h-screen min-h-[750px] mt-20"}`} 
+      style={{ backgroundColor: colors.blackish }}
+    >
       {/* STAGE 1: CINEMATIC MASK */}
       <div 
         className={`absolute inset-0 z-20 flex items-center justify-center transition-all duration-1000 ease-in-out
@@ -97,55 +98,59 @@ export default function Walkthrough() {
       </div>
 
       {/* STAGE 2: THE SPLIT THEATER */}
-      <div className="flex h-full w-full">
-        <div className={`relative h-full transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
-          ${isActive ? "w-full lg:w-[78%]" : "w-full"}`}>
+      <div className={`flex w-full ${isMobile && isActive ? "h-auto" : "h-full"}`}>
+        <div className={`relative transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
+          ${isActive ? "w-full lg:w-[78%]" : "w-full"}
+          ${isMobile && isActive ? "h-auto" : "h-full"}`}>
+          
           <video
-  key={isMobile ? "mobile" : "desktop"} // This resets the player when screen size changes
-  ref={videoRef}
-  loop
-  muted={isMuted}
-  playsInline
-  autoPlay // Add this if you want it to play immediately
-  className={`w-full h-full ${isMobile ? "object-contain" : "object-contain"}`}
-  style={{ objectPosition: 'center' }} // Ensures the video stays centered
->
-  <source 
-    src={isMobile ? "/mobile-walkthrough.mp4" : "https://subhamgroup.com/video/SubhamKishoriHeights.mp4"} 
-    type="video/mp4" 
-  />
-</video>
-<div className={`absolute bottom-10 left-1/2 -translate-x-1/2 
-flex gap-3 md:gap-4 flex-wrap justify-center w-[90%]
-transition-opacity duration-1000 
-${isActive ? "opacity-100" : "opacity-0"}`}>
-          {/* <div className={`absolute bottom-10 left-10 flex gap-4 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}> */}
+            key={isMobile ? "mobile" : "desktop"}
+            ref={videoRef}
+            loop
+            muted={isMuted}
+            playsInline
+            className={`w-full ${isMobile ? "h-auto object-contain" : "h-full object-contain"}`}
+            style={{ display: 'block' }}
+          >
+            <source 
+              src={isMobile ? "/mobile-walkthrough.mp4" : "https://subhamgroup.com/video/SubhamKishoriHeights.mp4"} 
+              type="video/mp4" 
+            />
+          </video>
+
+          {/* CONTROLS OVERLAY - Positioned relative to video height on mobile */}
+          <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 
+            flex gap-3 md:gap-4 flex-wrap justify-center w-[95%]
+            transition-opacity duration-1000 
+            ${isActive ? "opacity-100" : "opacity-0"}`}>
+            
             <button 
               onClick={togglePlay}
-              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
+              className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
             >
               {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
             </button>
 
             <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
+              className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
             >
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
 
             <button 
               onClick={handleExit}
-              className="px-8 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-3"
+              className="px-6 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2"
             >
-              <X className="w-4 h-4" /> Exit Theater
+              <X className="w-4 h-4" /> Exit
             </button>
           </div>
         </div>
 
+        {/* SIDEBAR (Desktop Only) */}
         <div className={`relative h-full bg-[#fafaf8] transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
-hidden lg:flex flex-col
-  ${isActive ? "lg:w-[22%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
+          hidden lg:flex flex-col
+          ${isActive ? "lg:w-[22%] opacity-100" : "w-0 opacity-0 overflow-hidden"}`}>
           
           <div className="p-6 lg:p-8 flex flex-col h-full justify-between text-[#041a14]">
             <div>
@@ -166,20 +171,7 @@ hidden lg:flex flex-col
                     <p className="text-xs font-bold">B+G+14 Modern Towers</p>
                   </div>
                 </div>
-                <div className="flex gap-6 items-start">
-                  <Trees className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Landscape</p>
-                    <p className="text-sm font-bold">78% Open Space Living</p>
-                  </div>
-                </div>
-                <div className="flex gap-6 items-start">
-                  <ShieldCheck className="w-6 h-6 mt-1 shrink-0" style={{ color: colors.brightOrange }} />
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest opacity-40 mb-1">Safety</p>
-                    <p className="text-sm font-bold">Earthquake Resistant Structure</p>
-                  </div>
-                </div>
+                {/* Other features */}
               </div>
             </div>
 

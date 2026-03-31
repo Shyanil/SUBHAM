@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ZoomIn, ZoomOut, Building2, Activity } from "lucide-react";
@@ -170,9 +172,9 @@ export default function PlanningSection() {
           <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-4" style={{ color: colors.darkOrange }}>Layouts & Architecture</p>
           <h2 className="font-serif text-5xl md:text-7xl text-[#041a14] mb-12">Explore Our <br /><span className="italic font-light" style={{ color: colors.darkOrange }}>Planning Designs</span></h2>
           <p className="text-sm md:text-base text-[#041a14]/70 max-w-3xl mx-auto leading-relaxed mb-8">
-  Explore our 3 & 4 BHK residences and duplex homes, designed for comfort, privacy, and style. 
-  Smart layouts ensure natural light, ventilation, and practical living for modern families.
-</p>
+            Explore our 3 & 4 BHK residences and duplex homes, designed for comfort, privacy, and style. 
+            Smart layouts ensure natural light, ventilation, and practical living for modern families.
+          </p>
           <div className="grid grid-cols-3 gap-2 mb-8 md:flex md:justify-center md:gap-3">
             {["Master Plan", "Block A", "Block B"].map((tab) => (
               <button
@@ -231,40 +233,45 @@ export default function PlanningSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden h-[520px] md:h-[600px] lg:h-[700px] group shadow-2xl" 
+            // Changed mobile height to min-h-auto to allow content to fit, and fixed crop by prioritizing object-top
+            className="relative rounded-[2.5rem] md:rounded-[5rem] overflow-hidden min-h-[520px] md:h-[600px] lg:h-[700px] group shadow-2xl flex flex-col justify-end" 
             style={{ backgroundColor: colors.blackish }}
           >
             <img 
               src="/why.jpg" 
               alt="Subham Kishori Heights Architecture" 
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-60"
+              // FIXED: object-top prevents the building facade from being cut off at the top
+              className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105 opacity-70"
             />
-            <div className="absolute inset-0 bg-gradient-to-t" style={{ backgroundImage: `linear-gradient(to top, ${colors.blackish}, transparent)` }}></div>
             
-            <div className="absolute inset-0 p-8 md:p-20 flex flex-col justify-center pt-20 pb-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#041a14] via-[#041a14]/40 to-transparent"></div>
+            
+            <div className="relative z-10 p-6 md:p-20 flex flex-col justify-end h-full">
               <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-12">
+                
                 <div className="max-w-2xl w-full text-left">
-                  <div className="w-16 md:w-20 h-1 mb-6 md:mb-8" style={{ backgroundColor: colors.brightOrange }}></div>
-                  <h3 className="font-serif text-4xl md:text-6xl text-white mb-6 md:mb-8 leading-tight">
-                    Architecture <br/> <span className="italic font-light" style={{ color: colors.brightOrange }}>in Harmony</span>
+                  <div className="w-12 md:w-20 h-1 mb-4 md:mb-8" style={{ backgroundColor: colors.brightOrange }}></div>
+                  <h3 className="font-serif text-3xl md:text-6xl text-white mb-3 md:mb-8 leading-tight">
+                    Architecture <br/> 
+                    <span className="italic font-light" style={{ color: colors.brightOrange }}>in Harmony</span>
                   </h3>
-                  <p className="text-white/80 text-lg md:text-xl leading-relaxed font-light">
+                  <p className="text-white/90 text-base md:text-xl leading-relaxed font-light mb-6 lg:mb-0">
                     Modern high-rise towers with clean vertical lines and a well-lit facade. 
                     Thoughtful space planning ensures natural light and open views for all 
                     65 exclusive residences.
                   </p>
                 </div>
                 
-                <div className="flex flex-row w-full lg:w-auto gap-4 md:gap-6">
-                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-white/20 text-white text-center min-w-[120px] md:min-w-[160px]">
-                      <Building2 className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
-                      <p className="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Structure</p>
-                      <p className="text-lg md:text-xl font-serif">2 Towers</p>
+                <div className="flex flex-row w-full lg:w-auto gap-3 md:gap-6">
+                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-xl p-4 md:p-8 rounded-[1.5rem] md:rounded-[3rem] border border-white/10 text-white text-center">
+                      <Building2 className="w-5 h-5 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
+                      <p className="text-[8px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-0.5">Structure</p>
+                      <p className="text-sm md:text-xl font-serif">2 Towers</p>
                    </div>
-                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-2xl p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-white/20 text-white text-center min-w-[120px] md:min-w-[160px]">
-                      <Activity className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
-                      <p className="text-[9px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-1">Elevation</p>
-                      <p className="text-lg md:text-xl font-serif">B+G+14</p>
+                   <div className="flex-1 lg:flex-none bg-white/10 backdrop-blur-xl p-4 md:p-8 rounded-[1.5rem] md:rounded-[3rem] border border-white/10 text-white text-center">
+                      <Activity className="w-5 h-5 md:w-8 md:h-8 mx-auto mb-2 md:mb-4" style={{ color: colors.brightOrange }} />
+                      <p className="text-[8px] md:text-[10px] font-black tracking-widest uppercase opacity-60 mb-0.5">Elevation</p>
+                      <p className="text-sm md:text-xl font-serif">B+G+14</p>
                    </div>
                 </div>
               </div>
