@@ -65,7 +65,7 @@ export default function Walkthrough() {
     <section 
       id="video" 
       className={`relative w-full overflow-hidden font-sans transition-all duration-700
-        ${isMobile && isActive ? "h-auto min-h-0 mt-10" : "h-screen min-h-[750px] mt-20"}`} 
+        ${isMobile ? "h-auto mt-10" : "h-screen min-h-[750px] mt-20"}`} 
       style={{ backgroundColor: colors.blackish }}
     >
       {/* STAGE 1: CINEMATIC MASK */}
@@ -75,33 +75,40 @@ export default function Walkthrough() {
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         
-        <div className="relative z-0 text-center flex flex-col items-center">
+        {/* Placeholder for Mobile to maintain height before video loads */}
+        {isMobile && !isActive && (
+           <div className="absolute inset-0 w-full h-full bg-black/20 aspect-video lg:aspect-auto" />
+        )}
+
+        <div className="relative z-0 text-center flex flex-col items-center px-4">
           <button 
             onClick={handleStart}
-            className="group relative w-32 h-32 md:w-44 md:h-44 flex items-center justify-center mb-10"
+            // FIXED: Scaled down icon size for mobile specifically
+            className={`group relative flex items-center justify-center mb-6 md:mb-10 ${isMobile ? "w-16 h-16" : "w-32 h-32 md:w-44 md:h-44"}`}
           >
             <div className="absolute inset-0 rounded-full border animate-ping" style={{ borderColor: `${colors.brightOrange}30` }} />
             <div className="absolute inset-2 rounded-full border animate-pulse" style={{ borderColor: `${colors.brightOrange}50` }} />
             
             <div className="w-full h-full rounded-full flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-2xl" style={{ backgroundColor: colors.brightOrange, color: colors.blackish }}>
-              <Play className="w-12 h-12 fill-current ml-2" />
+              <Play className={`${isMobile ? "w-6 h-6" : "w-12 h-12"} fill-current ml-1 md:ml-2`} />
             </div>
           </button>
           
-          <h2 className="font-serif text-5xl md:text-8xl text-white italic leading-none mb-6">
+          {/* FIXED: Scaled down font size for mobile specifically */}
+          <h2 className={`font-serif text-white italic leading-none mb-4 md:mb-6 ${isMobile ? "text-2xl" : "text-5xl md:text-8xl"}`}>
             Witness the <br /> <span className="not-italic font-bold uppercase tracking-tighter" style={{ color: colors.brightOrange }}>Ascent</span>
           </h2>
-          <p className="text-[10px] font-black uppercase tracking-[0.6em] text-white/50">
+          <p className={`${isMobile ? "text-[7px]" : "text-[10px]"} font-black uppercase tracking-[0.6em] text-white/50`}>
             Click to start the immersive walkthrough
           </p>
         </div>
       </div>
 
       {/* STAGE 2: THE SPLIT THEATER */}
-      <div className={`flex w-full ${isMobile && isActive ? "h-auto" : "h-full"}`}>
+      <div className={`flex w-full ${isMobile ? "h-auto" : "h-full"}`}>
         <div className={`relative transition-all duration-1000 ease-[cubic-bezier(0.2,0,0,1)] 
           ${isActive ? "w-full lg:w-[78%]" : "w-full"}
-          ${isMobile && isActive ? "h-auto" : "h-full"}`}>
+          ${isMobile ? "h-auto" : "h-full"}`}>
           
           <video
             key={isMobile ? "mobile" : "desktop"}
@@ -109,7 +116,7 @@ export default function Walkthrough() {
             loop
             muted={isMuted}
             playsInline
-            className={`w-full ${isMobile ? "h-auto object-contain" : "h-full object-contain"}`}
+            className={`w-full ${isMobile ? "h-auto object-contain aspect-video" : "h-full object-contain"}`}
             style={{ display: 'block' }}
           >
             <source 
@@ -118,7 +125,7 @@ export default function Walkthrough() {
             />
           </video>
 
-          {/* CONTROLS OVERLAY - Positioned relative to video height on mobile */}
+          {/* CONTROLS OVERLAY */}
           <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 
             flex gap-3 md:gap-4 flex-wrap justify-center w-[95%]
             transition-opacity duration-1000 
@@ -126,23 +133,23 @@ export default function Walkthrough() {
             
             <button 
               onClick={togglePlay}
-              className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
             >
-              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
+              {isPlaying ? <Pause className="w-4 h-4 md:w-5 h-5" /> : <Play className="w-4 h-4 md:w-5 h-5 ml-1" />}
             </button>
 
             <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all"
             >
-              {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              {isMuted ? <VolumeX className="w-4 h-4 md:w-5 h-5" /> : <Volume2 className="w-4 h-4 md:w-5 h-5" />}
             </button>
 
             <button 
               onClick={handleExit}
-              className="px-6 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2"
+              className="px-4 md:px-6 h-10 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-[8px] md:text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2"
             >
-              <X className="w-4 h-4" /> Exit
+              <X className="w-3 h-3 md:w-4 md:h-4" /> Exit
             </button>
           </div>
         </div>
@@ -171,7 +178,6 @@ export default function Walkthrough() {
                     <p className="text-xs font-bold">B+G+14 Modern Towers</p>
                   </div>
                 </div>
-                {/* Other features */}
               </div>
             </div>
 
