@@ -24,8 +24,6 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
     name: "",
     phone: "",
     email: "",
-    profession: "", 
-    pincode: "",    
     interest: "3 BHK",
     callTime: "9 AM to 12 PM", 
     utm_source: "direct",
@@ -285,7 +283,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                      </div>
                    </div>
 
-                   <div className="grid grid-cols-2 gap-3">
+                   {/* <div className="grid grid-cols-2 gap-3">
                      <div className="relative">
                         <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input type="text" placeholder="Profession" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, profession: e.target.value})} />
@@ -294,7 +292,7 @@ const StickyContact = ({ isOpen, setIsOpen, hideSticky }) => {
                         <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input type="number" placeholder="Pincode" required className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 py-3.5 text-sm outline-none focus:border-[#F36F21]" onChange={(e) => setFormData({...formData, pincode: e.target.value})} />
                      </div>
-                   </div>
+                   </div> */}
 
                    <div className="relative">
                       <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />

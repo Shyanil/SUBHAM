@@ -27,8 +27,6 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
     name: "",
     email: "",
     phone: "",
-    profession: "",
-    pincode: "",
     interest: "3 BHK",
     callTime: "Before 9 AM",
     utm_source: "direct",
@@ -169,7 +167,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                     <div className="relative">
                       <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
                       <input placeholder="Profession" required className={`${inputClass} pl-11`} onChange={(e) => setFormData({...formData, profession: e.target.value})} />
@@ -178,7 +176,7 @@ export default function PopupSticky({ isOpen, setIsOpen }) {
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
                       <input type="number" placeholder="Pincode" required className={`${inputClass} pl-11`} onChange={(e) => setFormData({...formData, pincode: e.target.value})} />
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />

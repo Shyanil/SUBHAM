@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { 
   Send, MapPin, Phone, ShieldCheck, 
   Target, CheckCircle2, Sparkles, Lock,
-  Home, Clock, ChevronDown, Briefcase, Hash, User, Mail
+  Home, Clock, ChevronDown, User, Mail
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../lib/firebase";
@@ -33,8 +33,6 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
-    profession: "",
-    pincode: "",
     interest: "3 BHK", 
     callTime: "9 AM to 12 PM",
     utm_source: "",
@@ -210,7 +208,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5 block ml-1">Profession</label>
                     <div className="relative">
@@ -219,9 +217,9 @@ export default function Contact() {
                         type="text" required placeholder="Profession" className={`${inputStyle} pl-11`}
                         onChange={(e) => setFormData({...formData, profession: e.target.value})}
                       />
-                    </div>
-                  </div>
-                  <div>
+                    </div> */}
+                  {/* </div> */}
+                  {/* <div>
                     <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5 block ml-1">Pincode</label>
                     <div className="relative">
                       <Hash className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
@@ -231,7 +229,7 @@ export default function Contact() {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-1.5 block ml-1">Phone Number</label>

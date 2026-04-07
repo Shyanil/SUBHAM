@@ -91,7 +91,7 @@ function ContactModal({ onClose }) {
                   <input type="email" placeholder="Email" required className={inputStyle} onChange={(e) => setFormData({...formData, email: e.target.value})} />
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="relative">
                   <Briefcase className={iconStyle} />
                   <input type="text" placeholder="Profession" required className={inputStyle} onChange={(e) => setFormData({...formData, profession: e.target.value})} />
@@ -100,7 +100,7 @@ function ContactModal({ onClose }) {
                   <MapPin className={iconStyle} />
                   <input type="number" placeholder="Pincode" required className={inputStyle} onChange={(e) => setFormData({...formData, pincode: e.target.value})} />
                 </div>
-              </div>
+              </div> */}
               <div className="relative">
                 <PhoneIcon className={iconStyle} />
                 <input type="tel" placeholder="10-digit Phone" required className={inputStyle} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
